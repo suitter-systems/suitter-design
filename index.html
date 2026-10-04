@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Visual directions for the Suitter hotel PMS reception screen, in Arabic.">
+<title>Suitter Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@300..700&family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=El+Messiri:wght@600;700&family=Aref+Ruqaa:wght@700&family=Beiruti:wght@400..700&display=swap">
+<style>
+  /* Page chrome: a quiet frame around full-size screen mocks. Each mock carries its own fixed palette. */
+  :root {
+    --bg: #f2f1ee; --fg: #1d1f22; --fg-muted: #5a5e64; --line: #dcdad5; --panel: #ffffff; --accent: #1d1f22;
+    --font-ui: "Noto Sans Arabic", system-ui, sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #34363a; --panel: #1f2023; --accent: #ecebe8; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #34363a; --panel: #1f2023; --accent: #ecebe8; color-scheme: dark; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); line-height: 1.6; }
+  .wrap { max-inline-size: 1240px; margin-inline: auto; padding-inline: 16px; padding-block: 32px 64px; display: grid; gap: 24px; }
+  .intro h1 { margin: 0; font-size: 26px; line-height: 1.3; text-wrap: balance; }
+  .intro p { margin: 6px 0 0; color: var(--fg-muted); max-inline-size: 58ch; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tab { font: inherit; font-weight: 600; line-height: 1.5; white-space: nowrap; padding-block: 10px; padding-inline: 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 24px; padding: 16px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  .notes h2 { grid-column: 1 / -1; margin: 0; font-size: 20px; }
+  .notes dl { margin: 0; } .notes dt { font-size: 13px; color: var(--fg-muted); } .notes dd { margin: 0; }
+  .swatches { display: flex; gap: 6px; margin-block-start: 4px; }
+  .swatches span { inline-size: 28px; block-size: 28px; border-radius: 6px; border: 1px solid var(--line); }
+  .verdict { grid-column: 1 / -1; border-block-start: 1px solid var(--line); padding-block-start: 12px; }
+  .verdict p { margin: 4px 0 0; }
+  .stage { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); }
+
+  /* ---------- The mock screen (shared markup, tokens per direction) ---------- */
+  .mock { min-inline-size: 1140px; background: var(--ground); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.55; }
+  .mock * { box-sizing: border-box; }
+  .shell { display: flex; align-items: center; gap: 28px; padding-inline: 24px; block-size: 58px; background: var(--shell-bg); color: var(--shell-ink); border-block-end: 1px solid var(--shell-line); }
+  .logo { font-family: var(--font-logo, var(--font-display)); font-weight: 700; font-size: var(--fs-logo, 23px); letter-spacing: 0; }
+  .nav { display: flex; gap: 2px; }
+  .nav a { padding-block: 6px; padding-inline: 12px; border-radius: var(--r-sm); color: var(--shell-muted); font-weight: 500; text-decoration: none; }
+  .nav a[aria-current="page"] { color: var(--shell-ink); background: var(--shell-active); }
+  .shell-end { margin-inline-start: auto; display: flex; align-items: center; gap: 14px; font-size: 13px; }
+  .bizdate { border: 1px solid var(--shell-line); padding-block: 3px; padding-inline: 10px; border-radius: var(--r-pill); }
+  .shell-end .lang { color: var(--shell-ink); font-weight: 600; text-decoration: none; }
+  .page { padding: 24px; display: grid; gap: var(--gap); }
+  .page-head { display: flex; align-items: flex-end; gap: 16px; }
+  .page-head h1 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h1); font-weight: var(--w-display); line-height: 1.25; }
+  .page-head .sub { color: var(--muted); }
+  .actions { margin-inline-start: auto; display: flex; gap: 8px; }
+  .btn { font: inherit; font-weight: 600; padding-block: 8px; padding-inline: 16px; border-radius: var(--r-ctl); border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--action); color: var(--on-action); }
+  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+  .mock kbd { font-family: inherit; font-size: 12px; line-height: 1.4; padding-inline: 6px; border: 1px solid var(--line-strong); border-radius: 4px; color: var(--muted); }
+  .strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: var(--surface); border: var(--panel-border); border-radius: var(--r-panel); }
+  .stat { padding-block: 12px; padding-inline: 18px; border-inline-start: 1px solid var(--line); }
+  .stat:first-child { border-inline-start: 0; }
+  .stat .k { font-size: 13px; color: var(--muted); }
+  .stat .v { font-size: 26px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .stat .m { font-size: 12px; color: var(--muted); }
+  .cols { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
+  .panel { background: var(--surface); border: var(--panel-border); border-radius: var(--r-panel); overflow: hidden; }
+  .panel-head { display: flex; align-items: baseline; gap: 8px; padding-block: 12px; padding-inline: 16px; border-block-end: 1px solid var(--line); }
+  .panel-head h2 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h2); font-weight: var(--w-display); }
+  .panel-head .count { color: var(--muted); font-size: 13px; }
+  .panel-head .more { margin-inline-start: auto; color: var(--link); font-weight: 600; font-size: 13px; text-decoration: none; }
+  .mock table { inline-size: 100%; border-collapse: collapse; }
+  .mock th { text-align: start; font-weight: 500; color: var(--muted); font-size: 12px; padding-block: 8px; padding-inline: 16px; border-block-end: 1px solid var(--line); }
+  .mock td { padding-block: var(--row-pad); padding-inline: 16px; border-block-end: 1px solid var(--line); vertical-align: middle; }
+  .mock tr:last-child td { border-block-end: 0; }
+  .mock .num { font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; }
+  .guest { font-weight: 600; }
+  .guest small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding-block: 2px; padding-inline: 9px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .chip::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: currentColor; }
+  .ok { background: var(--ok-bg); color: var(--ok-ink); }
+  .info { background: var(--info-bg); color: var(--info-ink); }
+  .warn { background: var(--warn-bg); color: var(--warn-ink); }
+  .attn { background: var(--attn-bg); color: var(--attn-ink); }
+  .neutral { background: var(--neutral-bg); color: var(--neutral-ink); }
+  .hk { padding: 16px; display: grid; gap: 12px; }
+  .hk-bar { display: flex; block-size: 10px; border-radius: var(--r-pill); overflow: hidden; gap: 2px; }
+  .hk-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .hk-list li { display: flex; align-items: center; gap: 8px; }
+  .hk-list .dot { inline-size: 10px; block-size: 10px; border-radius: 3px; flex: none; }
+  .hk-list .n { margin-inline-start: auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .board { display: grid; }
+  .brow { display: grid; grid-template-columns: 132px repeat(7, minmax(0, 1fr)); min-block-size: 44px; border-block-end: 1px solid var(--line); }
+  .brow:last-child { border-block-end: 0; }
+  .brow > * { grid-row: 1; }
+  .brow.head { min-block-size: 0; font-size: 12px; color: var(--muted); }
+  .brow.head > div { padding-block: 8px; padding-inline: 8px; text-align: center; }
+  .brow.head .today { color: var(--ink); font-weight: 700; }
+  .unit { padding-inline: 16px; display: flex; flex-direction: column; justify-content: center; border-inline-end: 1px solid var(--line); line-height: 1.3; }
+  .unit b { font-variant-numeric: tabular-nums; }
+  .unit span { font-size: 12px; color: var(--muted); }
+  .night { border-inline-start: 1px solid var(--line); }
+  /* Explicit columns, so the bars placed over them never push a night cell out of its column. */
+  .brow > .unit { grid-column: 1; }
+  .brow > i.night:nth-of-type(1) { grid-column: 2; } .brow > i.night:nth-of-type(2) { grid-column: 3; }
+  .brow > i.night:nth-of-type(3) { grid-column: 4; } .brow > i.night:nth-of-type(4) { grid-column: 5; }
+  .brow > i.night:nth-of-type(5) { grid-column: 6; } .brow > i.night:nth-of-type(6) { grid-column: 7; }
+  .brow > i.night:nth-of-type(7) { grid-column: 8; }
+  .night.today, .brow.head .today { background: var(--today-bg); }
+  .bar { margin-block: 7px; margin-inline: 3px; border-radius: var(--r-bar); padding-inline: 10px; display: flex; align-items: center; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; z-index: 1; }
+  .bar.inhouse { background: var(--bar-inhouse); color: var(--on-bar-inhouse); }
+  .bar.confirmed { background: var(--bar-confirmed); color: var(--on-bar-confirmed); }
+  .bar.tentative { background: var(--surface); color: var(--ink); border: 1.5px dashed var(--bar-tentative-line); }
+  /* Out of service is hatched, the room-board convention, so it never reads as a booking. */
+  .bar.ooo { background: repeating-linear-gradient(135deg, var(--bar-ooo) 0 6px, var(--surface) 6px 10px); color: var(--on-bar-ooo); border: 1px solid var(--line-strong); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-block: 10px; padding-inline: 16px; border-block-start: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { inline-size: 18px; block-size: 10px; border-radius: 3px; display: inline-block; }
+
+  /* ---------- Direction A: واحة (Oasis) ---------- */
+  .dir-a {
+    --ground: #f3f1ec; --surface: #ffffff; --ink: #1f2a27; --muted: #56605c; --line: #e8e4dc; --line-strong: #cfc9be;
+    --shell-bg: #0e4a43; --shell-ink: #f6f1e7; --shell-muted: #b9cfc9; --shell-line: #2b625a; --shell-active: #1d5f56;
+    --action: #e8b071; --on-action: #1f2a27; --link: #0e4a43;
+    --font-display: "Noto Naskh Arabic", serif; --font-body: "Noto Sans Arabic", sans-serif; --w-display: 700;
+    --fs-h1: 30px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 11px; --gap: 18px;
+    --r-panel: 18px; --r-ctl: 999px; --r-sm: 999px; --r-pill: 999px; --r-bar: 999px; --panel-border: 0;
+    --ok-bg: #dcebdc; --ok-ink: #23582f; --info-bg: #d9e9e5; --info-ink: #0e4a43; --warn-bg: #f8e2c4; --warn-ink: #7a4510;
+    --attn-bg: #f4d9d0; --attn-ink: #8a3216; --neutral-bg: #ebe8e2; --neutral-ink: #4b524f;
+    --bar-inhouse: #0e4a43; --on-bar-inhouse: #f6f1e7; --bar-confirmed: #bcd9d2; --on-bar-confirmed: #0e3d37;
+    --bar-tentative-line: #0e4a43; --bar-ooo: #e3ded4; --on-bar-ooo: #4b524f; --today-bg: #fbf3e6;
+    --hk-clean: #2f7a4a; --hk-inspected: #0e4a43; --hk-dirty: #c0602a; --hk-cleaning: #e8b071; --hk-ooo: #a3a7a4;
+  }
+  /* ---------- Direction B: طين (Clay) ---------- */
+  .dir-b {
+    --ground: #f4ece1; --surface: #fffaf3; --ink: #2a1c13; --muted: #6b5647; --line: #eadcca; --line-strong: #d6c3ac;
+    --shell-bg: #3a2419; --shell-ink: #f7eee3; --shell-muted: #cdb7a4; --shell-line: #58392a; --shell-active: #5a3a2a;
+    --action: #a8441c; --on-action: #ffffff; --link: #a8441c;
+    --font-display: "Reem Kufi", sans-serif; --font-body: "Readex Pro", sans-serif; --w-display: 600;
+    --fs-h1: 31px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 9px; --gap: 14px;
+    --r-panel: 6px; --r-ctl: 6px; --r-sm: 4px; --r-pill: 4px; --r-bar: 3px; --panel-border: 1px solid var(--line);
+    --ok-bg: #e3e9d2; --ok-ink: #435a1f; --info-bg: #f3e0d0; --info-ink: #8a3412; --warn-bg: #f1e3b8; --warn-ink: #6b5410;
+    --attn-bg: #f2d5cc; --attn-ink: #8d2e1b; --neutral-bg: #ece3d8; --neutral-ink: #5a4b3f;
+    --bar-inhouse: #a8441c; --on-bar-inhouse: #ffffff; --bar-confirmed: #e9c7ae; --on-bar-confirmed: #4a1f0c;
+    --bar-tentative-line: #a8441c; --bar-ooo: #e2d6c8; --on-bar-ooo: #5a4b3f; --today-bg: #fbefe2;
+    --hk-clean: #5e7a2c; --hk-inspected: #3a2419; --hk-dirty: #a8441c; --hk-cleaning: #d9a35a; --hk-ooo: #b3a596;
+  }
+  /* ---------- Direction C: حبر (Ink) ---------- */
+  .dir-c {
+    --ground: #f6f6f4; --surface: #ffffff; --ink: #131416; --muted: #5c6068; --line: #e6e7e9; --line-strong: #cfd1d5;
+    --shell-bg: #ffffff; --shell-ink: #131416; --shell-muted: #5c6068; --shell-line: #e6e7e9; --shell-active: #f0f0ee;
+    --action: #131416; --on-action: #ffffff; --link: #131416;
+    --font-display: "Noto Sans Arabic", sans-serif; --font-body: "Noto Sans Arabic", sans-serif; --w-display: 700;
+    --fs-h1: 24px; --fs-h2: 15px; --fs-body: 13px; --row-pad: 7px; --gap: 12px;
+    --r-panel: 8px; --r-ctl: 6px; --r-sm: 6px; --r-pill: 999px; --r-bar: 4px; --panel-border: 1px solid var(--line);
+    --ok-bg: #eef6f0; --ok-ink: #1d6b3a; --info-bg: #eef2fb; --info-ink: #1f4fb0; --warn-bg: #fbf3e4; --warn-ink: #8a5a0b;
+    --attn-bg: #fcecea; --attn-ink: #b0281b; --neutral-bg: #f0f0ee; --neutral-ink: #4a4e55;
+    --bar-inhouse: #131416; --on-bar-inhouse: #ffffff; --bar-confirmed: #e6e7e9; --on-bar-confirmed: #131416;
+    --bar-tentative-line: #131416; --bar-ooo: #f0f0ee; --on-bar-ooo: #5c6068; --today-bg: #fff6d6;
+    --hk-clean: #1d6b3a; --hk-inspected: #131416; --hk-dirty: #b0281b; --hk-cleaning: #c98a0b; --hk-ooo: #a3a6ab;
+  }
+  /* ---------- Direction D: ليل (Night) ---------- */
+  .dir-d {
+    --ground: #121619; --surface: #1a1f23; --ink: #ebe7df; --muted: #a5aba9; --line: #2a3136; --line-strong: #3b444a;
+    --shell-bg: #0d1012; --shell-ink: #ebe7df; --shell-muted: #a5aba9; --shell-line: #2a3136; --shell-active: #232a2f;
+    --action: #f0b45b; --on-action: #1a1407; --link: #f0b45b;
+    --font-display: "IBM Plex Sans Arabic", sans-serif; --font-body: "IBM Plex Sans Arabic", sans-serif; --w-display: 700;
+    --fs-h1: 27px; --fs-h2: 17px; --fs-body: 14px; --row-pad: 9px; --gap: 14px;
+    --r-panel: 8px; --r-ctl: 6px; --r-sm: 6px; --r-pill: 999px; --r-bar: 5px; --panel-border: 1px solid var(--line);
+    --ok-bg: #1f3326; --ok-ink: #8fd6a5; --info-bg: #1d2f3a; --info-ink: #8cc4e8; --warn-bg: #3a2e17; --warn-ink: #f0c27a;
+    --attn-bg: #3d211d; --attn-ink: #f3a091; --neutral-bg: #262c30; --neutral-ink: #c4c9cc;
+    --bar-inhouse: #f0b45b; --on-bar-inhouse: #1a1407; --bar-confirmed: #2f4752; --on-bar-confirmed: #e4eef2;
+    --bar-tentative-line: #f0b45b; --bar-ooo: #262c30; --on-bar-ooo: #c4c9cc; --today-bg: #2a2418;
+    --hk-clean: #5fbf7f; --hk-inspected: #8cc4e8; --hk-dirty: #e8785f; --hk-cleaning: #f0b45b; --hk-ooo: #6b7378;
+    color-scheme: dark;
+  }
+  /* ---------- Direction E: زيتون (Olive) ---------- */
+  .dir-e {
+    --ground: #f5f2e8; --surface: #fffdf8; --ink: #22251b; --muted: #5d604f; --line: #e6e1d1; --line-strong: #cdc6b0;
+    --shell-bg: #4a552a; --shell-ink: #f7f4ea; --shell-muted: #d3d8bd; --shell-line: #5f6b3a; --shell-active: #5b6834;
+    --action: #4a552a; --on-action: #ffffff; --link: #4a552a;
+    --font-display: "El Messiri", serif; --font-body: "IBM Plex Sans Arabic", sans-serif; --w-display: 700;
+    --fs-h1: 30px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 10px; --gap: 16px;
+    --r-panel: 12px; --r-ctl: 8px; --r-sm: 8px; --r-pill: 999px; --r-bar: 6px; --panel-border: 1px solid var(--line);
+    --ok-bg: #e4ead2; --ok-ink: #3f5214; --info-bg: #e3e9ef; --info-ink: #2d4a63; --warn-bg: #f3e6c4; --warn-ink: #6e5310;
+    --attn-bg: #f2dcd3; --attn-ink: #8a3418; --neutral-bg: #ebe8dc; --neutral-ink: #4f5245;
+    --bar-inhouse: #4a552a; --on-bar-inhouse: #ffffff; --bar-confirmed: #d8dfbf; --on-bar-confirmed: #2e3517;
+    --bar-tentative-line: #4a552a; --bar-ooo: #e4e0d2; --on-bar-ooo: #4f5245; --today-bg: #faf3dc;
+    --hk-clean: #5d7a2a; --hk-inspected: #4a552a; --hk-dirty: #a8502b; --hk-cleaning: #d6a640; --hk-ooo: #a9a690;
+  }
+  /* ---------- Direction F: ياسمين (Jasmine) ---------- */
+  .dir-f {
+    --ground: #faf8f6; --surface: #ffffff; --ink: #2a1f29; --muted: #645862; --line: #eee8ec; --line-strong: #d7ccd4;
+    --shell-bg: #4a2545; --shell-ink: #fbf5f8; --shell-muted: #dcc3d6; --shell-line: #613a5b; --shell-active: #5e3458;
+    --action: #4a2545; --on-action: #ffffff; --link: #4a2545;
+    --font-display: "Aref Ruqaa", serif; --font-body: "Beiruti", sans-serif; --w-display: 700;
+    --fs-h1: 32px; --fs-h2: 21px; --fs-body: 15px; --row-pad: 10px; --gap: 16px;
+    --r-panel: 10px; --r-ctl: 8px; --r-sm: 8px; --r-pill: 999px; --r-bar: 8px; --panel-border: 1px solid var(--line);
+    --ok-bg: #e2efe4; --ok-ink: #24603a; --info-bg: #efe3ee; --info-ink: #5b2b55; --warn-bg: #f6ecc9; --warn-ink: #6f5410;
+    --attn-bg: #f6dcd9; --attn-ink: #8f2c22; --neutral-bg: #eeeaed; --neutral-ink: #53494f;
+    --bar-inhouse: #4a2545; --on-bar-inhouse: #fbf5f8; --bar-confirmed: #e6d3e2; --on-bar-confirmed: #3a1c36;
+    --bar-tentative-line: #4a2545; --bar-ooo: #ece7ea; --on-bar-ooo: #53494f; --today-bg: #fbf3d0;
+    --hk-clean: #2f7a4a; --hk-inspected: #4a2545; --hk-dirty: #b04a35; --hk-cleaning: #d9b13f; --hk-ooo: #aaa0a7;
+  }
+  @media (prefers-reduced-motion: no-preference) { .tab { transition: background-color .15s, color .15s; } }
+</style>
+</head>
+<body>
+
+<div class="wrap" dir="rtl" lang="ar">
+  <header class="intro">
+    <h1>ستة اتجاهات بصرية لـ Suitter</h1>
+    <p>الشاشة نفسها والمحتوى نفسه في الاتجاهات الستة: لوحة الاستقبال لليوم. يتغير فقط ما يصنع الهوية: الألوان، والخط العربي، والزوايا، والكثافة. الأسماء والأرقام أمثلة مولَّدة، والأرقام بصيغة ar-SY.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="الاتجاهات">
+    <button class="tab" role="tab" id="t-a" aria-controls="p-a" aria-selected="true">أ · واحة (المعتمد)</button>
+    <button class="tab" role="tab" id="t-b" aria-controls="p-b" aria-selected="false" tabindex="-1">ب · طين</button>
+    <button class="tab" role="tab" id="t-c" aria-controls="p-c" aria-selected="false" tabindex="-1">ج · حبر</button>
+    <button class="tab" role="tab" id="t-d" aria-controls="p-d" aria-selected="false" tabindex="-1">د · ليل</button>
+    <button class="tab" role="tab" id="t-e" aria-controls="p-e" aria-selected="false" tabindex="-1">هـ · زيتون</button>
+    <button class="tab" role="tab" id="t-f" aria-controls="p-f" aria-selected="false" tabindex="-1">و · ياسمين</button>
+  </div>
+
+  <section id="p-a" role="tabpanel" aria-labelledby="t-a" data-dir="a"></section>
+  <section id="p-b" role="tabpanel" aria-labelledby="t-b" data-dir="b" hidden></section>
+  <section id="p-c" role="tabpanel" aria-labelledby="t-c" data-dir="c" hidden></section>
+  <section id="p-d" role="tabpanel" aria-labelledby="t-d" data-dir="d" hidden></section>
+  <section id="p-e" role="tabpanel" aria-labelledby="t-e" data-dir="e" hidden></section>
+  <section id="p-f" role="tabpanel" aria-labelledby="t-f" data-dir="f" hidden></section>
+</div>
+
+<template id="mock">
+  <div class="mock" dir="rtl" lang="ar">
+    <header class="shell">
+      <span class="logo">سويتر</span>
+      <nav class="nav" aria-label="الأقسام">
+        <a href="#" aria-current="page">الاستقبال</a><a href="#">الحجوزات</a><a href="#">لوحة الغرف</a><a href="#">التدبير الفندقي</a><a href="#">الصندوق والفواتير</a><a href="#">التقارير</a>
+      </nav>
+      <div class="shell-end">
+        <span class="bizdate">تاريخ العمل: الأحد ٤ تشرين الأول ٢٠٢٦</span>
+        <span>سامي · الاستقبال ١</span>
+        <a class="lang" href="#" lang="en" dir="ltr">English</a>
+      </div>
+    </header>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>الاستقبال اليوم</h1>
+          <div class="sub">منتجع الساحل · المبنى الرئيسي</div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary">بحث عن ضيف <kbd>/</kbd></button>
+          <button type="button" class="btn btn-primary">حجز جديد</button>
+        </div>
+      </div>
+      <div class="strip">
+        <div class="stat"><div class="k">وصول اليوم</div><div class="v">١٨</div><div class="m">وصل ٦ · بقي ١٢</div></div>
+        <div class="stat"><div class="k">مغادرة اليوم</div><div class="v">١٢</div><div class="m">غادر ٩ · بقي ٣</div></div>
+        <div class="stat"><div class="k">مقيمون الآن</div><div class="v">٧٤</div><div class="m">في ٥٢ وحدة</div></div>
+        <div class="stat"><div class="k">متاح الليلة</div><div class="v">٣١</div><div class="m">من ٢٨٩ وحدة</div></div>
+        <div class="stat"><div class="k">الإشغال الليلة</div><div class="v">٧٢٪</div><div class="m">أمس ٦٨٪</div></div>
+      </div>
+      <div class="cols">
+        <section class="panel" aria-labelledby="arr">
+          <div class="panel-head"><h2 id="arr">الوصول اليوم</h2><span class="count">١٢ متبقٍ</span><a class="more" href="#">كل الوصول</a></div>
+          <table>
+            <thead><tr><th>الضيف</th><th>الوحدة</th><th class="num">الليالي</th><th class="num">الموعد</th><th>الحالة</th><th class="num">المستحق</th></tr></thead>
+            <tbody>
+              <tr><td class="guest">رامي خوري<small>حجز مباشر</small></td><td class="num">١٠٢</td><td class="num">٢</td><td class="num">١٤:٠٠</td><td><span class="chip ok">جاهزة للوصول</span></td><td class="num money" data-usd="320"></td></tr>
+              <tr><td class="guest">مجموعة الأمل<small>٤ وحدات · وكيل سفر</small></td><td class="num">—</td><td class="num">٣</td><td class="num">١٦:٣٠</td><td><span class="chip attn">بلا تخصيص</span></td><td class="num money" data-usd="1240"></td></tr>
+              <tr><td class="guest">يوسف حداد<small>هاتف</small></td><td class="num">٣٠٨</td><td class="num">١</td><td class="num">١٨:٠٠</td><td><span class="chip warn">الغرفة غير جاهزة</span></td><td class="num money" data-usd="150"></td></tr>
+              <tr><td class="guest">ريم الأحمد<small>حجز مباشر</small></td><td class="num">١١٢</td><td class="num">٤</td><td class="num">١٣:١٥</td><td><span class="chip ok">جاهزة للوصول</span></td><td class="num money" data-usd="0"></td></tr>
+              <tr><td class="guest">جورج سمعان<small>بريد إلكتروني</small></td><td class="num">٢٠٥</td><td class="num">٢</td><td class="num">٢٠:٠٠</td><td><span class="chip neutral">وصول متأخر</span></td><td class="num money" data-usd="280"></td></tr>
+              <tr><td class="guest">سلمى عبد الله<small>حجز مباشر</small></td><td class="num">٢١٤</td><td class="num">٣</td><td class="num">١٢:٠٠</td><td><span class="chip info">وصلت</span></td><td class="num money" data-usd="0"></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="panel" aria-labelledby="hk">
+          <div class="panel-head"><h2 id="hk">حالة الغرف</h2><span class="count">٨٧ وحدة في الخدمة</span></div>
+          <div class="hk">
+            <div class="hk-bar" aria-hidden="true">
+              <span style="flex:42;background:var(--hk-clean)"></span><span style="flex:20;background:var(--hk-inspected)"></span><span style="flex:5;background:var(--hk-cleaning)"></span><span style="flex:17;background:var(--hk-dirty)"></span><span style="flex:3;background:var(--hk-ooo)"></span>
+            </div>
+            <ul class="hk-list">
+              <li><span class="dot" style="background:var(--hk-clean)"></span>نظيفة<span class="n">٤٢</span></li>
+              <li><span class="dot" style="background:var(--hk-inspected)"></span>مفحوصة<span class="n">٢٠</span></li>
+              <li><span class="dot" style="background:var(--hk-cleaning)"></span>قيد التنظيف<span class="n">٥</span></li>
+              <li><span class="dot" style="background:var(--hk-dirty)"></span>متسخة<span class="n">١٧</span></li>
+              <li><span class="dot" style="background:var(--hk-ooo)"></span>خارج الخدمة<span class="n">٣</span></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <section class="panel" aria-labelledby="rb">
+        <div class="panel-head"><h2 id="rb">لوحة الغرف</h2><span class="count">المبنى الرئيسي · الطابق الأول</span><a class="more" href="#">فتح اللوحة كاملة</a></div>
+        <div class="board">
+          <div class="brow head"><div></div><div class="today">الأحد ٤</div><div>الاثنين ٥</div><div>الثلاثاء ٦</div><div>الأربعاء ٧</div><div>الخميس ٨</div><div>الجمعة ٩</div><div>السبت ١٠</div></div>
+          <div class="brow"><div class="unit"><b>١٠١</b><span>مزدوجة · بحرية</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar inhouse" style="grid-column:2 / span 3">سامر الحلبي · مقيم</div><div class="bar confirmed" style="grid-column:6 / span 3">ليلى ناصر</div></div>
+          <div class="brow"><div class="unit"><b>١٠٢</b><span>مزدوجة</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar confirmed" style="grid-column:2 / span 2">رامي خوري · يصل ١٤:٠٠</div><div class="bar tentative" style="grid-column:5 / span 4">مجموعة الأمل · مبدئي</div></div>
+          <div class="brow"><div class="unit"><b>١٠٣</b><span>جناح</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar inhouse" style="grid-column:2 / span 5">عائلة درويش · مقيم</div></div>
+          <div class="brow"><div class="unit"><b>١٠٤</b><span>مزدوجة</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar ooo" style="grid-column:2 / span 2">خارج الخدمة · صيانة التكييف</div><div class="bar confirmed" style="grid-column:4 / span 3">هالة سعيد</div></div>
+          <div class="brow"><div class="unit"><b>١٠٥</b><span>عائلية · ٦ أشخاص</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar confirmed" style="grid-column:4 / span 2">كريم منصور</div><div class="bar confirmed" style="grid-column:7 / span 2">نور الهدى</div></div>
+          <div class="brow"><div class="unit"><b>١٠٦</b><span>جناح</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
+            <div class="bar inhouse" style="grid-column:2 / span 1">باسل عيسى · يغادر اليوم</div></div>
+        </div>
+        <div class="legend">
+          <span><i style="background:var(--bar-inhouse)"></i>مقيم</span>
+          <span><i style="background:var(--bar-confirmed)"></i>مؤكد</span>
+          <span><i style="border:1.5px dashed var(--bar-tentative-line)"></i>مبدئي</span>
+          <span><i style="background:repeating-linear-gradient(135deg,var(--bar-ooo) 0 3px,var(--surface) 3px 5px);border:1px solid var(--line-strong)"></i>خارج الخدمة</span>
+          <span><i style="background:var(--today-bg);border:1px solid var(--line-strong)"></i>اليوم</span>
+        </div>
+      </section>
+    </main>
+  </div>
+</template>
+
+<script>
+  (function () {
+    var NOTES = {
+      a: { name: 'أ · واحة', idea: 'دفء الضيافة: شريط علوي أخضر داكن، ولوحات بيضاء بلا حدود على أرضية ورقية، وزر رئيسي كهرماني. مستوحى من نمط Organic.',
+           fonts: 'العناوين: Noto Naskh Arabic (نسخ). النص: Noto Sans Arabic.', density: 'متوسطة، زوايا كبيرة وشرائط مستديرة.',
+           move: 'الشريط العلوي الأخضر، وحجوزات لوحة الغرف ككبسولات مستديرة.', verdict: 'الأقوى في إحساس الضيافة والأكثر صقلاً. نقطتا ضعف: نهايات الكبسولات المستديرة في لوحة الغرف تُضعف دقة حدود الليلة، والكثافة أقل من غيره.', sw: ['#0e4a43', '#e8b071', '#f3f1ec', '#1f2a27', '#bcd9d2'] },
+      b: { name: 'ب · طين', idea: 'ألوان الطين والرمل: أرضية رملية، شريط علوي بني داكن، وزر رئيسي بلون الطين المحروق. مستوحى من نمطي Methodical وTerracotta.',
+           fonts: 'العناوين: Reem Kufi (كوفي هندسي). النص: Readex Pro.', density: 'متوسطة إلى عالية، زوايا صغيرة وحدود واضحة.',
+           move: 'العناوين الكوفية، وأرضية الرمل الدافئة.', verdict: 'الأكثر تميزاً والأقرب إلى بيئتنا، ولا يشبه أي برنامج SaaS. نقطة ضعف: أرقام Readex Pro العربية غير ثابتة العرض، فلا تصطف الأرقام في الأعمدة تماماً. علاجها أن تبقى العناوين بخط Reem Kufi وتُكتب أرقام الجداول بخط ثابت العرض.', sw: ['#a8441c', '#3a2419', '#f4ece1', '#e9c7ae', '#5e7a2c'] },
+      c: { name: 'ج · حبر', idea: 'أبيض وأسود هادئ، واللون للحالات فقط. النسخة الضابطة للمقارنة، مستوحاة من نمط Minimal.',
+           fonts: 'كل شيء: Noto Sans Arabic، وأرقامه العربية بعرض ثابت في الجداول.', density: 'عالية: نص أصغر وصفوف أضيق، تعرض أكثر في الشاشة.',
+           move: 'عمود اليوم بخلفية صفراء فاتحة في لوحة الغرف، والباقي حبر على ورق.', verdict: 'الأوضح والأكثر كثافة للعمل اليومي الطويل، لكنه الأقل هوية: أقرب الثلاثة إلى الشكل العام الذي نريد تجنبه.', sw: ['#131416', '#ffffff', '#f6f6f4', '#fff6d6', '#1d6b3a'] },
+      d: { name: 'د · ليل', idea: 'وضع ليلي هادئ لوردية الليل وتدقيق نهاية اليوم: أرضية فحمية، وكهرماني دافئ للأزرار وللضيوف المقيمين.',
+           fonts: 'كل شيء: IBM Plex Sans Arabic، وهو خط منصات الحكومة السعودية.', density: 'متوسطة، وزوايا 8px.',
+           move: 'الكهرماني على الفحمي: المقيمون وعمود اليوم يضيئون في العتمة.', verdict: 'الأكثر لفتاً للنظر، ومريح للعين في وردية الليل. لكن الواجهة الداكنة غير مألوفة في نهار الاستقبال، لذلك يصلح وضعاً ليلياً اختيارياً فوق أي اتجاه نختاره، لا هويةً كاملة.', sw: ['#121619', '#f0b45b', '#2f4752', '#ebe7df', '#8fd6a5'] },
+      e: { name: 'هـ · زيتون', idea: 'زيتون وكريم: أخضر زيتوني للشريط العلوي والأزرار، وأرضية بلون الكريم. طابع متوسطي ريفي هادئ.',
+           fonts: 'العناوين: El Messiri، خط عربي أنيق مستوحى من النسخ ومعه لاتيني مطابق. النص: IBM Plex Sans Arabic.', density: 'متوسطة، وزوايا 12px وحدود خفيفة.',
+           move: 'عناوين El Messiri الأنيقة على الأخضر الزيتوني.', verdict: 'متوازن: أنيق ودافئ بلا مبالغة. يعطي El Messiri العناوين شخصية واضحة، ومعه خط لاتيني مطابق لصفحات الإنجليزية. نقطة ضعف: أرقام IBM Plex Sans Arabic العربية غير ثابتة العرض في الجداول.', sw: ['#4a552a', '#f5f2e8', '#d8dfbf', '#22251b', '#a8502b'] },
+      f: { name: 'و · ياسمين', idea: 'ياسمين دمشقي: باذنجاني عميق للشريط والأزرار، وأبيض ناصع، وأصفر الياسمين لعمود اليوم.',
+           fonts: 'العناوين: Aref Ruqaa (خط الرقعة). النص: Beiruti، خط عربي حديث من بيروت.', density: 'متوسطة، وزوايا 10px.',
+           move: 'عناوين بخط الرقعة: لمسة يدوية شامية لا يملكها أي برنامج آخر.', verdict: 'الأكثر تفرداً بفضل خط الرقعة. نقطتا ضعف ظهرتا في الفحص: خط Beiruti يضيّق المسافة بين الكلمات حتى تلتصق («حجزجديد»)، فيحتاج النص خطاً آخر. والرقعة تصلح للعناوين الكبيرة فقط.', sw: ['#4a2545', '#faf8f6', '#e6d3e2', '#fbf3d0', '#24603a'] }
+    };
+    // Money comes from Intl, as in the app. The currency code is isolated as an LTR run so "US$" keeps its order inside RTL text.
+    var money = new Intl.NumberFormat('ar-SY-u-ca-gregory', { style: 'currency', currency: 'USD' });
+    function fillMoney(root) {
+      Array.prototype.forEach.call(root.querySelectorAll('[data-usd]'), function (td) {
+        td.innerHTML = money.formatToParts(Number(td.getAttribute('data-usd'))).map(function (p) {
+          return p.type === 'currency' ? '<bdi dir="ltr">' + p.value + '</bdi>' : p.value;
+        }).join('');
+      });
+    }
+    var tpl = document.getElementById('mock');
+    ['a', 'b', 'c', 'd', 'e', 'f'].forEach(function (k) {
+      var panel = document.getElementById('p-' + k), n = NOTES[k];
+      var notes = document.createElement('div');
+      notes.className = 'notes';
+      notes.innerHTML = '<h2>' + n.name + '</h2>' +
+        '<dl><dt>الفكرة</dt><dd>' + n.idea + '</dd></dl>' +
+        '<dl><dt>الخطوط</dt><dd>' + n.fonts + '</dd></dl>' +
+        '<dl><dt>الكثافة والشكل</dt><dd>' + n.density + '</dd></dl>' +
+        '<dl><dt>الحركة المميزة</dt><dd>' + n.move + '</dd></dl>' +
+        '<dl><dt>الألوان الأساسية</dt><dd><div class="swatches">' + n.sw.map(function (c) { return '<span style="background:' + c + '" title="' + c + '"></span>'; }).join('') + '</div></dd></dl>' +
+        '<div class="verdict"><dl><dt>الحكم بعد الفحص</dt><dd>' + n.verdict + '</dd></dl><p>فحص Impeccable الآلي: ملاحظة واحدة، وهي التظليل المائل لـ«خارج الخدمة». أبقيناه لأنه رمز وظيفي في لوحات الغرف، لا زخرفة. التباين: كل النصوص ٥٫٤:١ أو أكثر.</p></div>';
+      var stage = document.createElement('div');
+      stage.className = 'stage';
+      var mock = tpl.content.firstElementChild.cloneNode(true);
+      mock.classList.add('dir-' + k);
+      fillMoney(mock);
+      stage.appendChild(mock);
+      panel.appendChild(notes);
+      panel.appendChild(stage);
+    });
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      tab.focus();
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        // In RTL the next tab sits to the left, so ArrowLeft moves forward.
+        var d = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0;
+        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length]); }
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

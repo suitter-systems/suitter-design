@@ -291,6 +291,38 @@ html{scroll-padding-block-end:72px}
 .uchip.us-occ{background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
 .uchip.us-dirty{background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
 .uchip.us-ready{background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
+/* Cards view of the three lists: one card per booking, in its unit's card colours from the room status page. A booking without
+   one unit (a group, no unit assigned) keeps a plain card with a dashed edge. The list stays the other view. */
+.viewseg{display:inline-flex;border:1px solid var(--muted);border-radius:var(--r-ctl);overflow:hidden}
+.viewseg button{font:inherit;font-size:14px;min-block-size:30px;padding-inline:12px;border:0;background:var(--surface);color:var(--text);cursor:pointer}
+.viewseg button[aria-pressed="true"]{background:var(--link);color:var(--on-link);font-weight:600}
+.bgrid,.bcards{list-style:none;margin:0;padding:0}
+.bgroup{padding-block:10px 12px;padding-inline:14px;border-block-end:1px solid var(--line)}
+.bgroup:last-child{border-block-end:0}
+.bgh{margin:0 0 8px;font-size:14px;font-weight:600}
+.bgh span{font-weight:400;font-size:12px;color:var(--muted);margin-inline-start:8px}
+.bcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:8px}
+.bcard{display:flex;flex-direction:column;gap:4px;min-inline-size:0;padding-block:6px 8px;padding-inline:10px;border-width:1.5px;border-style:dashed;border-color:var(--muted);border-radius:min(var(--r-panel),12px);background:var(--surface);font-size:12px;line-height:1.4;cursor:pointer}
+.bcard.us-paid{border-style:solid;background:var(--rs-paid-tile);border-color:var(--rs-paid-bar);color:var(--rs-paid-ink)}
+.bcard.us-unpaid{border-style:solid;background:var(--rs-unpaid-tile);border-color:var(--rs-unpaid-bar);color:var(--rs-unpaid-ink)}
+.bcard.us-occ{border-style:solid;background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
+.bcard.us-dirty{border-style:solid;background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
+.bcard.us-ready{border-style:solid;background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
+.bcard.is-sel{outline:3px solid var(--text);outline-offset:2px}
+.bcard.is-open{box-shadow:0 0 0 3px var(--link)}
+.btop{display:flex;align-items:center;gap:6px;min-block-size:24px}
+.bnum{display:inline-flex;align-items:center;gap:5px;font-size:20px;font-weight:700;line-height:1.2}
+.btype{min-inline-size:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bend{margin-inline-start:auto;display:inline-flex}
+.bguest{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;color:var(--text)}
+.bguest .namebtn{font-size:14px}
+.bref{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
+.bline{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;color:var(--text)}
+.bfoot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-block-start:auto;padding-block-start:2px}
+.bact{margin-inline-start:auto;display:inline-flex;align-items:center;gap:2px}
+.bcard .rowbtn{border-color:transparent;background:transparent;color:var(--link);padding-inline:8px;border-radius:8px}
+.bcard .rowbtn:hover,.bcard .rowbtn:focus-visible{background:var(--surface)}
+.bcard .hk-dirty,.bcard .hk-cleaning{box-shadow:0 0 0 1.5px var(--surface)}
 </style></head>
 <body><p style="margin: 0; padding: 6px 18px; font-size: 12px; text-align: center; background: #1f2a27; color: #f6f1e7">نسخة ثابتة من النموذج الأولي لشاشات الاستقبال، بيانات تجريبية. التنقل بين الشاشات يعمل، وباقي الأزرار لا تنفّذ شيئاً. <a href="index.html" style="color: #f6f1e7; text-decoration: underline">كل الشاشات</a></p>
 <div id="dc-root"><div class="sc-host" data-sc-name="Main"><div dir="rtl" lang="ar" class="theme-oasis" style="min-height: 100vh; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;">
@@ -421,7 +453,8 @@ html{scroll-padding-block-end:72px}
           
 
           
-            <div class="toolbar"><span class="count">يغادر غداً 23</span><div class="filters" style="margin-inline-start: auto;"><button type="button" class="filter" aria-haspopup="menu"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path></svg>تصدير<span class="sr-only"> القائمة</span></button></div></div>
+            <div class="toolbar"><span class="count">يغادر غداً 23</span><div class="filters" style="margin-inline-start: auto;"><span class="viewseg" role="group" aria-label="طريقة العرض"><button type="button" aria-pressed="true">قائمة</button><button type="button" aria-pressed="false">بطاقات</button></span><button type="button" class="filter" aria-haspopup="menu"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path></svg>تصدير<span class="sr-only"> القائمة</span></button></div></div>
+            
             <div style="overflow-x: auto; position: relative;">
               <table class="list ">
                 <thead>
@@ -504,6 +537,8 @@ html{scroll-padding-block-end:72px}
                 </tbody>
               </table>
             </div>
+            
+            
           
 
           <div class="foot">

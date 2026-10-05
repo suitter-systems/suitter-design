@@ -241,8 +241,8 @@ table.list{inline-size:100%;border-collapse:collapse;font-size:14px}
 
   <div style="display: flex; flex-wrap: wrap; align-items: flex-start;">
 
-    <nav aria-label="الأقسام" class="sidenav ">
-      <button type="button" class="navtoggle" aria-expanded="true" aria-label="طيّ القائمة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+    <nav aria-label="الأقسام" class="sidenav rail">
+      <button type="button" class="navtoggle" aria-expanded="false" aria-label="توسيع القائمة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
       <p class="navgroup">الاستقبال</p>
       <a class="navlink" href="main.html" title="اليوم"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg><span class="nl">اليوم</span><span class="ns" aria-hidden="true">اليوم</span></a>
       <p class="navgroup">الوحدات</p>
@@ -351,8 +351,8 @@ table.list{inline-size:100%;border-collapse:collapse;font-size:14px}
               <h3 class="rgh"><label class="hit"><input type="checkbox" aria-label="تحديد كل وحدات الطابق الأول" style=""></label><span class="sc-interp">الطابق الأول</span><span><span class="sc-interp">12 وحدة</span></span></h3>
               <ul class="tgrid">
                 
-                  <li class="tile rs-paid  ">
-                    <button type="button" class="tbody" id="tile-2104" aria-label="الوحدة 2104، جناح صغير، تصل اليوم، بعربون، مفحوصة، يصل 14:00، رامي خوري، VIP" title="الوحدة 2104، جناح صغير، تصل اليوم، بعربون، مفحوصة، يصل 14:00، رامي خوري، VIP" aria-expanded="false">
+                  <li class="tile rs-paid  is-open">
+                    <button type="button" class="tbody" id="tile-2104" aria-label="الوحدة 2104، جناح صغير، تصل اليوم، بعربون، مفحوصة، يصل 14:00، رامي خوري، VIP" title="الوحدة 2104، جناح صغير، تصل اليوم، بعربون، مفحوصة، يصل 14:00، رامي خوري، VIP" aria-expanded="true">
                       <span class="tnum"><span class="sc-interp">2104</span></span>
                       <span class="tmarks"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="hk hk-inspected" aria-hidden="true"></span><span class="rmark rm-gold" aria-hidden="true"></span><span class="tmove" aria-hidden="true"><span class="sc-interp">↘</span></span></span>
                     </button>
@@ -617,8 +617,43 @@ table.list{inline-size:100%;border-collapse:collapse;font-size:14px}
     </main>
 
     
+      <aside class="sidepanel" id="unit-panel" aria-labelledby="up-title">
+        <div class="sphead">
+          <div class="ttl">
+            <h2 id="up-title" tabindex="-1">الوحدة <span class="num"><span class="sc-interp">2104</span></span></h2>
+            <span class="sub"><span class="sc-interp">جناح صغير، الفندق الشرقي</span></span>
+          </div>
+          <button type="button" class="iconbtn spclose" aria-label="إغلاق اللوحة"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div class="spbody">
+          <div class="spstate rs-paid"><span class="sc-interp">تصل اليوم، بعربون</span></div>
+          <dl>
+            
+              <dt><span class="sc-interp">الإشغال</span></dt><dd><span class="sc-interp">شاغرة</span></dd>
+            
+              <dt><span class="sc-interp">حركة اليوم</span></dt><dd><span class="sc-interp">يصل 14:00، رامي خوري</span></dd>
+            
+              <dt><span class="sc-interp">العاملة</span></dt><dd><span class="sc-interp">—</span></dd>
+            
+              <dt><span class="sc-interp">لون الحجز</span></dt><dd><span class="sc-interp">VIP</span></dd>
+            
+          </dl>
+          
+            <div class="spfield">
+              <label for="up-hk">حالة التنظيف</label>
+              <select id="up-hk" class="sel"><option value="dirty">متسخة</option><option value="cleaning">قيد التنظيف</option><option value="clean">نظيفة</option><option value="inspected" selected="">مفحوصة</option></select>
+            </div>
+          
+        </div>
+        <div class="spfoot">
+          
+          <a class="btn" href="room-board.html">في الجدول الزمني</a>
+          <button type="button" class="btn">إغلاق</button>
+        </div>
+      </aside>
+    
   </div></div></div></div>
 
 
 
-<script>((pairs) => { pairs.forEach(([sel, to]) => { const el = document.querySelector(sel); if (el) el.addEventListener('click', () => { location.href = to; }); }); })([[".viewseg button:nth-child(2)","room-status-cards.html"],[".viewseg button:nth-child(3)","room-status-list.html"],["#tile-2104","room-status-unit.html"]]);</script></body></html>
+<script>((pairs) => { pairs.forEach(([sel, to]) => { const el = document.querySelector(sel); if (el) el.addEventListener('click', () => { location.href = to; }); }); })([[".spclose","main.html"],[".viewseg button:nth-child(1)","room-status.html"],[".viewseg button:nth-child(2)","room-status-cards.html"],[".viewseg button:nth-child(3)","room-status-list.html"],["#unit-panel .spclose","room-status.html"]]);</script></body></html>

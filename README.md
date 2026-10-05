@@ -7,3 +7,9 @@ Six visual directions for the reception screen of Suitter, a property management
 - **Oasis (واحة)** is the look the product uses. The other five are kept as references.
 - Names and figures on the page are generated examples, not guest data.
 - Each direction was checked for contrast (every text pair at 4.5:1 or more) and with the Impeccable anti-pattern detector.
+
+## Front desk screens
+
+**Live pages:** https://suitter-systems.github.io/suitter-design/front-desk/
+
+Static copies of the front desk prototype's screens (version 30, 5 Oct 2026) in the Oasis look: today's arrivals, departures and in-house guests, check-in, the room timeline and today's room status. Moving between the screens works; the other controls do nothing. Names and figures are generated examples, not guest data.

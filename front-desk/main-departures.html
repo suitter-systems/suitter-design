@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset="utf-8">
+<title>الاستقبال اليوم</title>
+<style>x-dc{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@700&amp;family=Noto+Sans+Arabic:wght@400;600&amp;family=Reem+Kufi:wght@600&amp;family=Readex+Pro:wght@400;600&amp;family=IBM+Plex+Sans+Arabic:wght@400;600;700&amp;family=El+Messiri:wght@700&amp;family=Aref+Ruqaa:wght@700&amp;display=swap"><style>
+body{margin:0}
+.skip{position:absolute;inset-inline-start:12px;inset-block-start:8px;z-index:50;padding-block:6px;padding-inline:14px;border-radius:var(--r-ctl);background:var(--brand);color:var(--on-brand);font-weight:600;text-decoration:none;translate:0 -200%}
+.skip:focus{translate:none}
+.bandstat{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--on-brand);white-space:nowrap}
+*{box-sizing:border-box}
+/* Theme layer only (D-049): each preset sets the shell, action, ground, fonts and corners. Status colours are shared and stay as they are. */
+.theme-oasis{--page:#f3f1ec;--surface:#ffffff;--text:#1f2a27;--muted:#56605c;--line:#e8e4dc;--line-strong:#cfc9be;--brand:#0e4a43;--brand-hover:#1d5f56;--on-brand:#f6f1e7;--on-brand-muted:#b9cfc9;--brand-line:#86ada5;--action:#e8b071;--action-hover:#dc9a52;--on-action:#1f2a27;--link:#0e4a43;--info-bg:#d9e9e5;--today:#ecf1f0;--today-col:#ecf1f0;--on-link:#f6f1e7;--band-edge:transparent;--font-display:"Noto Naskh Arabic", serif;--font-body:"Noto Sans Arabic", sans-serif;--r-panel:1.125rem;--r-ctl:999px}
+.theme-clay{--page:#f4ece1;--surface:#fffaf3;--text:#2a1c13;--muted:#6b5647;--line:#eadcca;--line-strong:#d6c3ac;--brand:#3a2419;--brand-hover:#5a3a2a;--on-brand:#f7eee3;--on-brand-muted:#cdb7a4;--brand-line:#cdb7a4;--action:#6b4530;--action-hover:#5a3a2a;--on-action:#ffffff;--link:#6b4530;--info-bg:#f3e0d0;--today:#f8ebe2;--today-col:#fbefe2;--on-link:#f7eee3;--band-edge:transparent;--font-display:"Reem Kufi", sans-serif;--font-body:"Readex Pro", sans-serif;--r-panel:6px;--r-ctl:6px}
+.theme-ink{--page:#f6f6f4;--surface:#ffffff;--text:#131416;--muted:#5c6068;--line:#e6e7e9;--line-strong:#cfd1d5;--brand:#ffffff;--brand-hover:#f0f0ee;--on-brand:#131416;--on-brand-muted:#5c6068;--brand-line:#5c6068;--action:#131416;--action-hover:#131416;--on-action:#ffffff;--link:#131416;--info-bg:#eef2fb;--today:#ececec;--today-col:#fff6d6;--on-link:#ffffff;--band-edge:#cfd1d5;--font-display:"Noto Sans Arabic", sans-serif;--font-body:"Noto Sans Arabic", sans-serif;--r-panel:8px;--r-ctl:6px}
+.theme-night{--page:#121619;--surface:#1a1f23;--text:#ebe7df;--muted:#a5aba9;--line:#2a3136;--line-strong:#3b444a;--brand:#0d1012;--brand-hover:#232a2f;--on-brand:#ebe7df;--on-brand-muted:#a5aba9;--brand-line:#a5aba9;--action:#7fd0c4;--action-hover:#99dcd2;--on-action:#0c1d1a;--link:#7fd0c4;--info-bg:#183330;--today:#2b2b27;--today-col:#2b2b27;--on-link:#0c1d1a;--band-edge:#3b444a;--font-display:"IBM Plex Sans Arabic", sans-serif;--font-body:"IBM Plex Sans Arabic", sans-serif;--r-panel:8px;--r-ctl:6px}
+.theme-olive{--page:#f5f2e8;--surface:#fffdf8;--text:#22251b;--muted:#5d604f;--line:#e6e1d1;--line-strong:#cdc6b0;--brand:#4a552a;--brand-hover:#5b6834;--on-brand:#f7f4ea;--on-brand-muted:#d3d8bd;--brand-line:#d3d8bd;--action:#4a552a;--action-hover:#4a552a;--on-action:#ffffff;--link:#4a552a;--info-bg:#e3e9ef;--today:#f1f0e8;--today-col:#faf3dc;--on-link:#f7f4ea;--band-edge:transparent;--font-display:"El Messiri", serif;--font-body:"IBM Plex Sans Arabic", sans-serif;--r-panel:12px;--r-ctl:8px}
+.theme-jasmine{--page:#faf8f6;--surface:#ffffff;--text:#2a1f29;--muted:#645862;--line:#eee8ec;--line-strong:#d7ccd4;--brand:#4a2545;--brand-hover:#5e3458;--on-brand:#fbf5f8;--on-brand-muted:#dcc3d6;--brand-line:#dcc3d6;--action:#4a2545;--action-hover:#4a2545;--on-action:#ffffff;--link:#4a2545;--info-bg:#efe3ee;--today:#f1eef0;--today-col:#fbf3d0;--on-link:#fbf5f8;--band-edge:transparent;--font-display:"Aref Ruqaa", serif;--font-body:"Noto Sans Arabic", sans-serif;--r-panel:10px;--r-ctl:8px}
+/* Shared status layer (D-049 point 4): one light set for every preset and one dark set (Night). Each status keeps its hue family
+   and its shape in both sets; only the values change, so marks reach 3:1 and text 4.5:1 on that set's surfaces.
+   A preset's links and actions never take a status value: they may share the information hue one step apart (Carbon: link Blue 60,
+   support-info Blue 70), never the warning, attention or success hue; amber is cleaning and warnings only.
+   Room states (--rs-*) and booking bars use Hisham's palette on OPERA's conventions (D-052): green ready, red dirty, teal occupied,
+   warm grey reserved without a deposit, orange reserved with one. Reservation colours (--resv-*) are the property's markers, never a fill. */
+[class*="theme-"]{--st-ok-bg:#dcebdc;--st-ok-ink:#23582f;--st-ok-line:#2f7a4a;--st-info-bg:#d9e9e5;--st-info-ink:#1d625a;--st-warn-bg:#f8e2c4;--st-warn-ink:#7a4510;--st-warn-dot:#a86f1c;--st-attn-bg:#f4d9d0;--st-attn-ink:#8a3216;--st-attn-line:#c0602a;--st-on-attn:#1f2a27;--st-on-attn-muted:#56605c;--st-neutral-bg:#ebe8e2;--st-neutral-ink:#4b524f;--hk-clean:#299043;--hk-inspected:#157632;--hk-cleaning:#ad761c;--hk-dirty:#C74A42;--bar-inhouse:#007172;--on-bar-inhouse:#ffffff;--bar-confirmed:#FFE8D4;--on-bar-confirmed:#532E00;--bar-confirmed-line:#AD6700;--bar-unpaid:#F3EBE5;--on-bar-unpaid:#453528;--bar-unpaid-line:#90735D;--bar-tentative-line:#90735D;--bar-ooo-a:#e3ded4;--bar-ooo-b:#ffffff;--on-bar-ooo:#4b524f;--bar-ooo-line:#7d837c;--rs-ready-bar:#299043;--rs-ready-tile:#DDF4DF;--rs-ready-ink:#064519;--rs-dirty-bar:#C74A42;--rs-dirty-tile:#FFE6E3;--rs-dirty-ink:#641C18;--rs-occ-bar:#008B8C;--rs-occ-tile:#D8F3F3;--rs-occ-ink:#004242;--rs-paid-bar:#AD6700;--rs-paid-tile:#FFE8D4;--rs-paid-ink:#532E00;--rs-unpaid-bar:#90735D;--rs-unpaid-tile:#F3EBE5;--rs-unpaid-ink:#453528;--resv-gold:#946E00;--resv-navy:#2F4D79;--resv-plum:#7B4C90;--resv-blue:#1F6FB2;--resv-black:#222426;--resv-rose:#A8325F}
+.theme-night{color-scheme:dark;--st-ok-bg:#1f3326;--st-ok-ink:#8fd6a5;--st-ok-line:#5fbf7f;--st-info-bg:#183330;--st-info-ink:#5fb8aa;--st-warn-bg:#3a2e17;--st-warn-ink:#f0c27a;--st-warn-dot:#f0c27a;--st-attn-bg:#3d211d;--st-attn-ink:#f3a091;--st-attn-line:#e8785f;--st-on-attn:#ebe7df;--st-on-attn-muted:#c4c9cc;--st-neutral-bg:#262c30;--st-neutral-ink:#c4c9cc;--hk-clean:#5fbf7f;--hk-inspected:#8fd6a5;--hk-cleaning:#f0b45b;--hk-dirty:#ec7d72;--bar-inhouse:#3fbcbc;--on-bar-inhouse:#0c1d1a;--bar-confirmed:#392a14;--on-bar-confirmed:#f6dab2;--bar-confirmed-line:#e5a24c;--bar-unpaid:#2e2621;--on-bar-unpaid:#ead9cb;--bar-unpaid-line:#bba18d;--bar-tentative-line:#bba18d;--bar-ooo-a:#262c30;--bar-ooo-b:#1a1f23;--on-bar-ooo:#c4c9cc;--bar-ooo-line:#7d8489;--rs-ready-bar:#5fbf7f;--rs-ready-tile:#1f3326;--rs-ready-ink:#c3ebcf;--rs-dirty-bar:#ec7d72;--rs-dirty-tile:#3d211d;--rs-dirty-ink:#f7cbc5;--rs-occ-bar:#3fbcbc;--rs-occ-tile:#143436;--rs-occ-ink:#bdeeee;--rs-paid-bar:#e5a24c;--rs-paid-tile:#392a14;--rs-paid-ink:#f6dab2;--rs-unpaid-bar:#bba18d;--rs-unpaid-tile:#2e2621;--rs-unpaid-ink:#ead9cb;--resv-gold:#e8c25a;--resv-navy:#8fb0e0;--resv-plum:#c9a2dc;--resv-blue:#7fb6ec;--resv-black:#ebe7df;--resv-rose:#ee9bbb}
+a{color:var(--link)}a:hover{color:var(--link)}
+::placeholder{color:var(--muted);opacity:1}
+:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.band :focus-visible{outline-color:var(--on-brand)}
+.sr-only{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.bandbtn{font:inherit;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding-block:5px;padding-inline:12px;border-radius:var(--r-ctl);border:1px solid var(--brand-line);background:transparent;color:var(--on-brand);cursor:pointer;white-space:nowrap;text-decoration:none}
+.bandbtn:hover{background:var(--brand-hover);color:var(--on-brand)}
+.sidenav{flex:0 0 216px;align-self:stretch;padding-block:6px 20px;padding-inline:8px;background:var(--surface);border-inline-end:1px solid var(--line)}
+.sidenav.rail{flex-basis:84px}
+.ns{display:none}
+.rail .ns{display:block;font-size:12px;line-height:1.2}
+.navtoggle{display:grid;place-items:center;inline-size:36px;block-size:36px;margin-inline-start:2px;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}
+.navtoggle:hover{background:var(--page);color:var(--text)}
+.navgroup{margin:0;padding-block:14px 4px;padding-inline:10px;font-size:12px;font-weight:600;color:var(--text)}
+.navlink{display:flex;align-items:center;gap:10px;padding-block:6px;padding-inline:10px;border-radius:8px;color:var(--text);text-decoration:none;font-size:14px}
+.navlink svg{flex:none;color:var(--muted)}
+.navlink:hover{background:var(--page);color:var(--text)}
+.navlink[aria-current="page"]{background:var(--info-bg);color:var(--link);font-weight:600}
+.navlink[aria-current="page"] svg{color:var(--link)}
+.rail .nl{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.rail .navgroup{block-size:0;padding:0;margin-block:8px;margin-inline:8px;overflow:hidden;border-block-start:1px solid var(--line)}
+.xlink{font-size:14px;font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.xlink:hover{text-decoration:underline;text-underline-offset:3px}
+.rail .navlink{flex-direction:column;justify-content:center;gap:3px;padding-inline:0;text-align:center}
+.navcount{margin-inline-start:auto;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.btn{font:inherit;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;min-block-size:32px;padding-block:4px;padding-inline:14px;border-radius:var(--r-ctl);border:1px solid var(--muted);background:var(--surface);color:var(--link);cursor:pointer;white-space:nowrap;text-decoration:none}
+.btn:hover{background:var(--page);color:var(--text)}
+.btn.primary{background:var(--action);border-color:var(--action);color:var(--on-action)}
+.btn.primary:hover{background:var(--action-hover);border-color:var(--action-hover)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.badge{display:inline-grid;place-items:center;min-inline-size:20px;block-size:20px;padding-inline:5px;border-radius:var(--r-ctl);background:var(--link);color:var(--on-link);font-size:12px;font-variant-numeric:tabular-nums}
+.hksum{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding-block:8px;padding-inline:16px;background:var(--surface);border-radius:var(--r-panel)}
+.hksum h2{margin:0;font-family:var(--font-body);font-size:14px;font-weight:600}
+.hksum .stack{display:flex;gap:2px;flex:1 1 160px;max-inline-size:300px;block-size:10px;border-radius:var(--r-ctl);overflow:hidden}
+.hksum .stack i{display:block}
+.hksum .stack i.ooo{background:repeating-linear-gradient(135deg,var(--muted) 0 2px,var(--surface) 2px 4px)}
+.hksum ul{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none;font-size:14px}
+.hksum li{display:inline-flex;align-items:center;gap:6px}
+.hksum b{font-variant-numeric:tabular-nums}
+.hksum .links{margin-inline-start:auto;display:flex;gap:14px;font-size:14px}
+.hksum .links a{text-decoration:underline;text-underline-offset:3px}
+.linkbtn{font:inherit;font-size:14px;font-weight:600;border:0;background:transparent;color:var(--link);cursor:pointer;padding:4px;text-decoration:underline;text-underline-offset:3px}
+.panel{background:var(--surface);border-radius:var(--r-panel);overflow:hidden}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding-block:8px;padding-inline:14px;border-block-end:1px solid var(--line)}
+.toolbar h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:20px}
+.count{font-size:14px;color:var(--muted)}
+.filter{font:inherit;font-size:14px;display:inline-flex;align-items:center;gap:5px;min-block-size:32px;padding-block:4px;padding-inline:10px;border-radius:var(--r-ctl);border:1px solid var(--muted);background:var(--surface);color:var(--text);cursor:pointer;white-space:nowrap}
+.filter[disabled]{opacity:.55;cursor:not-allowed}
+.sel{font:inherit;font-size:14px;block-size:32px;padding-block:0;padding-inline:8px;border-radius:var(--r-ctl);border:1px solid var(--muted);background:var(--surface);color:var(--text)}
+table.list{inline-size:100%;border-collapse:collapse;font-size:14px}
+.list th{text-align:start;font-weight:600;font-size:12px;color:var(--muted);padding-block:5px;padding-inline:8px;border-block-end:1px solid var(--line-strong);white-space:nowrap;background:var(--page)}
+.list td{padding-block:4px;padding-inline:8px;border-block-end:1px solid var(--line);vertical-align:middle;white-space:nowrap;block-size:40px}
+.list tbody tr:hover td{background:var(--page)}
+.list tbody tr:last-child td,.list tbody tr:last-child th{border-block-end:0}
+.num{font-variant-numeric:tabular-nums}
+.strong{font-weight:600}
+.ref{font-size:12px;color:var(--muted);margin-inline-start:6px}
+.refcol{font-size:12px;color:var(--muted)}
+.muted{color:var(--muted)}
+.guest{max-inline-size:230px;overflow:hidden;text-overflow:ellipsis}
+.guest .strong{display:block;line-height:1.3}
+.guest .ref{display:block;margin-inline-start:0;line-height:1.25}
+.chip{display:inline-flex;align-items:center;gap:6px;padding-block:2px;padding-inline:9px;border-radius:var(--r-ctl);font-size:12px;font-weight:600;white-space:nowrap}
+.chip::before{content:"";inline-size:6px;block-size:6px;border-radius:50%;background:currentColor}
+.chip.ok{background:var(--st-ok-bg);color:var(--st-ok-ink)}
+.chip.info{background:var(--st-info-bg);color:var(--st-info-ink)}
+.chip.warn{background:var(--st-neutral-bg);color:var(--st-neutral-ink)}
+.chip.warn::before{background:var(--st-warn-dot)}
+.chip.attn{background:var(--st-attn-bg);color:var(--st-attn-ink)}
+.chip.neutral{background:var(--st-neutral-bg);color:var(--st-neutral-ink)}
+.hkcell{display:inline-flex;align-items:center;gap:6px}
+.hk{display:inline-block;inline-size:10px;block-size:10px;border-radius:50%;flex:none}
+.hk-inspected{background:var(--hk-inspected);border-radius:1px;transform:rotate(45deg) scale(.85)}
+.hk-clean{background:var(--hk-clean)}
+.hk-cleaning{background:linear-gradient(90deg,var(--hk-cleaning) 50%,var(--surface) 50%);border:1.5px solid var(--hk-cleaning)}
+.hk-dirty{background:var(--surface);border:2.5px solid var(--hk-dirty)}
+.hk-ooo{border-radius:2px;background:repeating-linear-gradient(135deg,var(--muted) 0 2px,var(--surface) 2px 4px);border:1px solid var(--muted)}
+.hk-none{background:var(--surface);border:1.5px dashed var(--muted)}
+.rowbtn{font:inherit;font-size:12px;font-weight:600;padding-block:4px;padding-inline:12px;border-radius:var(--r-ctl);border:1px solid var(--muted);background:var(--surface);color:var(--link);cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+.rowbtn:hover{background:var(--page);color:var(--text)}
+.rowbtn.go{border-color:var(--link);color:var(--link);border-width:1.5px}
+.rowbtn.go:hover{background:var(--page)}
+/* Three tiers: one filled action per page (.btn.primary), outlined secondary actions (.btn, .rowbtn), quiet text actions on rows (.list/.item .rowbtn). */
+.list .rowbtn,.item .rowbtn{border-color:transparent;background:transparent;color:var(--link);padding-block:4px;padding-inline:8px;border-radius:8px}
+.list .rowbtn:hover,.item .rowbtn:hover,.list .rowbtn:focus-visible,.item .rowbtn:focus-visible{background:var(--page);color:var(--link)}
+.list .rowbtn.go,.item .rowbtn.go{border-color:transparent;border-width:1px}
+.list tbody th{text-align:start;font-weight:inherit;font-size:inherit;color:inherit;background:transparent;padding-block:4px;padding-inline:8px;border-block-end:1px solid var(--line);white-space:nowrap}
+.list tbody tr:hover th{background:var(--page)}
+.iconbtn{inline-size:26px;block-size:26px;display:inline-grid;place-items:center;border-radius:var(--r-ctl);border:0;background:transparent;color:var(--muted);cursor:pointer;vertical-align:middle}
+.iconbtn:hover{background:var(--page);color:var(--text)}
+.foot{display:flex;align-items:center;gap:12px;padding-block:8px;padding-inline:14px;border-block-start:1px solid var(--line);font-size:12px}
+.item{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:2px 12px;padding-block:10px;padding-inline:14px;border-block-end:1px solid var(--line)}
+.item:last-child{border-block-end:0}
+.item .ico{grid-row:span 2;inline-size:30px;block-size:30px;border-radius:var(--r-ctl);display:grid;place-items:center}
+.item .ico.attn{background:var(--st-attn-bg);color:var(--st-attn-ink)}
+.item .ico.warn{background:var(--st-warn-bg);color:var(--st-warn-ink)}
+.item .ico.neutral{background:var(--st-neutral-bg);color:var(--st-neutral-ink)}
+.item .acts{grid-row:span 2;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.bulk{display:flex;flex-direction:column;gap:6px;padding-block:10px;padding-inline:14px;border-block-end:1px solid var(--line-strong);background:var(--today)}
+.bulk ul{margin:0;padding-inline-start:18px;font-size:14px}
+.bulk .acts{display:flex;gap:6px}
+.bulk .no{color:var(--st-attn-ink);font-weight:600}
+/* An 18px box inside a 24px target (WCAG 2.5.8). */
+.hit{display:inline-grid;place-items:center;min-inline-size:24px;min-block-size:24px;cursor:pointer;vertical-align:middle}
+.hit input{inline-size:18px;block-size:18px;margin:0;accent-color:var(--link);cursor:pointer}
+.notes{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 16px;padding-block:10px;padding-inline:14px;background:var(--surface);border:1px solid var(--line-strong);border-radius:0.375rem;font-size:14px}
+.notes ul{margin:0;padding-inline-start:18px;flex:1 1 420px}
+/* The start screen is a worklist (SAP Fiori Worklist; Mews Reservation overview): today's lists come first, opened from count tiles. */
+html{scroll-padding-block-end:72px}
+.pagehead{display:flex;flex-wrap:wrap;align-items:center;gap:2px 14px}
+.pagehead h1{margin:0;font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.3}
+.headacts{margin-inline-start:auto;display:flex;flex-wrap:wrap;gap:8px}
+/* Alerts are exceptions with a defined response each (UK HSE), not a tab. */
+.alerts{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 12px;padding-block:0;padding-inline:14px;background:var(--st-attn-bg);color:var(--st-on-attn);border:1px solid var(--st-attn-line);border-radius:0.375rem}
+.alines{display:flex;flex-direction:column}
+.aline{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;min-block-size:40px}
+.aline + .aline{border-block-start:1px solid var(--st-attn-line)}
+.aline .ico{inline-size:24px;block-size:24px;display:grid;place-items:center;color:var(--st-attn-ink);flex:none}
+.aline .t{font-weight:600}
+.aline .s{font-size:12px;color:var(--st-on-attn-muted)}
+.aline .rowbtn{margin-inline-start:auto;border-color:transparent;background:transparent;color:var(--st-attn-ink);padding-inline:8px;border-radius:8px}
+.aline .rowbtn:hover,.aline .rowbtn:focus-visible{background:var(--surface)}
+.alerts .linkbtn{color:var(--st-attn-ink);white-space:nowrap}
+/* The worklist. */
+.work{display:flex;flex-direction:column;position:relative}
+.wait{display:inline-flex;align-items:center;gap:5px;padding-inline:8px;block-size:20px;border-radius:var(--r-ctl);background:var(--st-attn-bg);color:var(--st-attn-ink);font-size:12px;font-weight:600}
+.list tr.grp th{background:var(--page);color:var(--text);font-size:14px;font-weight:600;padding-block:3px;border-block-end:1px solid var(--line)}
+.list tr.grp th span{font-weight:400;color:var(--muted);font-size:12px;margin-inline-start:8px}
+.list tbody tr.row{cursor:pointer}
+.list tbody tr.is-sel td,.list tbody tr.is-sel th{background:var(--today)}
+.list tbody tr.is-open td,.list tbody tr.is-open th{background:var(--info-bg)}
+.namebtn{font:inherit;font-weight:600;display:block;padding:0;border:0;background:transparent;color:inherit;cursor:pointer;text-align:start;line-height:1.3;max-inline-size:100%;overflow:hidden;text-overflow:ellipsis}
+.namebtn:hover{text-decoration:underline;text-underline-offset:3px}
+/* A reservation colour the property chose (VIP, a source): a marker with its word, never a row fill (D-052). */
+.rmark{display:inline-block;inline-size:10px;block-size:10px;border-radius:2px;flex:none;box-shadow:0 0 0 1.5px var(--surface)}
+.rm-gold{background:var(--resv-gold)}
+.vipm{display:inline-flex;align-items:center;gap:4px;margin-inline-start:6px;font-size:12px;font-weight:600;color:var(--text);line-height:1;vertical-align:middle}
+.list.dense td,.list.dense tbody th{block-size:36px;padding-block:2px}
+.list.dense .guest .ref{display:inline;margin-inline-start:6px}
+.list.dense .guest .namebtn{display:inline}
+/* With the side panel open the list narrows, so the least needed columns go. */
+.list.narrow .col-n,.list.narrow .col-g,.list.narrow .utype{display:none}
+.list.narrow .guest{max-inline-size:170px}
+.list.narrow td,.list.narrow th{padding-inline:6px}
+/* Selecting rows shows its actions at the foot of the list; nothing above the rows moves. */
+.selbar{position:sticky;inset-block-end:0;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;min-block-size:52px;padding-block:8px;padding-inline:14px;background:var(--today);border-block-start:1px solid var(--line-strong)}
+.selbar .acts{margin-inline-start:auto;display:flex;gap:6px}
+.selbar.msg{background:var(--surface)}
+.foot .seg{display:inline-flex;border:1px solid var(--muted);border-radius:var(--r-ctl);overflow:hidden}
+.foot .seg button{font:inherit;font-size:12px;min-block-size:28px;padding-inline:10px;border:0;background:var(--surface);color:var(--text);cursor:pointer}
+.foot .seg button[aria-pressed="true"]{background:var(--link);color:var(--on-link);font-weight:600}
+/* Side panel: non-modal, at the inline end, for a quick view; work that needs focus opens a page (MDS Side Panel and Data Grid usage). */
+.sidepanel{flex:0 0 440px;max-inline-size:440px;align-self:flex-start;position:sticky;inset-block-start:0;block-size:calc(100vh - 52px);display:flex;flex-direction:column;background:var(--surface);border-inline-start:1px solid var(--line-strong)}
+.sphead{display:flex;align-items:flex-start;gap:8px;padding-block:14px 10px;padding-inline:18px;border-block-end:1px solid var(--line)}
+.sphead .ttl{flex:1 1 auto;min-inline-size:0}
+.sphead h2{margin:0;font-family:var(--font-display);font-weight:700;font-size:20px;line-height:1.3}
+.sphead h2:focus{outline:none}
+.sphead h2:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+.sphead .sub{font-size:12px;color:var(--muted)}
+.spclose{inline-size:32px;block-size:32px;flex:none}
+.spbody{flex:1 1 auto;overflow:auto;padding-block:12px;padding-inline:18px;display:flex;flex-direction:column;gap:14px}
+.spbody dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px 12px;font-size:14px}
+.spbody dt{color:var(--muted);font-size:12px;padding-block-start:2px}
+.spbody dd{margin:0}
+.spbody .chiprow{display:flex;flex-wrap:wrap;gap:6px}
+.spbody ul{margin:0;padding-inline-start:18px;font-size:14px;display:flex;flex-direction:column;gap:6px}
+.spbody .no{color:var(--st-attn-ink);font-weight:600}
+.spitem{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding-block:10px;border-block-end:1px solid var(--line)}
+.spitem .t{font-weight:600}
+.spitem .s{font-size:12px;color:var(--muted);grid-column:1}
+.spitem .rowbtn{grid-row:span 2;border-color:transparent;background:transparent;color:var(--link);padding-inline:8px;border-radius:8px}
+.spitem .rowbtn:hover,.spitem .rowbtn:focus-visible{background:var(--page)}
+.spfoot{display:flex;flex-wrap:wrap;gap:8px;padding-block:12px;padding-inline:18px;border-block-start:1px solid var(--line)}
+.spfoot .btn{justify-content:center}
+/* Today's counts as one strip of tiles that are the tabs (OPERA's today tiles, on one screen as Cloudbeds does), in v14's look:
+   one divided card, big figures, the selected tile outlined all round. Tonight's figures sit beside it in an outlined box, not clickable. */
+.work.strip{background:transparent;border-radius:0;overflow:visible;gap:8px}
+.kpis{display:flex;flex-wrap:wrap;gap:10px}
+.kpis [role="tablist"]{display:flex;flex:3 1 450px;background:var(--surface);border-radius:var(--r-panel);overflow:hidden}
+.figs{display:flex;flex:2 1 300px;border:1px solid var(--line-strong);border-radius:var(--r-panel)}
+.fig + .fig{border-inline-start:1px solid var(--line)}
+.tab,.fig{font:inherit;text-align:start;flex:1 1 0;min-inline-size:118px;display:flex;flex-direction:column;gap:2px;padding-block:12px 10px;padding-inline:16px;border:0;border-block-end:3px solid transparent;background:transparent;color:var(--text)}
+.tab{cursor:pointer}
+.tab + .tab{border-inline-start:1px solid var(--line)}
+.tab:hover{background:var(--page)}
+.tab[aria-selected="true"]{background:var(--info-bg);box-shadow:inset 0 0 0 2px var(--link)}
+/* The end tiles take the strip's outer corners, so the selected tile's outline follows the rounding instead of being clipped by it. */
+.tab:first-child{border-start-start-radius:var(--r-panel);border-end-start-radius:var(--r-panel)}
+.tab:last-child{border-start-end-radius:var(--r-panel);border-end-end-radius:var(--r-panel)}
+.tab .k,.fig .k{font-size:12px;color:var(--muted)}
+.tab[aria-selected="true"] .k{color:var(--link);font-weight:600}
+.tab .v,.fig .v{font-family:var(--font-display);font-size:30px;font-weight:700;line-height:1.15;font-variant-numeric:tabular-nums}
+.figs .fig .v{font-size:24px}
+.tab .m,.fig .m{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12px;color:var(--muted);white-space:nowrap}
+/* In-house is context, not a queue of work: its number is quieter than arrivals and departures (Few: when everything stands out, nothing does). */
+.tab.ctx .v{color:var(--muted);font-weight:600}
+.work.strip [role="tabpanel"]{background:var(--surface);border-radius:var(--r-panel);overflow:clip}
+.work.strip .toolbar .filters{margin-inline-start:auto;display:flex;flex-wrap:wrap;gap:6px}
+/* Control sizes: three heights on a 4px grid (Carbon's extra small, small and medium). 24px for a control inside a row or a
+   footer, 32px for every other button, select and band control, 40px for a field a person types an amount or text into. */
+.bandbtn{box-sizing:border-box;min-block-size:32px;padding-block:0}
+.navtoggle{inline-size:32px;block-size:32px}
+.navlink{box-sizing:border-box;min-block-size:32px;padding-block:4px}
+.band input[type="search"]{box-sizing:border-box;block-size:32px}
+.rowbtn,.list .rowbtn,.item .rowbtn,.aline .rowbtn{box-sizing:border-box;min-block-size:24px;padding-block:1px;line-height:20px}
+.iconbtn{inline-size:24px;block-size:24px}
+.linkbtn{box-sizing:border-box;min-block-size:24px;padding-block:0}
+.foot .seg button{min-block-size:22px}
+/* The top of the page is kept short so the list starts early: at 1366x768 nine arrivals show without scrolling. */
+.hksum{padding-block:4px}
+.aline{min-block-size:32px}
+.toolbar{padding-block:6px}
+.tab,.fig{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:baseline;gap:0 10px;padding-block:8px 5px}
+.tab .k,.fig .k{grid-column:1 / -1}
+</style></head>
+<body><p style="margin: 0; padding: 6px 18px; font-size: 12px; text-align: center; background: #1f2a27; color: #f6f1e7">نسخة ثابتة من النموذج الأولي لشاشات الاستقبال، بيانات تجريبية. التنقل بين الشاشات يعمل، وباقي الأزرار لا تنفّذ شيئاً. <a href="index.html" style="color: #f6f1e7; text-decoration: underline">كل الشاشات</a></p>
+<div id="dc-root"><div class="sc-host" data-sc-name="Main"><div dir="rtl" lang="ar" class="theme-oasis" style="min-height: 100vh; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;">
+  <a class="skip" href="#main-content">الانتقال إلى المحتوى الرئيسي</a>
+
+  <header class="band" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 8px; padding-inline: 16px; background: var(--brand); color: var(--on-brand); border-block-end: 1px solid var(--band-edge);">
+    <span style="font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1;">سويتر</span>
+    <div style="position: relative; flex: 1 1 280px; max-width: 440px;">
+      <label for="global-search" class="sr-only">بحث عن ضيف أو وحدة أو حجز</label>
+      <span aria-hidden="true" style="position: absolute; inset-inline-start: 12px; inset-block: 0px; display: flex; align-items: center; color: var(--muted);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      </span>
+      <input id="global-search" type="search" dir="auto" aria-keyshortcuts="/" placeholder="ابحث بالاسم أو رقم الوحدة أو رقم الحجز" style="inline-size: 100%; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 14px; padding-block: 0px; padding-inline: 36px 40px; border-radius: var(--r-ctl); border: 1px solid var(--on-brand); background: var(--surface); color: var(--text);" value="">
+      <kbd aria-hidden="true" style="position: absolute; inset-inline-end: 12px; inset-block-start: 7px; font-family: inherit; font-size: 12px; line-height: 1.4; padding-inline: 6px; border: 1px solid var(--muted); border-radius: 4px; color: var(--muted);">/</kbd>
+    </div>
+    <button type="button" class="bandbtn">منتجع الساحل، كل المباني
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+    </button>
+    <div style="margin-inline-start: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+      <span role="status" style="display: inline-flex; gap: 12px;">
+        <span class="bandstat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.5"></circle></svg>الصندوق مفتوح</span>
+        <span class="bandstat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path></svg>المُرمِّز متصل</span>
+      </span>
+      <span style="font-size: 14px; color: var(--on-brand-muted); white-space: nowrap;">سامي، الاستقبال 1</span>
+      <a href="#" hreflang="en" lang="en" dir="ltr" style="color: var(--on-brand); font-weight: 600; font-size: 14px; text-decoration: none; padding-block: 4px; padding-inline: 12px; border: 1px solid var(--brand-line); border-radius: var(--r-ctl);">English</a>
+    </div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-start;">
+
+    <nav aria-label="الأقسام" class="sidenav ">
+      <button type="button" class="navtoggle" aria-expanded="true" aria-label="طيّ القائمة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+      <p class="navgroup">الاستقبال</p>
+      <a class="navlink" href="main.html" aria-current="page" title="اليوم"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg><span class="nl">اليوم</span><span class="ns" aria-hidden="true">اليوم</span></a>
+      <p class="navgroup">الوحدات</p>
+      <a class="navlink" href="room-board.html" title="الجدول الزمني"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg><span class="nl">الجدول الزمني</span><span class="ns" aria-hidden="true">الجدول</span></a>
+      <a class="navlink" href="room-status.html" title="حالة الوحدات اليوم"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"></path><circle cx="7" cy="11" r="2"></circle></svg><span class="nl">حالة الوحدات اليوم</span><span class="ns" aria-hidden="true">الوحدات</span></a>
+      <a class="navlink" href="#" title="الصيانة وخارج الخدمة"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"></path></svg><span class="nl">الصيانة وخارج الخدمة</span><span class="ns" aria-hidden="true">الصيانة</span></a>
+      <p class="navgroup">الحجوزات</p>
+      <a class="navlink" href="#" title="الحجوزات"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 3h6v3H9zM9 12h6M9 16h4"></path></svg><span class="nl">الحجوزات</span><span class="ns" aria-hidden="true">الحجوزات</span></a>
+      <a class="navlink" href="#" title="المجموعات والوكلاء"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path><path d="M16 5a3 3 0 0 1 0 6M21 20c0-2.6-1.6-4.8-4-5.6"></path></svg><span class="nl">المجموعات والوكلاء</span><span class="ns" aria-hidden="true">المجموعات</span></a>
+      <a class="navlink" href="#" title="الضيوف"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg><span class="nl">الضيوف</span><span class="ns" aria-hidden="true">الضيوف</span></a>
+      <p class="navgroup">المال</p>
+      <a class="navlink" href="#" title="الصندوق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.5"></circle></svg><span class="nl">الصندوق</span><span class="ns" aria-hidden="true">الصندوق</span></a>
+      <a class="navlink" href="#" title="الفواتير"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M14 3v5h5M9 13h7M9 17h5"></path></svg><span class="nl">الفواتير</span><span class="ns" aria-hidden="true">الفواتير</span></a>
+      <a class="navlink" href="#" title="حسابات الوكلاء"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5h6v2M3 12h18"></path></svg><span class="nl">حسابات الوكلاء</span><span class="ns" aria-hidden="true">الوكلاء</span></a>
+      <p class="navgroup">نهاية اليوم</p>
+      <a class="navlink" href="#" title="التدقيق الليلي"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg><span class="nl">التدقيق الليلي</span><span class="ns" aria-hidden="true">التدقيق</span></a>
+      <a class="navlink" href="#" title="التقارير"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg><span class="nl">التقارير</span><span class="ns" aria-hidden="true">التقارير</span></a>
+      <p class="navgroup">النظام</p>
+      <a class="navlink" href="#" title="الإعدادات"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg><span class="nl">الإعدادات</span><span class="ns" aria-hidden="true">الإعدادات</span></a>
+    </nav>
+
+    <main id="main-content" tabindex="-1" style="flex: 999 1 560px; min-width: 0px; padding-block: 10px 24px; padding-inline: 18px; display: flex; flex-direction: column; gap: 8px;">
+
+      <div class="pagehead">
+        <h1>الاستقبال اليوم</h1>
+        <span class="muted" style="font-size: 14px;">تاريخ العمل: الأحد 4 تشرين الأول 2026</span>
+        <div class="headacts">
+          <button type="button" class="btn" aria-expanded="false" aria-controls="handover">ملاحظات الوردية <span class="badge">2</span></button>
+          <button type="button" class="btn">ضيف بلا حجز</button>
+          <button type="button" class="btn primary">حجز جديد</button>
+        </div>
+      </div>
+
+      
+
+      <section class="hksum" aria-labelledby="hksum-h">
+        <h2 id="hksum-h">حالة الوحدات</h2>
+        <div class="stack" aria-hidden="true"><i style="flex: 98 1 0%; background: var(--hk-clean);"></i><i style="flex: 72 1 0%; background: var(--hk-inspected);"></i><i style="flex: 21 1 0%; background: var(--hk-cleaning);"></i><i style="flex: 93 1 0%; background: var(--hk-dirty);"></i><i class="ooo" style="flex: 5 1 0%;"></i></div>
+        <ul>
+          <li><span class="hk hk-clean" aria-hidden="true"></span>نظيفة <b>98</b></li>
+          <li><span class="hk hk-inspected" aria-hidden="true"></span>مفحوصة <b>72</b></li>
+          <li><span class="hk hk-cleaning" aria-hidden="true"></span>قيد التنظيف <b>21</b></li>
+          <li><span class="hk hk-dirty" aria-hidden="true"></span>متسخة <b>93</b></li>
+          <li><span class="hk hk-ooo" aria-hidden="true"></span>خارج الخدمة <b>5</b></li>
+        </ul>
+        <span class="links"><a href="room-status.html">حالة الوحدات</a><a href="room-board.html">الجدول الزمني</a></span>
+      </section>
+
+      <section class="alerts" aria-labelledby="alerts-h">
+        <h2 id="alerts-h" class="sr-only">تنبيهات تحتاج إجراءً</h2>
+        <div class="alines">
+          
+            <div class="aline">
+              <span class="ico" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 8v5"></path><path d="M12 16.5v.01"></path><circle cx="12" cy="12" r="9"></circle></svg></span>
+              <span><span class="t"><span class="sc-interp">يوسف حداد ينتظر منذ 45 دقيقة</span></span><span class="s">، <span class="sc-interp">الجناح 3205 متسخ، في قائمة الانتظار</span></span></span>
+              <button type="button" class="rowbtn"><span class="sc-interp">استعجال التنظيف</span></button>
+            </div>
+          
+        </div>
+        <button type="button" class="linkbtn" id="all-alerts-btn"><span class="sc-interp">و4 تنبيهات أخرى</span></button>
+      </section>
+
+      <section class="panel work strip" aria-labelledby="work-h">
+        <h2 id="work-h" class="sr-only">قوائم عمل اليوم</h2>
+        <div class="kpis">
+          <div role="tablist" aria-label="قوائم اليوم">
+            
+              <button type="button" role="tab" id="tab-arr" class="tab work" aria-selected="false" aria-controls="panel-arr" tabindex="-1">
+                <span class="k"><span class="sc-interp">الوصول</span></span><span class="sr-only">، </span>
+                <span class="v"><span class="sc-interp">12</span></span>
+                <span class="m"><span class="sc-interp">من 18</span><span class="sr-only">، </span><span class="wait"><span class="sc-interp">واحد ينتظر</span></span></span>
+              </button>
+            
+              <button type="button" role="tab" id="tab-dep" class="tab work" aria-selected="true" aria-controls="panel-dep" tabindex="0">
+                <span class="k"><span class="sc-interp">المغادرة</span></span><span class="sr-only">، </span>
+                <span class="v"><span class="sc-interp">3</span></span>
+                <span class="m"><span class="sc-interp">من 12</span></span>
+              </button>
+            
+              <button type="button" role="tab" id="tab-inh" class="tab ctx" aria-selected="false" aria-controls="panel-inh" tabindex="-1">
+                <span class="k"><span class="sc-interp">المقيمون</span></span><span class="sr-only">، </span>
+                <span class="v"><span class="sc-interp">196</span></span>
+                <span class="m"><span class="sc-interp">وحدة، 412 ضيفاً</span></span>
+              </button>
+            
+          </div>
+          <div class="figs">
+            <div class="fig"><span class="k">متاح الليلة</span><span class="v">79</span><span class="m">من 284 قابلة للبيع</span></div>
+            <div class="fig"><span class="k">الإشغال الليلة</span><span class="v">72%</span><span class="m">أمس 71%</span></div>
+          </div>
+        </div>
+        <div role="tabpanel" id="panel-dep" aria-labelledby="tab-dep">
+
+          
+
+          
+            <div class="toolbar"><span class="count">المغادرة حتى 12:00</span><div class="filters" style="margin-inline-start: auto;"><button type="button" class="filter" aria-haspopup="menu"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path></svg>تصدير<span class="sr-only"> القائمة</span></button></div></div>
+            <div style="overflow-x: auto; position: relative;">
+              <table class="list ">
+                <thead>
+                  <tr><th style="inline-size: 34px;"><span class="sr-only">تحديد</span></th><th>الضيف</th><th>الوحدة</th><th class="num">المغادرة</th><th>الرصيد</th><th class="col-g">التأمين</th><th>الحالة</th><th><span class="sr-only">إجراءات</span></th></tr>
+                </thead>
+                <tbody>
+                  
+                    <tr class="row ">
+                      <td><label class="hit"><input type="checkbox" aria-label="تحديد باسل عيسى" style=""></label></td>
+                      <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23977"><span class="sc-interp">باسل عيسى</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23977</span></bdi></span></th>
+                      <td><span class="strong num"><span class="sc-interp">2106</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td class="num"><span class="sc-interp">14:00</span></td>
+                      <td class="num"><span class="sc-interp">11,600</span> <bdi><span class="sc-interp">ل.س.</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">مطعم</span></span></td>
+                      <td class="num col-g"><span class="sc-interp">7,000</span> <bdi><span class="sc-interp">ل.س.</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">محتجز</span></span></td>
+                      <td><span class="chip warn"><span class="sc-interp">مغادرة متأخرة</span></span></td>
+                      <td style="text-align: end; white-space: nowrap;">
+                        <button type="button" class="rowbtn go"><span class="sc-interp">تسوية الرصيد</span></button>
+                        <button type="button" class="iconbtn" aria-label="إجراءات أخرى لـ باسل عيسى"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg></button>
+                      </td>
+                    </tr>
+                  
+                    <tr class="row ">
+                      <td><label class="hit"><input type="checkbox" aria-label="تحديد جمال الخطيب" style=""></label></td>
+                      <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23981"><span class="sc-interp">جمال الخطيب</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23981</span></bdi></span></th>
+                      <td><span class="strong num"><span class="sc-interp">2203</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td class="num"><span class="sc-interp">12:00</span></td>
+                      <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
+                      <td class="num col-g"><span class="sc-interp">50</span> <bdi><span class="sc-interp">US$</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">محتجز</span></span></td>
+                      <td><span class="chip warn"><span class="sc-interp">التأمين لم يُعَد</span></span></td>
+                      <td style="text-align: end; white-space: nowrap;">
+                        <button type="button" class="rowbtn go"><span class="sc-interp">إعادة التأمين</span></button>
+                        <button type="button" class="iconbtn" aria-label="إجراءات أخرى لـ جمال الخطيب"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg></button>
+                      </td>
+                    </tr>
+                  
+                    <tr class="row ">
+                      <td><label class="hit"><input type="checkbox" aria-label="تحديد ليلى ناصر" style=""></label></td>
+                      <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23990"><span class="sc-interp">ليلى ناصر</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23990</span></bdi></span></th>
+                      <td><span class="strong num"><span class="sc-interp">3202</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                      <td class="num"><span class="sc-interp">12:00</span></td>
+                      <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
+                      <td class="num col-g"><span class="sc-interp"></span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">أُعيد 11:40</span></span></td>
+                      <td><span class="chip ok"><span class="sc-interp">جاهز للمغادرة</span></span></td>
+                      <td style="text-align: end; white-space: nowrap;">
+                        <button type="button" class="rowbtn go"><span class="sc-interp">تسجيل المغادرة</span></button>
+                        <button type="button" class="iconbtn" aria-label="إجراءات أخرى لـ ليلى ناصر"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg></button>
+                      </td>
+                    </tr>
+                  
+                    <tr class="row ">
+                      <td></td>
+                      <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23968"><span class="sc-interp">منى قاسم</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23968</span></bdi></span></th>
+                      <td><span class="strong num"><span class="sc-interp">2102</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td class="num"><span class="sc-interp">10:20</span></td>
+                      <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
+                      <td class="num col-g"><span class="sc-interp"></span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">أُعيد 10:15</span></span></td>
+                      <td><span class="chip info"><span class="sc-interp">غادرت</span></span></td>
+                      <td style="text-align: end; white-space: nowrap;">
+                        <button type="button" class="rowbtn "><span class="sc-interp">فتح الحجز</span></button>
+                        <button type="button" class="iconbtn" aria-label="إجراءات أخرى لـ منى قاسم"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg></button>
+                      </td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+            
+            
+          
+
+          
+
+          <div class="foot">
+            <span class="muted"><span class="sc-interp">يظهر 4 من 12. الرصيد يُسوّى بدفعة أو يُحوّل إلى حساب الذمم، والتأمين يُعاد بإيصال قبل المغادرة</span></span>
+            <a href="#" style="text-decoration: underline; text-underline-offset: 3px;"><span class="sc-interp">كل المغادرة</span></a>
+            <span style="margin-inline-start: auto; display: inline-flex; align-items: center; gap: 8px;">
+              <span class="muted" id="density-l">الكثافة</span>
+              <span class="seg" role="group" aria-labelledby="density-l">
+                <button type="button" aria-pressed="true">مريحة</button>
+                <button type="button" aria-pressed="false">مضغوطة</button>
+              </span>
+            </span>
+          </div>
+        </div>
+        <div role="tabpanel" id="panel-arr" aria-labelledby="tab-arr" hidden=""></div><div role="tabpanel" id="panel-inh" aria-labelledby="tab-inh" hidden=""></div>
+      </section>
+    </main>
+
+    
+  </div></div></div></div>
+
+
+
+<script>((pairs) => { pairs.forEach(([sel, to]) => { const el = document.querySelector(sel); if (el) el.addEventListener('click', () => { location.href = to; }); }); })([["#tab-arr","main.html"],["#tab-inh","main-in-house.html"]]);</script></body></html>

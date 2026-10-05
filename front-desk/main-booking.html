@@ -65,10 +65,10 @@ body{margin:0}
    and its shape in both sets; only the values change, so marks reach 3:1 and text 4.5:1 on that set's surfaces.
    A preset's links and actions never take a status value: they may share the information hue one step apart (Carbon: link Blue 60,
    support-info Blue 70), never the warning, attention or success hue; amber is cleaning and warnings only.
-   Room states (--rs-*) and booking bars use Hisham's palette with his own meanings: green vacant, red occupied, teal vacant and waiting for cleaning,
+   Room states (--rs-*) and booking bars use Hisham's palette on OPERA's conventions (D-052): green ready, red dirty, teal occupied,
    warm grey reserved without a deposit, orange reserved with one. Reservation colours (--resv-*) are the property's markers, never a fill. */
-[class*="theme-"]{--st-ok-bg:#dcebdc;--st-ok-ink:#23582f;--st-ok-line:#2f7a4a;--st-info-bg:#d9e9e5;--st-info-ink:#1d625a;--st-warn-bg:#f8e2c4;--st-warn-ink:#7a4510;--st-warn-dot:#a86f1c;--st-attn-bg:#f4d9d0;--st-attn-ink:#8a3216;--st-attn-line:#c0602a;--st-on-attn:#1f2a27;--st-on-attn-muted:#56605c;--st-neutral-bg:#ebe8e2;--st-neutral-ink:#4b524f;--hk-clean:#299043;--hk-inspected:#157632;--hk-cleaning:#ad761c;--hk-dirty:#008B8C;--bar-inhouse:#A73730;--on-bar-inhouse:#ffffff;--bar-confirmed:#FFE8D4;--on-bar-confirmed:#532E00;--bar-confirmed-line:#AD6700;--bar-unpaid:#F3EBE5;--on-bar-unpaid:#453528;--bar-unpaid-line:#90735D;--bar-tentative-line:#90735D;--bar-ooo-a:#e3ded4;--bar-ooo-b:#ffffff;--on-bar-ooo:#4b524f;--bar-ooo-line:#7d837c;--rs-ready-bar:#299043;--rs-ready-tile:#DDF4DF;--rs-ready-ink:#064519;--rs-dirty-bar:#008B8C;--rs-dirty-tile:#D8F3F3;--rs-dirty-ink:#004242;--rs-occ-bar:#C74A42;--rs-occ-tile:#FFE6E3;--rs-occ-ink:#641C18;--rs-paid-bar:#AD6700;--rs-paid-tile:#FFE8D4;--rs-paid-ink:#532E00;--rs-unpaid-bar:#90735D;--rs-unpaid-tile:#F3EBE5;--rs-unpaid-ink:#453528;--resv-gold:#946E00;--resv-navy:#2F4D79;--resv-plum:#7B4C90;--resv-blue:#1F6FB2;--resv-black:#222426;--resv-rose:#A8325F}
-.theme-night{color-scheme:dark;--st-ok-bg:#1f3326;--st-ok-ink:#8fd6a5;--st-ok-line:#5fbf7f;--st-info-bg:#183330;--st-info-ink:#5fb8aa;--st-warn-bg:#3a2e17;--st-warn-ink:#f0c27a;--st-warn-dot:#f0c27a;--st-attn-bg:#3d211d;--st-attn-ink:#f3a091;--st-attn-line:#e8785f;--st-on-attn:#ebe7df;--st-on-attn-muted:#c4c9cc;--st-neutral-bg:#262c30;--st-neutral-ink:#c4c9cc;--hk-clean:#5fbf7f;--hk-inspected:#8fd6a5;--hk-cleaning:#f0b45b;--hk-dirty:#3fbcbc;--bar-inhouse:#ec7d72;--on-bar-inhouse:#2a0f0c;--bar-confirmed:#392a14;--on-bar-confirmed:#f6dab2;--bar-confirmed-line:#e5a24c;--bar-unpaid:#2e2621;--on-bar-unpaid:#ead9cb;--bar-unpaid-line:#bba18d;--bar-tentative-line:#bba18d;--bar-ooo-a:#262c30;--bar-ooo-b:#1a1f23;--on-bar-ooo:#c4c9cc;--bar-ooo-line:#7d8489;--rs-ready-bar:#5fbf7f;--rs-ready-tile:#1f3326;--rs-ready-ink:#c3ebcf;--rs-dirty-bar:#3fbcbc;--rs-dirty-tile:#143436;--rs-dirty-ink:#bdeeee;--rs-occ-bar:#ec7d72;--rs-occ-tile:#3d211d;--rs-occ-ink:#f7cbc5;--rs-paid-bar:#e5a24c;--rs-paid-tile:#392a14;--rs-paid-ink:#f6dab2;--rs-unpaid-bar:#bba18d;--rs-unpaid-tile:#2e2621;--rs-unpaid-ink:#ead9cb;--resv-gold:#e8c25a;--resv-navy:#8fb0e0;--resv-plum:#c9a2dc;--resv-blue:#7fb6ec;--resv-black:#ebe7df;--resv-rose:#ee9bbb}
+[class*="theme-"]{--st-ok-bg:#dcebdc;--st-ok-ink:#23582f;--st-ok-line:#2f7a4a;--st-info-bg:#d9e9e5;--st-info-ink:#1d625a;--st-warn-bg:#f8e2c4;--st-warn-ink:#7a4510;--st-warn-dot:#a86f1c;--st-attn-bg:#f4d9d0;--st-attn-ink:#8a3216;--st-attn-line:#c0602a;--st-on-attn:#1f2a27;--st-on-attn-muted:#56605c;--st-neutral-bg:#ebe8e2;--st-neutral-ink:#4b524f;--hk-clean:#299043;--hk-inspected:#157632;--hk-cleaning:#ad761c;--hk-dirty:#C74A42;--bar-inhouse:#007172;--on-bar-inhouse:#ffffff;--bar-confirmed:#FFE8D4;--on-bar-confirmed:#532E00;--bar-confirmed-line:#AD6700;--bar-unpaid:#F3EBE5;--on-bar-unpaid:#453528;--bar-unpaid-line:#90735D;--bar-tentative-line:#90735D;--bar-ooo-a:#e3ded4;--bar-ooo-b:#ffffff;--on-bar-ooo:#4b524f;--bar-ooo-line:#7d837c;--rs-ready-bar:#299043;--rs-ready-tile:#DDF4DF;--rs-ready-ink:#064519;--rs-dirty-bar:#C74A42;--rs-dirty-tile:#FFE6E3;--rs-dirty-ink:#641C18;--rs-occ-bar:#008B8C;--rs-occ-tile:#D8F3F3;--rs-occ-ink:#004242;--rs-paid-bar:#AD6700;--rs-paid-tile:#FFE8D4;--rs-paid-ink:#532E00;--rs-unpaid-bar:#90735D;--rs-unpaid-tile:#F3EBE5;--rs-unpaid-ink:#453528;--resv-gold:#946E00;--resv-navy:#2F4D79;--resv-plum:#7B4C90;--resv-blue:#1F6FB2;--resv-black:#222426;--resv-rose:#A8325F}
+.theme-night{color-scheme:dark;--st-ok-bg:#1f3326;--st-ok-ink:#8fd6a5;--st-ok-line:#5fbf7f;--st-info-bg:#183330;--st-info-ink:#5fb8aa;--st-warn-bg:#3a2e17;--st-warn-ink:#f0c27a;--st-warn-dot:#f0c27a;--st-attn-bg:#3d211d;--st-attn-ink:#f3a091;--st-attn-line:#e8785f;--st-on-attn:#ebe7df;--st-on-attn-muted:#c4c9cc;--st-neutral-bg:#262c30;--st-neutral-ink:#c4c9cc;--hk-clean:#5fbf7f;--hk-inspected:#8fd6a5;--hk-cleaning:#f0b45b;--hk-dirty:#ec7d72;--bar-inhouse:#3fbcbc;--on-bar-inhouse:#0c1d1a;--bar-confirmed:#392a14;--on-bar-confirmed:#f6dab2;--bar-confirmed-line:#e5a24c;--bar-unpaid:#2e2621;--on-bar-unpaid:#ead9cb;--bar-unpaid-line:#bba18d;--bar-tentative-line:#bba18d;--bar-ooo-a:#262c30;--bar-ooo-b:#1a1f23;--on-bar-ooo:#c4c9cc;--bar-ooo-line:#7d8489;--rs-ready-bar:#5fbf7f;--rs-ready-tile:#1f3326;--rs-ready-ink:#c3ebcf;--rs-dirty-bar:#ec7d72;--rs-dirty-tile:#3d211d;--rs-dirty-ink:#f7cbc5;--rs-occ-bar:#3fbcbc;--rs-occ-tile:#143436;--rs-occ-ink:#bdeeee;--rs-paid-bar:#e5a24c;--rs-paid-tile:#392a14;--rs-paid-ink:#f6dab2;--rs-unpaid-bar:#bba18d;--rs-unpaid-tile:#2e2621;--rs-unpaid-ink:#ead9cb;--resv-gold:#e8c25a;--resv-navy:#8fb0e0;--resv-plum:#c9a2dc;--resv-blue:#7fb6ec;--resv-black:#ebe7df;--resv-rose:#ee9bbb}
 a{color:var(--link)}a:hover{color:var(--link)}
 ::placeholder{color:var(--muted);opacity:1}
 :focus-visible{outline:3px solid var(--link);outline-offset:2px}
@@ -283,7 +283,7 @@ html{scroll-padding-block-end:72px}
 .toolbar{padding-block:6px}
 .tab,.fig{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:baseline;gap:0 10px;padding-block:8px 5px}
 .tab .k,.fig .k{grid-column:1 / -1}
-/* A unit's number wears its card's colour from the room status page, with the same icon, so one unit looks the same on both. */
+/* A unit's number wears its card's colour from the room status page (D-052), with the same icon, so one unit looks the same on both. */
 .uchip{display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;min-block-size:24px;padding-inline:6px;border:1.5px solid;border-radius:6px}
 .uchip svg{flex:none}
 .uchip.us-paid{background:var(--rs-paid-tile);border-color:var(--rs-paid-bar);color:var(--rs-paid-ink)}
@@ -291,38 +291,6 @@ html{scroll-padding-block-end:72px}
 .uchip.us-occ{background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
 .uchip.us-dirty{background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
 .uchip.us-ready{background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
-/* Cards view of the three lists: one card per booking, in its unit's card colours from the room status page. A booking without
-   one unit (a group, no unit assigned) keeps a plain card with a dashed edge. The list stays the other view. */
-.viewseg{display:inline-flex;border:1px solid var(--muted);border-radius:var(--r-ctl);overflow:hidden}
-.viewseg button{font:inherit;font-size:14px;min-block-size:30px;padding-inline:12px;border:0;background:var(--surface);color:var(--text);cursor:pointer}
-.viewseg button[aria-pressed="true"]{background:var(--link);color:var(--on-link);font-weight:600}
-.bgrid,.bcards{list-style:none;margin:0;padding:0}
-.bgroup{padding-block:10px 12px;padding-inline:14px;border-block-end:1px solid var(--line)}
-.bgroup:last-child{border-block-end:0}
-.bgh{margin:0 0 8px;font-size:14px;font-weight:600}
-.bgh span{font-weight:400;font-size:12px;color:var(--muted);margin-inline-start:8px}
-.bcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:8px}
-.bcard{display:flex;flex-direction:column;gap:4px;min-inline-size:0;padding-block:6px 8px;padding-inline:10px;border-width:1.5px;border-style:dashed;border-color:var(--muted);border-radius:min(var(--r-panel),12px);background:var(--surface);font-size:12px;line-height:1.4;cursor:pointer}
-.bcard.us-paid{border-style:solid;background:var(--rs-paid-tile);border-color:var(--rs-paid-bar);color:var(--rs-paid-ink)}
-.bcard.us-unpaid{border-style:solid;background:var(--rs-unpaid-tile);border-color:var(--rs-unpaid-bar);color:var(--rs-unpaid-ink)}
-.bcard.us-occ{border-style:solid;background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
-.bcard.us-dirty{border-style:solid;background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
-.bcard.us-ready{border-style:solid;background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
-.bcard.is-sel{outline:3px solid var(--text);outline-offset:2px}
-.bcard.is-open{box-shadow:0 0 0 3px var(--link)}
-.btop{display:flex;align-items:center;gap:6px;min-block-size:24px}
-.bnum{display:inline-flex;align-items:center;gap:5px;font-size:20px;font-weight:700;line-height:1.2}
-.btype{min-inline-size:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bend{margin-inline-start:auto;display:inline-flex}
-.bguest{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 8px;color:var(--text)}
-.bguest .namebtn{font-size:14px}
-.bref{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}
-.bline{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;color:var(--text)}
-.bfoot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-block-start:auto;padding-block-start:2px}
-.bact{margin-inline-start:auto;display:inline-flex;align-items:center;gap:2px}
-.bcard .rowbtn{border-color:transparent;background:transparent;color:var(--link);padding-inline:8px;border-radius:8px}
-.bcard .rowbtn:hover,.bcard .rowbtn:focus-visible{background:var(--surface)}
-.bcard .hk-dirty,.bcard .hk-cleaning{box-shadow:0 0 0 1.5px var(--surface)}
 </style></head>
 <body><p style="margin: 0; padding: 6px 18px; font-size: 12px; text-align: center; background: #1f2a27; color: #f6f1e7">نسخة ثابتة من النموذج الأولي لشاشات الاستقبال، بيانات تجريبية. التنقل بين الشاشات يعمل، وباقي الأزرار لا تنفّذ شيئاً. <a href="index.html" style="color: #f6f1e7; text-decoration: underline">كل الشاشات</a></p>
 <div id="dc-root"><div class="sc-host" data-sc-name="Main"><div dir="rtl" lang="ar" class="theme-oasis" style="min-height: 100vh; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;">
@@ -452,13 +420,11 @@ html{scroll-padding-block-end:72px}
             <div class="toolbar">
               <span class="count">الأقرب موعداً أولاً، والواصلون في آخر القائمة</span>
               <div class="filters">
-                <span class="viewseg" role="group" aria-label="طريقة العرض"><button type="button" aria-pressed="true">قائمة</button><button type="button" aria-pressed="false">بطاقات</button></span>
                 <select class="sel" aria-label="جاهزية الوحدة"><option value="all" selected="">الجاهزية: الكل</option><option value="ready">جاهزة (مفحوصة)</option><option value="notready">غير جاهزة</option><option value="none">بلا تخصيص</option></select>
                 <select class="sel" aria-label="المبنى"><option value="all" selected="">المبنى: الكل</option><option value="الفندق الشرقي"><span class="sc-interp">الفندق الشرقي</span></option><option value="الفندق الغربي"><span class="sc-interp">الفندق الغربي</span></option><option value="البرج الأول"><span class="sc-interp">البرج الأول</span></option><option value="البرج الثاني"><span class="sc-interp">البرج الثاني</span></option><option value="البرج الثالث"><span class="sc-interp">البرج الثالث</span></option><option value="البرج الرابع"><span class="sc-interp">البرج الرابع</span></option><option value="البرج الخامس"><span class="sc-interp">البرج الخامس</span></option></select>
                 <button type="button" class="filter" aria-haspopup="menu"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"></path></svg>تصدير<span class="sr-only"> القائمة</span></button>
               </div>
             </div>
-            
             <div style="overflow-x: auto; position: relative;">
               <table class="list narrow ">
                 <thead>
@@ -680,8 +646,6 @@ html{scroll-padding-block-end:72px}
                 
               </table>
             </div>
-            
-            
             
             
           

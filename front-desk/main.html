@@ -283,6 +283,14 @@ html{scroll-padding-block-end:72px}
 .toolbar{padding-block:6px}
 .tab,.fig{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:baseline;gap:0 10px;padding-block:8px 5px}
 .tab .k,.fig .k{grid-column:1 / -1}
+/* A unit's number wears its card's colour from the room status page (D-052), with the same icon, so one unit looks the same on both. */
+.uchip{display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;min-block-size:24px;padding-inline:6px;border:1.5px solid;border-radius:6px}
+.uchip svg{flex:none}
+.uchip.us-paid{background:var(--rs-paid-tile);border-color:var(--rs-paid-bar);color:var(--rs-paid-ink)}
+.uchip.us-unpaid{background:var(--rs-unpaid-tile);border-color:var(--rs-unpaid-bar);color:var(--rs-unpaid-ink)}
+.uchip.us-occ{background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
+.uchip.us-dirty{background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
+.uchip.us-ready{background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
 </style></head>
 <body><p style="margin: 0; padding: 6px 18px; font-size: 12px; text-align: center; background: #1f2a27; color: #f6f1e7">نسخة ثابتة من النموذج الأولي لشاشات الاستقبال، بيانات تجريبية. التنقل بين الشاشات يعمل، وباقي الأزرار لا تنفّذ شيئاً. <a href="index.html" style="color: #f6f1e7; text-decoration: underline">كل الشاشات</a></p>
 <div id="dc-root"><div class="sc-host" data-sc-name="Main"><div dir="rtl" lang="ar" class="theme-oasis" style="min-height: 100vh; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;">
@@ -440,7 +448,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد يوسف حداد" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24102"><span class="sc-interp">يوسف حداد</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24102</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">3205</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                        <td><span class="strong num uchip us-unpaid" title="تصل اليوم، بلا عربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9"></path></svg><span class="sc-interp">3205</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بلا عربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-dirty" aria-hidden="true"></span><span class="sc-interp">متسخة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">1</span></td>
                         <td class="num"><span class="sc-interp">12:55</span></td>
@@ -462,7 +470,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد ريم الأحمد" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24120"><span class="sc-interp">ريم الأحمد</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24120</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">1103</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">1103</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-clean" aria-hidden="true"></span><span class="sc-interp">نظيفة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">4</span></td>
                         <td class="num"><span class="sc-interp">13:15</span></td>
@@ -479,7 +487,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد رامي خوري" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24117"><span class="sc-interp">رامي خوري</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24117</span></bdi><span class="vipm"><span class="rmark rm-gold" aria-hidden="true"></span>VIP</span></span></th>
-                        <td><span class="strong num"><span class="sc-interp">2104</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">2104</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-inspected" aria-hidden="true"></span><span class="sc-interp">مفحوصة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">2</span></td>
                         <td class="num"><span class="sc-interp">14:00</span></td>
@@ -496,7 +504,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد عائلة النجار" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24098"><span class="sc-interp">عائلة النجار</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24098</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">2206</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">2206</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-cleaning" aria-hidden="true"></span><span class="sc-interp">قيد التنظيف</span></span></td>
                         <td class="num col-n"><span class="sc-interp">5</span></td>
                         <td class="num"><span class="sc-interp">15:00</span></td>
@@ -513,7 +521,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد مجموعة الأمل، سفريات الشام" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-GR-0311"><span class="sc-interp">مجموعة الأمل، سفريات الشام</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">GR-0311</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">4 وحدات</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
+                        <td><span class="strong num " title=""><span class="sc-interp">4 وحدات</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
                         <td><span class="hkcell"><span class="hk hk-none" aria-hidden="true"></span><span class="sc-interp">بلا تخصيص</span></span></td>
                         <td class="num col-n"><span class="sc-interp">3</span></td>
                         <td class="num"><span class="sc-interp">16:30</span></td>
@@ -530,7 +538,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد نادين سلوم" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24127"><span class="sc-interp">نادين سلوم</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24127</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">3106</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">3106</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-clean" aria-hidden="true"></span><span class="sc-interp">نظيفة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">2</span></td>
                         <td class="num"><span class="sc-interp">17:00</span></td>
@@ -547,7 +555,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد لينا حمّود" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24133"><span class="sc-interp">لينا حمّود</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24133</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">1107</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">1107</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-inspected" aria-hidden="true"></span><span class="sc-interp">مفحوصة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">3</span></td>
                         <td class="num"><span class="sc-interp">18:30</span></td>
@@ -564,7 +572,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد مازن عبود" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24129"><span class="sc-interp">مازن عبود</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24129</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">2304</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                        <td><span class="strong num uchip us-paid" title="تصل اليوم، بعربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg><span class="sc-interp">2304</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بعربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-dirty" aria-hidden="true"></span><span class="sc-interp">متسخة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">2</span></td>
                         <td class="num"><span class="sc-interp">19:00</span></td>
@@ -581,7 +589,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد جورج سمعان" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24125"><span class="sc-interp">جورج سمعان</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24125</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">2109</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح وسط</span></span></td>
+                        <td><span class="strong num uchip us-unpaid" title="تصل اليوم، بلا عربون"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9"></path></svg><span class="sc-interp">2109</span><span class="sr-only">، <span class="sc-interp">تصل اليوم، بلا عربون</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح وسط</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-inspected" aria-hidden="true"></span><span class="sc-interp">مفحوصة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">2</span></td>
                         <td class="num"><span class="sc-interp">20:00</span></td>
@@ -598,7 +606,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td><label class="hit"><input type="checkbox" aria-label="تحديد باسل نصر" style=""></label></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24131"><span class="sc-interp">باسل نصر</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24131</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">—</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                        <td><span class="strong num " title=""><span class="sc-interp">—</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-none" aria-hidden="true"></span><span class="sc-interp">بلا تخصيص</span></span></td>
                         <td class="num col-n"><span class="sc-interp">1</span></td>
                         <td class="num"><span class="sc-interp">22:00</span></td>
@@ -620,7 +628,7 @@ html{scroll-padding-block-end:72px}
                       <tr class="row ">
                         <td></td>
                         <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-24090"><span class="sc-interp">سلمى عبد الله</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-24090</span></bdi></span></th>
-                        <td><span class="strong num"><span class="sc-interp">3102</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                        <td><span class="strong num uchip us-occ" title="مشغولة"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg><span class="sc-interp">3102</span><span class="sr-only">، <span class="sc-interp">مشغولة</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                         <td><span class="hkcell"><span class="hk hk-inspected" aria-hidden="true"></span><span class="sc-interp">مفحوصة</span></span></td>
                         <td class="num col-n"><span class="sc-interp">3</span></td>
                         <td class="num"><span class="sc-interp">12:00</span></td>

@@ -283,6 +283,14 @@ html{scroll-padding-block-end:72px}
 .toolbar{padding-block:6px}
 .tab,.fig{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:baseline;gap:0 10px;padding-block:8px 5px}
 .tab .k,.fig .k{grid-column:1 / -1}
+/* A unit's number wears its card's colour from the room status page (D-052), with the same icon, so one unit looks the same on both. */
+.uchip{display:inline-flex;align-items:center;gap:4px;box-sizing:border-box;min-block-size:24px;padding-inline:6px;border:1.5px solid;border-radius:6px}
+.uchip svg{flex:none}
+.uchip.us-paid{background:var(--rs-paid-tile);border-color:var(--rs-paid-bar);color:var(--rs-paid-ink)}
+.uchip.us-unpaid{background:var(--rs-unpaid-tile);border-color:var(--rs-unpaid-bar);color:var(--rs-unpaid-ink)}
+.uchip.us-occ{background:var(--rs-occ-tile);border-color:var(--rs-occ-bar);color:var(--rs-occ-ink)}
+.uchip.us-dirty{background:var(--rs-dirty-tile);border-color:var(--rs-dirty-bar);color:var(--rs-dirty-ink)}
+.uchip.us-ready{background:var(--rs-ready-tile);border-color:var(--rs-ready-bar);color:var(--rs-ready-ink)}
 </style></head>
 <body><p style="margin: 0; padding: 6px 18px; font-size: 12px; text-align: center; background: #1f2a27; color: #f6f1e7">نسخة ثابتة من النموذج الأولي لشاشات الاستقبال، بيانات تجريبية. التنقل بين الشاشات يعمل، وباقي الأزرار لا تنفّذ شيئاً. <a href="index.html" style="color: #f6f1e7; text-decoration: underline">كل الشاشات</a></p>
 <div id="dc-root"><div class="sc-host" data-sc-name="Main"><div dir="rtl" lang="ar" class="theme-oasis" style="min-height: 100vh; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;">
@@ -422,7 +430,7 @@ html{scroll-padding-block-end:72px}
                     <tr class="row ">
                       <td><label class="hit"><input type="checkbox" aria-label="تحديد باسل عيسى" style=""></label></td>
                       <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23977"><span class="sc-interp">باسل عيسى</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23977</span></bdi></span></th>
-                      <td><span class="strong num"><span class="sc-interp">2106</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td><span class="strong num uchip us-occ" title="مشغولة"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg><span class="sc-interp">2106</span><span class="sr-only">، <span class="sc-interp">مشغولة</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                       <td class="num"><span class="sc-interp">14:00</span></td>
                       <td class="num"><span class="sc-interp">11,600</span> <bdi><span class="sc-interp">ل.س.</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">مطعم</span></span></td>
                       <td class="num col-g"><span class="sc-interp">7,000</span> <bdi><span class="sc-interp">ل.س.</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">محتجز</span></span></td>
@@ -436,7 +444,7 @@ html{scroll-padding-block-end:72px}
                     <tr class="row ">
                       <td><label class="hit"><input type="checkbox" aria-label="تحديد جمال الخطيب" style=""></label></td>
                       <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23981"><span class="sc-interp">جمال الخطيب</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23981</span></bdi></span></th>
-                      <td><span class="strong num"><span class="sc-interp">2203</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td><span class="strong num uchip us-occ" title="مشغولة"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg><span class="sc-interp">2203</span><span class="sr-only">، <span class="sc-interp">مشغولة</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                       <td class="num"><span class="sc-interp">12:00</span></td>
                       <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
                       <td class="num col-g"><span class="sc-interp">50</span> <bdi><span class="sc-interp">US$</span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">محتجز</span></span></td>
@@ -450,7 +458,7 @@ html{scroll-padding-block-end:72px}
                     <tr class="row ">
                       <td><label class="hit"><input type="checkbox" aria-label="تحديد ليلى ناصر" style=""></label></td>
                       <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23990"><span class="sc-interp">ليلى ناصر</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23990</span></bdi></span></th>
-                      <td><span class="strong num"><span class="sc-interp">3202</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
+                      <td><span class="strong num uchip us-occ" title="مشغولة"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8zM4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg><span class="sc-interp">3202</span><span class="sr-only">، <span class="sc-interp">مشغولة</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح كبير</span></span></td>
                       <td class="num"><span class="sc-interp">12:00</span></td>
                       <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
                       <td class="num col-g"><span class="sc-interp"></span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">أُعيد 11:40</span></span></td>
@@ -464,7 +472,7 @@ html{scroll-padding-block-end:72px}
                     <tr class="row ">
                       <td></td>
                       <th scope="row" class="guest"><button type="button" class="namebtn" id="name-SR-23968"><span class="sc-interp">منى قاسم</span><span class="sr-only">، عرض الملخص</span></button><span class="ref"><bdi dir="ltr"><span class="sc-interp">SR-23968</span></bdi></span></th>
-                      <td><span class="strong num"><span class="sc-interp">2102</span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
+                      <td><span class="strong num uchip us-dirty" title="شاغرة تحتاج تنظيفاً"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h9"></path></svg><span class="sc-interp">2102</span><span class="sr-only">، <span class="sc-interp">شاغرة تحتاج تنظيفاً</span></span></span> <span class="muted utype" style="font-size: 12px;"><span class="sc-interp">جناح صغير</span></span></td>
                       <td class="num"><span class="sc-interp">10:20</span></td>
                       <td class="num"><span class="sc-interp">—</span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp"></span></span></td>
                       <td class="num col-g"><span class="sc-interp"></span> <bdi><span class="sc-interp"></span></bdi> <span class="muted" style="font-size: 12px;"><span class="sc-interp">أُعيد 10:15</span></span></td>

@@ -13,3 +13,9 @@ Six visual directions for the reception screen of Suitter, a property management
 **Live pages:** https://suitter-systems.github.io/suitter-design/front-desk/
 
 Static copies of the front desk prototype's screens (version 36, 5 Oct 2026) in the Oasis look: today's arrivals, departures and in-house guests, check-in, the room timeline and today's room status. Moving between the screens works; the other controls do nothing. Names and figures are generated examples, not guest data.
+
+## Choosing the look
+
+**Live page:** https://suitter-systems.github.io/suitter-design/choose-the-look/
+
+Four looks for the front desk, each with its own navigation and screen layout, shown on four screens: today's arrivals, check-in, the room timeline and today's room status. All four show the same example day at the same moment. A viewer picks a look for each screen, then one look overall; the picks stay in that browser, and the page gives a summary to copy and send. Names and figures are generated examples, not guest data.

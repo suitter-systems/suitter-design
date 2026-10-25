@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>اختيار شكل سويتر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&display=swap">
+<style>
+/* One screen at a time: a tab per screen, the four options in a 2x2 grid, one pick per screen, then a final choice.
+   Deliberately neutral so the page itself does not favour any option. */
+:root {
+  --bg: #f6f6f5;
+  --surface: #ffffff;
+  --ink: #1c1c1c;
+  --muted: #5c5c5c;
+  --line: #dedddb;
+  --edge: #8a8a87;
+  --picked: #1c1c1c;
+  --on-picked: #ffffff;
+  --focus: #1f5fbf;
+  --font: "Noto Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161616; --surface: #202020; --ink: #ececea; --muted: #ababa8; --line: #363634; --edge: #8a8a87;
+    --picked: #ececea; --on-picked: #161616; --focus: #8ab4f8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161616; --surface: #202020; --ink: #ececea; --muted: #ababa8; --line: #363634; --edge: #8a8a87;
+  --picked: #ececea; --on-picked: #161616; --focus: #8ab4f8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 1440px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px; display: grid; gap: 24px; }
+header { display: grid; gap: 8px; }
+h1 { font-size: 1.75rem; font-weight: 600; margin: 0; text-wrap: balance; }
+h2 { font-size: 1.25rem; font-weight: 600; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 52rem; }
+.small { font-size: 0.875rem; color: var(--muted); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; border-block-end: 1px solid var(--line); }
+.tab { min-height: 44px; padding-inline: 16px; border: 0; border-block-end: 3px solid transparent; background: transparent; cursor: pointer; color: var(--muted); font-weight: 600; }
+.tab[aria-selected="true"] { color: var(--ink); border-block-end-color: var(--ink); }
+.tab .done { font-weight: 400; font-size: 0.875rem; }
+.panel { display: grid; gap: 20px; }
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr)); gap: 20px; }
+.opt { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; display: grid; grid-template-rows: auto auto; min-width: 0; }
+.opt.is-picked { border: 2px solid var(--picked); }
+.shot { display: block; width: 100%; padding: 0; border: 0; border-block-end: 1px solid var(--line); background: var(--bg); cursor: zoom-in; }
+.shot img { display: block; width: 100%; height: auto; aspect-ratio: 1366 / 768; object-fit: cover; object-position: top; }
+.opt-foot { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 16px; }
+.letter { font-size: 1.25rem; font-weight: 600; min-width: 1.5em; }
+.name { color: var(--muted); font-size: 0.9375rem; }
+.pick { margin-inline-start: auto; min-height: 44px; padding-inline: 18px; border-radius: 6px; border: 1px solid var(--edge); background: transparent; cursor: pointer; }
+.pick[aria-pressed="true"] { background: var(--picked); color: var(--on-picked); border-color: var(--picked); }
+.field { display: grid; gap: 6px; max-width: 46rem; }
+label { font-weight: 600; }
+textarea { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--edge); border-radius: 6px; padding: 10px 12px; min-height: 72px; resize: vertical; width: 100%; }
+.toggle { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; cursor: pointer; }
+.toggle input { width: 20px; height: 20px; }
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; gap: 12px; }
+.summary pre { margin: 0; white-space: pre-wrap; font-family: var(--font); font-size: 0.9375rem; }
+.btn { justify-self: start; min-height: 44px; padding-inline: 16px; border-radius: 6px; border: 1px solid var(--edge); background: transparent; cursor: pointer; }
+.final { display: flex; gap: 8px; flex-wrap: wrap; }
+dialog { border: 0; padding: 0; background: var(--surface); color: var(--ink); width: min(1400px, 96vw); max-height: 92vh; border-radius: 8px; }
+dialog::backdrop { background: rgb(0 0 0 / 0.7); }
+.dialog-bar { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 12px; background: var(--surface); border-block-end: 1px solid var(--line); }
+dialog img { display: block; width: 100%; height: auto; }
+.close { min-height: 40px; padding-inline: 16px; border-radius: 6px; border: 1px solid var(--edge); background: transparent; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="wrap" dir="rtl" lang="ar">
+  <header>
+    <h1>أيّ شكل تريده لسويتر؟</h1>
+    <p class="lead">هذه أربعة أشكال مختلفة لسويتر، لكل منها طريقة تنقّل وترتيب شاشات خاص به، لا ألوان فقط. كل الأشكال تعرض اليوم نفسه، في اللحظة نفسها: الضيوف والوحدات والمبالغ نفسها. اختر في كل شاشة الشكل الذي تفضّله، ثم اختر في الأخير الشكل الذي تريده لسويتر.</p>
+    <p class="small">اضغط على أي صورة لتكبيرها وترى الصفحة كاملة. الأسماء والأرقام أمثلة، لا بيانات ضيوف.</p>
+    <label class="toggle"><input type="checkbox" id="show-names"> إظهار مصدر كل شكل</label>
+    <p class="small" id="save-state" role="status">تُحفظ اختياراتك في هذا المتصفح. حين تنتهي، انسخ الخلاصة من «الاختيار الأخير» وأرسلها.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="الشاشات" id="tabs"></div>
+  <div id="panels"></div>
+</div>
+
+<dialog id="viewer" aria-labelledby="viewer-title">
+  <div class="dialog-bar" dir="rtl" lang="ar">
+    <strong id="viewer-title"></strong>
+    <button type="button" class="close" id="viewer-close">إغلاق</button>
+  </div>
+  <img id="viewer-img" alt="">
+</dialog>
+
+<script>
+(function () {
+  var OPTIONS = [
+    { id: 'mews', letter: 'أ', name: 'على طريقة Mews' },
+    { id: 'opera', letter: 'ب', name: 'على طريقة OPERA' },
+    { id: 'cloudbeds', letter: 'ج', name: 'على طريقة Cloudbeds' },
+    { id: 'current', letter: 'د', name: 'سويتر الحالي' }
+  ];
+  var SCREENS = [
+    { id: 'Main', title: 'الاستقبال اليوم' },
+    { id: 'CheckIn', title: 'تسجيل الوصول' },
+    { id: 'Timeline', title: 'الجدول الزمني' },
+    { id: 'RoomStatus', title: 'حالة الوحدات' }
+  ];
+  var LOCAL_KEY = 'choose-the-look-v2';
+  var state = { picks: {}, notes: {}, final: null, finalNote: '' };
+  var showNames = false;
+  var current = 0;
+
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function label(o) { return 'الشكل ' + o.letter + (showNames ? '، ' + o.name : ''); }
+
+  var tabsHost = document.getElementById('tabs');
+  var panelsHost = document.getElementById('panels');
+  var tabButtons = [];
+
+  function buildTabs() {
+    var all = SCREENS.concat([{ id: 'final', title: 'الاختيار الأخير' }]);
+    all.forEach(function (s, i) {
+      var t = el('button', { type: 'button', role: 'tab', class: 'tab', id: 'tab-' + s.id, 'aria-controls': 'panel-' + s.id, 'aria-selected': 'false', tabindex: '-1' });
+      t.appendChild(document.createTextNode((s.id === 'final' ? '' : (i + 1) + '. ') + s.title + ' '));
+      t.appendChild(el('span', { class: 'done', id: 'done-' + s.id }));
+      t.addEventListener('click', function () { select(i, true); });
+      t.addEventListener('keydown', function (e) {
+        var n = all.length;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          select((i + (e.key === 'ArrowLeft' ? 1 : n - 1)) % n, true);
+        } else if (e.key === 'Home') { e.preventDefault(); select(0, true); }
+        else if (e.key === 'End') { e.preventDefault(); select(n - 1, true); }
+      });
+      tabsHost.appendChild(t);
+      tabButtons.push(t);
+      panelsHost.appendChild(el('section', { role: 'tabpanel', class: 'panel', id: 'panel-' + s.id, 'aria-labelledby': 'tab-' + s.id, tabindex: '0', hidden: '' }));
+    });
+  }
+
+  function select(i, focus) {
+    current = i;
+    tabButtons.forEach(function (t, j) {
+      t.setAttribute('aria-selected', String(i === j));
+      t.setAttribute('tabindex', i === j ? '0' : '-1');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = i !== j;
+    });
+    if (focus) tabButtons[i].focus();
+  }
+
+  function renderScreen(s, i) {
+    var p = document.getElementById('panel-' + s.id);
+    p.textContent = '';
+    p.appendChild(el('h2', null, (i + 1) + '. ' + s.title + ': أيّ شكل تفضّل؟'));
+    var grid = el('div', { class: 'options' });
+    OPTIONS.forEach(function (o) {
+      var picked = state.picks[s.id] === o.id;
+      var card = el('article', { class: 'opt' + (picked ? ' is-picked' : ''), 'aria-label': label(o) });
+      var b = el('button', { type: 'button', class: 'shot', 'aria-label': 'تكبير ' + label(o) + '، ' + s.title });
+      b.appendChild(el('img', { src: 'img/' + o.id + '-' + s.id + '-view.jpg', alt: '', loading: 'lazy' }));
+      b.addEventListener('click', function () { openViewer(label(o) + '، ' + s.title, 'img/' + o.id + '-' + s.id + '-full.jpg'); });
+      card.appendChild(b);
+      var foot = el('div', { class: 'opt-foot' });
+      foot.appendChild(el('span', { class: 'letter' }, o.letter));
+      if (showNames) foot.appendChild(el('span', { class: 'name' }, o.name));
+      var pick = el('button', { type: 'button', class: 'pick', 'aria-pressed': String(picked), 'data-key': s.id + ':' + o.id }, picked ? 'اخترت هذا' : 'أختار هذا');
+      pick.addEventListener('click', function () {
+        state.picks[s.id] = state.picks[s.id] === o.id ? null : o.id;
+        changed();
+      });
+      foot.appendChild(pick);
+      card.appendChild(foot);
+      grid.appendChild(card);
+    });
+    p.appendChild(grid);
+    var f = el('div', { class: 'field' });
+    f.appendChild(el('label', { for: 'note-' + s.id }, 'لماذا؟ ملاحظة اختيارية'));
+    var t = el('textarea', { id: 'note-' + s.id, dir: 'auto' });
+    t.value = state.notes[s.id] || '';
+    t.addEventListener('input', function () { state.notes[s.id] = t.value; changed(true); });
+    f.appendChild(t);
+    p.appendChild(f);
+    var next = el('button', { type: 'button', class: 'btn' }, i < SCREENS.length - 1 ? 'الشاشة التالية: ' + SCREENS[i + 1].title : 'إلى الاختيار الأخير');
+    next.addEventListener('click', function () { select(i + 1, true); window.scrollTo(0, 0); });
+    p.appendChild(next);
+  }
+
+  function renderFinal() {
+    var p = document.getElementById('panel-final');
+    p.textContent = '';
+    p.appendChild(el('h2', null, 'أيّ شكل تريده لسويتر؟'));
+    var row = el('div', { class: 'final', role: 'group', 'aria-label': 'الشكل الذي تريده' });
+    OPTIONS.forEach(function (o) {
+      var b = el('button', { type: 'button', class: 'pick', 'aria-pressed': String(state.final === o.id), 'data-key': 'final:' + o.id }, label(o));
+      b.style.marginInlineStart = '0';
+      b.addEventListener('click', function () { state.final = state.final === o.id ? null : o.id; changed(); });
+      row.appendChild(b);
+    });
+    p.appendChild(row);
+    var f = el('div', { class: 'field' });
+    f.appendChild(el('label', { for: 'note-final' }, 'ما الذي تريد أن نغيّره فيه؟ ملاحظة اختيارية'));
+    var t = el('textarea', { id: 'note-final', dir: 'auto' });
+    t.value = state.finalNote || '';
+    t.addEventListener('input', function () { state.finalNote = t.value; changed(true); });
+    f.appendChild(t);
+    p.appendChild(f);
+    var box = el('section', { class: 'summary', 'aria-labelledby': 'sum-h' });
+    box.appendChild(el('h2', { id: 'sum-h' }, 'الخلاصة'));
+    box.appendChild(el('pre', { id: 'summary', dir: 'auto' }, summaryText()));
+    var copy = el('button', { type: 'button', class: 'btn' }, 'نسخ الخلاصة');
+    var out = el('p', { class: 'small', role: 'status' });
+    copy.addEventListener('click', function () {
+      var text = summaryText();
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById('summary'));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        out.textContent = 'حدّدنا الخلاصة؛ انسخها من لوحة المفاتيح.';
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { out.textContent = 'نُسخت الخلاصة.'; }, fallback);
+      else fallback();
+    });
+    box.appendChild(copy);
+    box.appendChild(out);
+    p.appendChild(box);
+  }
+
+  function optionById(id) { return OPTIONS.filter(function (o) { return o.id === id; })[0]; }
+  function summaryText() {
+    var lines = SCREENS.map(function (s) {
+      var o = optionById(state.picks[s.id]);
+      var n = (state.notes[s.id] || '').trim();
+      return s.title + ': ' + (o ? 'الشكل ' + o.letter + '، ' + o.name : 'لم يُختر بعد') + (n ? '\n  ' + n : '');
+    });
+    var f = optionById(state.final);
+    lines.push('الشكل المختار لسويتر: ' + (f ? 'الشكل ' + f.letter + '، ' + f.name : 'لم يُختر بعد'));
+    if ((state.finalNote || '').trim()) lines.push('  ' + state.finalNote.trim());
+    return lines.join('\n');
+  }
+
+  function renderAll() {
+    SCREENS.forEach(renderScreen);
+    renderFinal();
+    SCREENS.forEach(function (s) {
+      var o = optionById(state.picks[s.id]);
+      document.getElementById('done-' + s.id).textContent = o ? '(' + o.letter + ')' : '';
+    });
+    var f = optionById(state.final);
+    document.getElementById('done-final').textContent = f ? '(' + f.letter + ')' : '';
+  }
+
+  function changed(typing) {
+    if (!typing) {
+      var key = document.activeElement && document.activeElement.getAttribute('data-key');
+      renderAll();
+      select(current, false);
+      var again = key && document.querySelector('[data-key="' + key + '"]');
+      if (again) again.focus();
+    } else {
+      var sum = document.getElementById('summary');
+      if (sum) sum.textContent = summaryText();
+    }
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch (e) { /* storage refused: the summary still works */ }
+  }
+
+  function valid(id) { return OPTIONS.some(function (o) { return o.id === id; }) ? id : null; }
+
+  var viewer = document.getElementById('viewer'), opener = null;
+  function openViewer(title, src) {
+    opener = document.activeElement;
+    document.getElementById('viewer-title').textContent = title;
+    var i = document.getElementById('viewer-img'); i.src = src; i.alt = title;
+    viewer.showModal();
+    document.getElementById('viewer-close').focus();
+  }
+  document.getElementById('viewer-close').addEventListener('click', function () { viewer.close(); });
+  viewer.addEventListener('click', function (e) { if (e.target === viewer) viewer.close(); });
+  viewer.addEventListener('close', function () { if (opener) opener.focus(); });
+
+  document.getElementById('show-names').addEventListener('change', function (e) {
+    showNames = e.target.checked;
+    renderAll(); select(current, false);
+  });
+
+  buildTabs();
+  try {
+    var kept = JSON.parse(localStorage.getItem(LOCAL_KEY) || 'null');
+    if (kept && typeof kept === 'object') {
+      SCREENS.forEach(function (s) {
+        if (kept.picks && valid(kept.picks[s.id])) state.picks[s.id] = kept.picks[s.id];
+        if (kept.notes && typeof kept.notes[s.id] === 'string') state.notes[s.id] = kept.notes[s.id];
+      });
+      state.final = valid(kept.final);
+      state.finalNote = typeof kept.finalNote === 'string' ? kept.finalNote : '';
+    }
+  } catch (e) { /* nothing kept */ }
+  renderAll();
+  select(0, false);
+})();
+</script>
+</body>
+</html>

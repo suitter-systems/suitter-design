@@ -2,396 +2,667 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Visual directions for the Suitter hotel PMS reception screen, in Arabic.">
-<title>Suitter Directions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ثيمات Suitter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@300..700&family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=El+Messiri:wght@600;700&family=Aref+Ruqaa:wght@700&family=Beiruti:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@300..700&family=Reem+Kufi:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=El+Messiri:wght@600;700&family=Aref+Ruqaa:wght@700&display=swap">
 <style>
-  /* Page chrome: a quiet frame around full-size screen mocks. Each mock carries its own fixed palette. */
+  /* The page around the screen: neutral, light or dark with the viewer's system. */
   :root {
-    --bg: #f2f1ee; --fg: #1d1f22; --fg-muted: #5a5e64; --line: #dcdad5; --panel: #ffffff; --accent: #1d1f22;
-    --font-ui: "Noto Sans Arabic", system-ui, sans-serif;
+    --bg: #f2f1ee; --fg: #1d1f22; --fg-muted: #5a5e64; --line: #d4d2cc; --panel: #ffffff; --accent: #1d1f22; --on-accent: #ffffff;
+    --pass: #1d6b3a; --fail: #a3261a;
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #34363a; --panel: #1f2023; --accent: #ecebe8; color-scheme: dark; }
+    :root:not([data-theme="light"]) { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #3a3c40; --panel: #1f2023; --accent: #ecebe8; --on-accent: #17181a; --pass: #8fd6a5; --fail: #f3a091; color-scheme: dark; }
   }
-  :root[data-theme="dark"] { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #34363a; --panel: #1f2023; --accent: #ecebe8; color-scheme: dark; }
-  body { background: var(--bg); color: var(--fg); font-family: var(--font-ui); line-height: 1.6; }
-  .wrap { max-inline-size: 1240px; margin-inline: auto; padding-inline: 16px; padding-block: 32px 64px; display: grid; gap: 24px; }
-  .intro h1 { margin: 0; font-size: 26px; line-height: 1.3; text-wrap: balance; }
-  .intro p { margin: 6px 0 0; color: var(--fg-muted); max-inline-size: 58ch; }
-  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tab { font: inherit; font-weight: 600; line-height: 1.5; white-space: nowrap; padding-block: 10px; padding-inline: 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
-  .tab[aria-selected="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-  .tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 24px; padding: 16px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
-  .notes h2 { grid-column: 1 / -1; margin: 0; font-size: 20px; }
-  .notes dl { margin: 0; } .notes dt { font-size: 13px; color: var(--fg-muted); } .notes dd { margin: 0; }
-  .swatches { display: flex; gap: 6px; margin-block-start: 4px; }
-  .swatches span { inline-size: 28px; block-size: 28px; border-radius: 6px; border: 1px solid var(--line); }
-  .verdict { grid-column: 1 / -1; border-block-start: 1px solid var(--line); padding-block-start: 12px; }
-  .verdict p { margin: 4px 0 0; }
-  .stage { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); }
+  :root[data-theme="dark"] { --bg: #17181a; --fg: #ecebe8; --fg-muted: #a7a9ad; --line: #3a3c40; --panel: #1f2023; --accent: #ecebe8; --on-accent: #17181a; --pass: #8fd6a5; --fail: #f3a091; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Noto Sans Arabic", system-ui, sans-serif; line-height: 1.6; }
+  .wrap { max-inline-size: 1500px; margin-inline: auto; padding-block: 28px 48px; padding-inline: 16px; }
+  .intro { max-inline-size: 60rem; }
+  .intro h1 { margin: 0 0 8px; font-size: 26px; line-height: 1.3; text-wrap: balance; }
+  .intro p { margin: 0 0 8px; color: var(--fg-muted); }
+  .controls { display: grid; gap: 14px; margin-block: 20px; }
+  .group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .group-label { min-inline-size: 11rem; font-weight: 600; }
+  .opt { font: inherit; font-weight: 600; line-height: 1.5; white-space: nowrap; padding-block: 8px; padding-inline: 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+  .opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .opt:focus-visible, .wrap a:focus-visible, .wrap summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 12px 24px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .notes h2 { grid-column: 1 / -1; margin: 0; font-size: 19px; }
+  .notes dl { margin: 0; }
+  .notes dt { font-size: 13px; color: var(--fg-muted); }
+  .notes dd { margin: 0; }
+  .frame { margin-block: 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+  .check { display: grid; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .check h2 { margin: 0; font-size: 19px; }
+  .check p { margin: 0; color: var(--fg-muted); }
+  .verdict { font-weight: 600; }
+  .ok { color: var(--pass); }
+  .bad { color: var(--fail); }
+  .matrix { border-collapse: collapse; inline-size: 100%; max-inline-size: 48rem; }
+  .matrix th, .matrix td { padding-block: 8px; padding-inline: 12px; border-block-end: 1px solid var(--line); text-align: start; }
+  .matrix thead th { font-size: 13px; color: var(--fg-muted); font-weight: 500; }
+  .matrix .num { font-variant-numeric: tabular-nums; }
+  .pairs { columns: 2 22rem; column-gap: 32px; margin: 0; padding: 0; list-style: none; }
+  .pairs li { display: flex; gap: 12px; break-inside: avoid; padding-block: 3px; border-block-end: 1px solid var(--line); font-size: 14px; }
+  .pairs li span:first-child { flex: 1; }
+  .pairs .num { font-variant-numeric: tabular-nums; }
+  details summary { cursor: pointer; font-weight: 600; }
+  .foot { margin-block-start: 24px; color: var(--fg-muted); font-size: 14px; }
 
-  /* ---------- The mock screen (shared markup, tokens per direction) ---------- */
-  .mock { min-inline-size: 1140px; background: var(--ground); color: var(--ink); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.55; }
-  .mock * { box-sizing: border-box; }
-  .shell { display: flex; align-items: center; gap: 28px; padding-inline: 24px; block-size: 58px; background: var(--shell-bg); color: var(--shell-ink); border-block-end: 1px solid var(--shell-line); }
-  .logo { font-family: var(--font-logo, var(--font-display)); font-weight: 700; font-size: var(--fs-logo, 23px); letter-spacing: 0; }
-  .nav { display: flex; gap: 2px; }
-  .nav a { padding-block: 6px; padding-inline: 12px; border-radius: var(--r-sm); color: var(--shell-muted); font-weight: 500; text-decoration: none; }
-  .nav a[aria-current="page"] { color: var(--shell-ink); background: var(--shell-active); }
-  .shell-end { margin-inline-start: auto; display: flex; align-items: center; gap: 14px; font-size: 13px; }
-  .bizdate { border: 1px solid var(--shell-line); padding-block: 3px; padding-inline: 10px; border-radius: var(--r-pill); }
-  .shell-end .lang { color: var(--shell-ink); font-weight: 600; text-decoration: none; }
-  .page { padding: 24px; display: grid; gap: var(--gap); }
-  .page-head { display: flex; align-items: flex-end; gap: 16px; }
-  .page-head h1 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h1); font-weight: var(--w-display); line-height: 1.25; }
-  .page-head .sub { color: var(--muted); }
-  .actions { margin-inline-start: auto; display: flex; gap: 8px; }
-  .btn { font: inherit; font-weight: 600; padding-block: 8px; padding-inline: 16px; border-radius: var(--r-ctl); border: 1px solid transparent; display: inline-flex; align-items: center; gap: 8px; }
-  .btn-primary { background: var(--action); color: var(--on-action); }
-  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
-  .mock kbd { font-family: inherit; font-size: 12px; line-height: 1.4; padding-inline: 6px; border: 1px solid var(--line-strong); border-radius: 4px; color: var(--muted); }
-  .strip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: var(--surface); border: var(--panel-border); border-radius: var(--r-panel); }
-  .stat { padding-block: 12px; padding-inline: 18px; border-inline-start: 1px solid var(--line); }
-  .stat:first-child { border-inline-start: 0; }
-  .stat .k { font-size: 13px; color: var(--muted); }
-  .stat .v { font-size: 26px; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
-  .stat .m { font-size: 12px; color: var(--muted); }
-  .cols { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: var(--gap); align-items: start; }
-  .panel { background: var(--surface); border: var(--panel-border); border-radius: var(--r-panel); overflow: hidden; }
-  .panel-head { display: flex; align-items: baseline; gap: 8px; padding-block: 12px; padding-inline: 16px; border-block-end: 1px solid var(--line); }
-  .panel-head h2 { margin: 0; font-family: var(--font-display); font-size: var(--fs-h2); font-weight: var(--w-display); }
-  .panel-head .count { color: var(--muted); font-size: 13px; }
-  .panel-head .more { margin-inline-start: auto; color: var(--link); font-weight: 600; font-size: 13px; text-decoration: none; }
-  .mock table { inline-size: 100%; border-collapse: collapse; }
-  .mock th { text-align: start; font-weight: 500; color: var(--muted); font-size: 12px; padding-block: 8px; padding-inline: 16px; border-block-end: 1px solid var(--line); }
-  .mock td { padding-block: var(--row-pad); padding-inline: 16px; border-block-end: 1px solid var(--line); vertical-align: middle; }
-  .mock tr:last-child td { border-block-end: 0; }
-  .mock .num { font-variant-numeric: tabular-nums; text-align: end; white-space: nowrap; }
-  .guest { font-weight: 600; }
-  .guest small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; padding-block: 2px; padding-inline: 9px; border-radius: var(--r-pill); font-size: 12px; font-weight: 600; white-space: nowrap; }
-  .chip::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: currentColor; }
-  .ok { background: var(--ok-bg); color: var(--ok-ink); }
-  .info { background: var(--info-bg); color: var(--info-ink); }
-  .warn { background: var(--warn-bg); color: var(--warn-ink); }
-  .attn { background: var(--attn-bg); color: var(--attn-ink); }
-  .neutral { background: var(--neutral-bg); color: var(--neutral-ink); }
-  .hk { padding: 16px; display: grid; gap: 12px; }
-  .hk-bar { display: flex; block-size: 10px; border-radius: var(--r-pill); overflow: hidden; gap: 2px; }
-  .hk-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
-  .hk-list li { display: flex; align-items: center; gap: 8px; }
-  .hk-list .dot { inline-size: 10px; block-size: 10px; border-radius: 3px; flex: none; }
-  .hk-list .n { margin-inline-start: auto; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .board { display: grid; }
-  .brow { display: grid; grid-template-columns: 132px repeat(7, minmax(0, 1fr)); min-block-size: 44px; border-block-end: 1px solid var(--line); }
-  .brow:last-child { border-block-end: 0; }
-  .brow > * { grid-row: 1; }
-  .brow.head { min-block-size: 0; font-size: 12px; color: var(--muted); }
-  .brow.head > div { padding-block: 8px; padding-inline: 8px; text-align: center; }
-  .brow.head .today { color: var(--ink); font-weight: 700; }
-  .unit { padding-inline: 16px; display: flex; flex-direction: column; justify-content: center; border-inline-end: 1px solid var(--line); line-height: 1.3; }
-  .unit b { font-variant-numeric: tabular-nums; }
-  .unit span { font-size: 12px; color: var(--muted); }
-  .night { border-inline-start: 1px solid var(--line); }
-  /* Explicit columns, so the bars placed over them never push a night cell out of its column. */
-  .brow > .unit { grid-column: 1; }
-  .brow > i.night:nth-of-type(1) { grid-column: 2; } .brow > i.night:nth-of-type(2) { grid-column: 3; }
-  .brow > i.night:nth-of-type(3) { grid-column: 4; } .brow > i.night:nth-of-type(4) { grid-column: 5; }
-  .brow > i.night:nth-of-type(5) { grid-column: 6; } .brow > i.night:nth-of-type(6) { grid-column: 7; }
-  .brow > i.night:nth-of-type(7) { grid-column: 8; }
-  .night.today, .brow.head .today { background: var(--today-bg); }
-  .bar { margin-block: 7px; margin-inline: 3px; border-radius: var(--r-bar); padding-inline: 10px; display: flex; align-items: center; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; z-index: 1; }
-  .bar.inhouse { background: var(--bar-inhouse); color: var(--on-bar-inhouse); }
-  .bar.confirmed { background: var(--bar-confirmed); color: var(--on-bar-confirmed); }
-  .bar.tentative { background: var(--surface); color: var(--ink); border: 1.5px dashed var(--bar-tentative-line); }
-  /* Out of service is hatched, the room-board convention, so it never reads as a booking. */
-  .bar.ooo { background: repeating-linear-gradient(135deg, var(--bar-ooo) 0 6px, var(--surface) 6px 10px); color: var(--on-bar-ooo); border: 1px solid var(--line-strong); }
-  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-block: 10px; padding-inline: 16px; border-block-start: 1px solid var(--line); font-size: 12px; color: var(--muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .legend i { inline-size: 18px; block-size: 10px; border-radius: 3px; display: inline-block; }
+  /* ---------- The screen: look D's shell, with the room status board ---------- */
+  .mock {
+    min-inline-size: 1120px; background: var(--page); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.5;
+    /* Theme layer: Oasis by default. */
+    --page: #f3f1ec; --surface: #ffffff; --text: #1f2a27; --muted: #56605c; --line-c: #e8e4dc; --ctl-border: #7d837c;
+    --brand: #0e4a43; --brand-hover: #1d5f56; --brand-line: #86ada5; --on-brand: #f6f1e7; --on-brand-muted: #b9cfc9; --band-edge: transparent;
+    --action: #e8b071; --on-action: #1f2a27; --link: #0e4a43; --on-link: #f6f1e7; --focus: #0e4a43; --selected: #d9e9e5;
+    --font-display: "Noto Naskh Arabic", serif; --font-h2: var(--font-display); --font-body: "Noto Sans Arabic", sans-serif; --w-display: 700;
+    --r-panel: 18px; --r-ctl: 999px; --r-small: 6px; --tile-min: 96px;
 
-  /* ---------- Direction A: واحة (Oasis) ---------- */
-  .dir-a {
-    --ground: #f3f1ec; --surface: #ffffff; --ink: #1f2a27; --muted: #56605c; --line: #e8e4dc; --line-strong: #cfc9be;
-    --shell-bg: #0e4a43; --shell-ink: #f6f1e7; --shell-muted: #b9cfc9; --shell-line: #2b625a; --shell-active: #1d5f56;
-    --action: #e8b071; --on-action: #1f2a27; --link: #0e4a43;
-    --font-display: "Noto Naskh Arabic", serif; --font-body: "Noto Sans Arabic", sans-serif; --w-display: 700;
-    --fs-h1: 30px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 11px; --gap: 18px;
-    --r-panel: 18px; --r-ctl: 999px; --r-sm: 999px; --r-pill: 999px; --r-bar: 999px; --panel-border: 0;
-    --ok-bg: #dcebdc; --ok-ink: #23582f; --info-bg: #d9e9e5; --info-ink: #0e4a43; --warn-bg: #f8e2c4; --warn-ink: #7a4510;
-    --attn-bg: #f4d9d0; --attn-ink: #8a3216; --neutral-bg: #ebe8e2; --neutral-ink: #4b524f;
-    --bar-inhouse: #0e4a43; --on-bar-inhouse: #f6f1e7; --bar-confirmed: #bcd9d2; --on-bar-confirmed: #0e3d37;
-    --bar-tentative-line: #0e4a43; --bar-ooo: #e3ded4; --on-bar-ooo: #4b524f; --today-bg: #fbf3e6;
-    --hk-clean: #2f7a4a; --hk-inspected: #0e4a43; --hk-dirty: #c0602a; --hk-cleaning: #e8b071; --hk-ooo: #a3a7a4;
+    /* Status layer, standard set, light (shared by every light theme). */
+    --u-ready-edge: #299043; --u-ready-surface: #ddf4df; --u-ready-text: #064519;
+    --u-dirty-edge: #c74a42; --u-dirty-surface: #ffe6e3; --u-dirty-text: #641c18;
+    --u-unpaid-edge: #90735d; --u-unpaid-surface: #f3ebe5; --u-unpaid-text: #453528;
+    --u-paid-edge: #ad6700; --u-paid-surface: #ffe8d4; --u-paid-text: #532e00;
+    --u-occ-edge: #008b8c; --u-occ-surface: #d8f3f3; --u-occ-text: #004242;
+    --u-oos-edge: #7d837c; --u-oos-surface: #ebe8e2; --u-oos-alt: #ffffff; --u-oos-text: #4b524f;
+    --hk-clean: #299043; --hk-inspected: #157632; --hk-cleaning: #ad761c; --hk-dirty: #c74a42; --hk-oos: #56605c;
+    --late-bg: #222426; --on-late: #ffffff;
   }
-  /* ---------- Direction B: طين (Clay) ---------- */
-  .dir-b {
-    --ground: #f4ece1; --surface: #fffaf3; --ink: #2a1c13; --muted: #6b5647; --line: #eadcca; --line-strong: #d6c3ac;
-    --shell-bg: #3a2419; --shell-ink: #f7eee3; --shell-muted: #cdb7a4; --shell-line: #58392a; --shell-active: #5a3a2a;
-    --action: #a8441c; --on-action: #ffffff; --link: #a8441c;
+  /* The other set: red for a guest in the unit; a vacant unit is green whether or not it needs cleaning,
+     and the "dirty" mark turns teal so red keeps one meaning on the board. */
+  .mock[data-set="occupied-red"] {
+    --u-dirty-edge: #299043; --u-dirty-surface: #ddf4df; --u-dirty-text: #064519;
+    --u-occ-edge: #c74a42; --u-occ-surface: #ffe6e3; --u-occ-text: #641c18;
+    --hk-dirty: #008b8c;
+  }
+
+  /* Theme presets: the shell only. */
+  .mock[data-theme="clay"] {
+    --page: #f4ece1; --surface: #fffaf3; --text: #2a1c13; --muted: #6b5647; --line-c: #eadcca; --ctl-border: #6b5647;
+    --brand: #3a2419; --brand-hover: #5a3a2a; --brand-line: #8a6a56; --on-brand: #f7eee3; --on-brand-muted: #cdb7a4;
+    --action: #6b4530; --on-action: #ffffff; --link: #6b4530; --on-link: #ffffff; --focus: #6b4530; --selected: #f1e2d3;
     --font-display: "Reem Kufi", sans-serif; --font-body: "Readex Pro", sans-serif; --w-display: 600;
-    --fs-h1: 31px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 9px; --gap: 14px;
-    --r-panel: 6px; --r-ctl: 6px; --r-sm: 4px; --r-pill: 4px; --r-bar: 3px; --panel-border: 1px solid var(--line);
-    --ok-bg: #e3e9d2; --ok-ink: #435a1f; --info-bg: #f3e0d0; --info-ink: #8a3412; --warn-bg: #f1e3b8; --warn-ink: #6b5410;
-    --attn-bg: #f2d5cc; --attn-ink: #8d2e1b; --neutral-bg: #ece3d8; --neutral-ink: #5a4b3f;
-    --bar-inhouse: #a8441c; --on-bar-inhouse: #ffffff; --bar-confirmed: #e9c7ae; --on-bar-confirmed: #4a1f0c;
-    --bar-tentative-line: #a8441c; --bar-ooo: #e2d6c8; --on-bar-ooo: #5a4b3f; --today-bg: #fbefe2;
-    --hk-clean: #5e7a2c; --hk-inspected: #3a2419; --hk-dirty: #a8441c; --hk-cleaning: #d9a35a; --hk-ooo: #b3a596;
+    --r-panel: 6px; --r-ctl: 6px; --r-small: 4px;
   }
-  /* ---------- Direction C: حبر (Ink) ---------- */
-  .dir-c {
-    --ground: #f6f6f4; --surface: #ffffff; --ink: #131416; --muted: #5c6068; --line: #e6e7e9; --line-strong: #cfd1d5;
-    --shell-bg: #ffffff; --shell-ink: #131416; --shell-muted: #5c6068; --shell-line: #e6e7e9; --shell-active: #f0f0ee;
-    --action: #131416; --on-action: #ffffff; --link: #131416;
-    --font-display: "Noto Sans Arabic", sans-serif; --font-body: "Noto Sans Arabic", sans-serif; --w-display: 700;
-    --fs-h1: 24px; --fs-h2: 15px; --fs-body: 13px; --row-pad: 7px; --gap: 12px;
-    --r-panel: 8px; --r-ctl: 6px; --r-sm: 6px; --r-pill: 999px; --r-bar: 4px; --panel-border: 1px solid var(--line);
-    --ok-bg: #eef6f0; --ok-ink: #1d6b3a; --info-bg: #eef2fb; --info-ink: #1f4fb0; --warn-bg: #fbf3e4; --warn-ink: #8a5a0b;
-    --attn-bg: #fcecea; --attn-ink: #b0281b; --neutral-bg: #f0f0ee; --neutral-ink: #4a4e55;
-    --bar-inhouse: #131416; --on-bar-inhouse: #ffffff; --bar-confirmed: #e6e7e9; --on-bar-confirmed: #131416;
-    --bar-tentative-line: #131416; --bar-ooo: #f0f0ee; --on-bar-ooo: #5c6068; --today-bg: #fff6d6;
-    --hk-clean: #1d6b3a; --hk-inspected: #131416; --hk-dirty: #b0281b; --hk-cleaning: #c98a0b; --hk-ooo: #a3a6ab;
+  .mock[data-theme="ink"] {
+    --page: #f6f6f4; --surface: #ffffff; --text: #131416; --muted: #5c6068; --line-c: #e6e7e9; --ctl-border: #5c6068;
+    --brand: #ffffff; --brand-hover: #f0f0ee; --brand-line: #cfd1d5; --on-brand: #131416; --on-brand-muted: #5c6068; --band-edge: #cfd1d5;
+    --action: #131416; --on-action: #ffffff; --link: #131416; --on-link: #ffffff; --focus: #131416; --selected: #ececea;
+    --font-display: "Noto Sans Arabic", sans-serif; --font-body: "Noto Sans Arabic", sans-serif;
+    --r-panel: 8px; --r-ctl: 6px; --r-small: 6px; --tile-min: 88px;
   }
-  /* ---------- Direction D: ليل (Night) ---------- */
-  .dir-d {
-    --ground: #121619; --surface: #1a1f23; --ink: #ebe7df; --muted: #a5aba9; --line: #2a3136; --line-strong: #3b444a;
-    --shell-bg: #0d1012; --shell-ink: #ebe7df; --shell-muted: #a5aba9; --shell-line: #2a3136; --shell-active: #232a2f;
-    --action: #f0b45b; --on-action: #1a1407; --link: #f0b45b;
-    --font-display: "IBM Plex Sans Arabic", sans-serif; --font-body: "IBM Plex Sans Arabic", sans-serif; --w-display: 700;
-    --fs-h1: 27px; --fs-h2: 17px; --fs-body: 14px; --row-pad: 9px; --gap: 14px;
-    --r-panel: 8px; --r-ctl: 6px; --r-sm: 6px; --r-pill: 999px; --r-bar: 5px; --panel-border: 1px solid var(--line);
-    --ok-bg: #1f3326; --ok-ink: #8fd6a5; --info-bg: #1d2f3a; --info-ink: #8cc4e8; --warn-bg: #3a2e17; --warn-ink: #f0c27a;
-    --attn-bg: #3d211d; --attn-ink: #f3a091; --neutral-bg: #262c30; --neutral-ink: #c4c9cc;
-    --bar-inhouse: #f0b45b; --on-bar-inhouse: #1a1407; --bar-confirmed: #2f4752; --on-bar-confirmed: #e4eef2;
-    --bar-tentative-line: #f0b45b; --bar-ooo: #262c30; --on-bar-ooo: #c4c9cc; --today-bg: #2a2418;
-    --hk-clean: #5fbf7f; --hk-inspected: #8cc4e8; --hk-dirty: #e8785f; --hk-cleaning: #f0b45b; --hk-ooo: #6b7378;
-    color-scheme: dark;
+  .mock[data-theme="night"] {
+    --page: #121619; --surface: #1a1f23; --text: #ebe7df; --muted: #a5aba9; --line-c: #2a3136; --ctl-border: #8a9296;
+    --brand: #0d1012; --brand-hover: #232a2f; --brand-line: #3b444a; --on-brand: #ebe7df; --on-brand-muted: #a5aba9; --band-edge: #2a3136;
+    --action: #7fd0c4; --on-action: #0c1d1a; --link: #7fd0c4; --on-link: #0c1d1a; --focus: #7fd0c4; --selected: #183330;
+    --font-display: "IBM Plex Sans Arabic", sans-serif; --font-body: "IBM Plex Sans Arabic", sans-serif;
+    --r-panel: 8px; --r-ctl: 6px; --r-small: 6px;
+    /* Status layer, standard set, dark. */
+    --u-ready-edge: #5fbf7f; --u-ready-surface: #1f3326; --u-ready-text: #c3ebcf;
+    --u-dirty-edge: #ec7d72; --u-dirty-surface: #3d211d; --u-dirty-text: #f7cbc5;
+    --u-unpaid-edge: #bba18d; --u-unpaid-surface: #2e2621; --u-unpaid-text: #ead9cb;
+    --u-paid-edge: #e5a24c; --u-paid-surface: #392a14; --u-paid-text: #f6dab2;
+    --u-occ-edge: #3fbcbc; --u-occ-surface: #143436; --u-occ-text: #bdeeee;
+    --u-oos-edge: #7d8489; --u-oos-surface: #262c30; --u-oos-alt: #1a1f23; --u-oos-text: #c4c9cc;
+    --hk-clean: #5fbf7f; --hk-inspected: #8fd6a5; --hk-cleaning: #f0b45b; --hk-dirty: #ec7d72; --hk-oos: #a5aba9;
+    --late-bg: #ebe7df; --on-late: #121619;
   }
-  /* ---------- Direction E: زيتون (Olive) ---------- */
-  .dir-e {
-    --ground: #f5f2e8; --surface: #fffdf8; --ink: #22251b; --muted: #5d604f; --line: #e6e1d1; --line-strong: #cdc6b0;
-    --shell-bg: #4a552a; --shell-ink: #f7f4ea; --shell-muted: #d3d8bd; --shell-line: #5f6b3a; --shell-active: #5b6834;
-    --action: #4a552a; --on-action: #ffffff; --link: #4a552a;
-    --font-display: "El Messiri", serif; --font-body: "IBM Plex Sans Arabic", sans-serif; --w-display: 700;
-    --fs-h1: 30px; --fs-h2: 19px; --fs-body: 14px; --row-pad: 10px; --gap: 16px;
-    --r-panel: 12px; --r-ctl: 8px; --r-sm: 8px; --r-pill: 999px; --r-bar: 6px; --panel-border: 1px solid var(--line);
-    --ok-bg: #e4ead2; --ok-ink: #3f5214; --info-bg: #e3e9ef; --info-ink: #2d4a63; --warn-bg: #f3e6c4; --warn-ink: #6e5310;
-    --attn-bg: #f2dcd3; --attn-ink: #8a3418; --neutral-bg: #ebe8dc; --neutral-ink: #4f5245;
-    --bar-inhouse: #4a552a; --on-bar-inhouse: #ffffff; --bar-confirmed: #d8dfbf; --on-bar-confirmed: #2e3517;
-    --bar-tentative-line: #4a552a; --bar-ooo: #e4e0d2; --on-bar-ooo: #4f5245; --today-bg: #faf3dc;
-    --hk-clean: #5d7a2a; --hk-inspected: #4a552a; --hk-dirty: #a8502b; --hk-cleaning: #d6a640; --hk-ooo: #a9a690;
+  .mock[data-theme="night"][data-set="occupied-red"] {
+    --u-dirty-edge: #5fbf7f; --u-dirty-surface: #1f3326; --u-dirty-text: #c3ebcf;
+    --u-occ-edge: #ec7d72; --u-occ-surface: #3d211d; --u-occ-text: #f7cbc5;
+    --hk-dirty: #3fbcbc;
   }
-  /* ---------- Direction F: ياسمين (Jasmine) ---------- */
-  .dir-f {
-    --ground: #faf8f6; --surface: #ffffff; --ink: #2a1f29; --muted: #645862; --line: #eee8ec; --line-strong: #d7ccd4;
-    --shell-bg: #4a2545; --shell-ink: #fbf5f8; --shell-muted: #dcc3d6; --shell-line: #613a5b; --shell-active: #5e3458;
-    --action: #4a2545; --on-action: #ffffff; --link: #4a2545;
-    --font-display: "Aref Ruqaa", serif; --font-body: "Beiruti", sans-serif; --w-display: 700;
-    --fs-h1: 32px; --fs-h2: 21px; --fs-body: 15px; --row-pad: 10px; --gap: 16px;
-    --r-panel: 10px; --r-ctl: 8px; --r-sm: 8px; --r-pill: 999px; --r-bar: 8px; --panel-border: 1px solid var(--line);
-    --ok-bg: #e2efe4; --ok-ink: #24603a; --info-bg: #efe3ee; --info-ink: #5b2b55; --warn-bg: #f6ecc9; --warn-ink: #6f5410;
-    --attn-bg: #f6dcd9; --attn-ink: #8f2c22; --neutral-bg: #eeeaed; --neutral-ink: #53494f;
-    --bar-inhouse: #4a2545; --on-bar-inhouse: #fbf5f8; --bar-confirmed: #e6d3e2; --on-bar-confirmed: #3a1c36;
-    --bar-tentative-line: #4a2545; --bar-ooo: #ece7ea; --on-bar-ooo: #53494f; --today-bg: #fbf3d0;
-    --hk-clean: #2f7a4a; --hk-inspected: #4a2545; --hk-dirty: #b04a35; --hk-cleaning: #d9b13f; --hk-ooo: #aaa0a7;
+  .mock[data-theme="olive"] {
+    --page: #f5f2e8; --surface: #fffdf8; --text: #22251b; --muted: #5d604f; --line-c: #e6e1d1; --ctl-border: #5d604f;
+    --brand: #4a552a; --brand-hover: #5b6834; --brand-line: #7d8a55; --on-brand: #f7f4ea; --on-brand-muted: #d3d8bd;
+    --action: #4a552a; --on-action: #ffffff; --link: #4a552a; --on-link: #ffffff; --focus: #4a552a; --selected: #e9ecd9;
+    --font-display: "El Messiri", serif; --font-body: "IBM Plex Sans Arabic", sans-serif;
+    --r-panel: 12px; --r-ctl: 8px; --r-small: 8px;
   }
-  @media (prefers-reduced-motion: no-preference) { .tab { transition: background-color .15s, color .15s; } }
+  .mock[data-theme="jasmine"] {
+    --page: #faf8f6; --surface: #ffffff; --text: #2a1f29; --muted: #645862; --line-c: #eee8ec; --ctl-border: #645862;
+    --brand: #4a2545; --brand-hover: #5e3458; --brand-line: #8a6584; --on-brand: #fbf5f8; --on-brand-muted: #dcc3d6;
+    --action: #4a2545; --on-action: #ffffff; --link: #4a2545; --on-link: #fbf5f8; --focus: #4a2545; --selected: #f1e6ef;
+    --font-display: "Aref Ruqaa", serif; --font-h2: "Noto Sans Arabic", sans-serif; --font-body: "Noto Sans Arabic", sans-serif;
+    --r-panel: 10px; --r-ctl: 8px; --r-small: 8px;
+  }
+
+  .mock :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .mock .band :focus-visible { outline-color: var(--on-brand); }
+  .mock button, .mock input, .mock select { font: inherit; color: inherit; }
+  .mock button { cursor: pointer; }
+  .mock .icon { inline-size: 16px; block-size: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .mock .sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .mock kbd { font-family: inherit; font-size: 12px; padding-inline: 5px; border: 1px solid var(--ctl-border); border-radius: 4px; color: var(--muted); background: var(--surface); }
+
+  .band { display: flex; align-items: center; gap: 12px; block-size: 56px; padding-inline: 16px; background: var(--brand); color: var(--on-brand); border-block-end: 1px solid var(--band-edge); }
+  .band .logo { block-size: 32px; inline-size: auto; flex: none; }
+  .band-search { position: relative; display: flex; align-items: center; flex: 1 1 22rem; max-inline-size: 24rem; }
+  .band-search input { inline-size: 100%; block-size: 36px; padding-inline: 34px 34px; border: 1px solid var(--ctl-border); border-radius: var(--r-ctl); background: var(--surface); color: var(--text); }
+  .band-search input::placeholder { color: var(--muted); opacity: 1; }
+  .band-search .icon { position: absolute; inset-inline-start: 11px; color: var(--muted); pointer-events: none; }
+  .band-search kbd { position: absolute; inset-inline-end: 10px; }
+  .band-select { block-size: 36px; padding-inline: 12px; border: 1px solid var(--brand-line); border-radius: var(--r-ctl); background: transparent; color: var(--on-brand); }
+  .band-select option { color: #1f2a27; }
+  .band-end { display: flex; align-items: center; gap: 12px; margin-inline-start: auto; font-size: 13px; }
+  .band-btn { display: inline-flex; align-items: center; gap: 6px; block-size: 34px; padding-inline: 12px; border: 1px solid var(--brand-line); border-radius: var(--r-ctl); background: transparent; color: var(--on-brand); white-space: nowrap; }
+  .band-btn:hover { background: var(--brand-hover); }
+  .band-count { min-inline-size: 20px; padding-inline: 5px; border-radius: 999px; background: var(--on-brand); color: var(--brand); font-weight: 700; text-align: center; font-size: 12px; }
+  .station { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; white-space: nowrap; }
+  .station li { display: flex; align-items: center; gap: 6px; padding-inline: 10px; }
+  .station li + li { border-inline-start: 1px solid var(--brand-line); }
+  .station .icon { color: var(--on-brand-muted); }
+  .lang { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .lang a { color: var(--on-brand); }
+
+  .shell { display: grid; grid-template-columns: 13rem minmax(0, 1fr); }
+  .nav { padding: 12px 12px 24px; background: var(--surface); border-inline-end: 1px solid var(--line-c); }
+  .nav-title { margin: 16px 0 4px; padding-inline: 12px; color: var(--muted); font-size: 12px; font-weight: 600; }
+  .nav-title:first-child { margin-block-start: 4px; }
+  .nav ul { margin: 0; padding: 0; list-style: none; }
+  .nav a { display: flex; align-items: center; gap: 10px; padding-block: 7px; padding-inline: 12px; border-radius: var(--r-small); color: var(--text); text-decoration: none; }
+  .nav a .icon { color: var(--muted); }
+  .nav a:hover { background: var(--page); }
+  .nav a[aria-current="page"] { background: var(--selected); color: var(--link); font-weight: 600; }
+  .nav a[aria-current="page"] .icon { color: var(--link); }
+
+  .page { display: flex; flex-direction: column; gap: 16px; min-inline-size: 0; padding: 24px; }
+  .page-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .page-head h1 { margin: 0; font-family: var(--font-display); font-weight: var(--w-display); font-size: 28px; line-height: 1.3; }
+  .page-head .muted { margin: 0; color: var(--muted); }
+  .page-actions { display: flex; align-items: center; gap: 10px; margin-inline-start: auto; }
+  .field { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+  .field input { block-size: 34px; inline-size: 8.5rem; padding-inline: 12px; border: 1px solid var(--ctl-border); border-radius: var(--r-ctl); background: var(--surface); color: var(--text); font-variant-numeric: tabular-nums; }
+  .seg { display: inline-flex; padding: 2px; border: 1px solid var(--ctl-border); border-radius: var(--r-ctl); background: var(--surface); }
+  .seg button { block-size: 30px; padding-inline: 12px; border: 0; border-radius: var(--r-ctl); background: none; color: var(--text); white-space: nowrap; }
+  .seg button[aria-pressed="true"], .seg button[aria-selected="true"] { background: var(--link); color: var(--on-link); font-weight: 600; }
+
+  .stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; }
+  .stat { padding: 14px 16px; border-radius: var(--r-panel); background: var(--surface); }
+  .stat dt { color: var(--muted); font-size: 13px; }
+  .stat dd { margin: 4px 0 0; font-size: 24px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+
+  .bar-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .tabs { display: flex; gap: 4px; border-block-end: 1px solid var(--line-c); }
+  .tabs button { padding-block: 8px; padding-inline: 14px; border: 0; border-block-end: 3px solid transparent; background: none; color: var(--muted); font-weight: 500; }
+  .tabs button[aria-selected="true"] { color: var(--text); font-weight: 700; border-block-end-color: var(--link); }
+
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding: 12px 16px; border-radius: var(--r-panel); background: var(--surface); }
+  .legend-title { color: var(--muted); font-size: 13px; margin-inline-end: 4px; }
+  .legend-sep { inline-size: 1px; block-size: 24px; background: var(--line-c); margin-inline: 6px; }
+  .state-chip { display: inline-flex; align-items: center; gap: 6px; block-size: 32px; padding-inline: 10px; border: 1.5px solid var(--edge); border-radius: var(--r-ctl); background: var(--fill); color: var(--ink); font-weight: 600; font-size: 13px; white-space: nowrap; }
+  .state-chip[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--edge); }
+  .state-chip b { font-variant-numeric: tabular-nums; }
+  .hk-sum { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; white-space: nowrap; }
+  .hk-sum b { font-variant-numeric: tabular-nums; }
+
+  .board { display: grid; gap: 0; padding: 8px 12px; border-radius: var(--r-panel); background: var(--surface); }
+  .floor { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); gap: 10px; padding-block: 12px; }
+  .floor + .floor { border-block-start: 1px solid var(--line-c); }
+  .floor-name { display: grid; place-content: center; text-align: center; border-radius: var(--r-small); background: var(--page); color: var(--muted); font-size: 12px; }
+  .floor-name b { display: block; color: var(--text); font-size: 22px; line-height: 1.2; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--tile-min), 1fr)); gap: 8px; }
+
+  .tile { --edge: var(--u-ready-edge); --fill: var(--u-ready-surface); --ink: var(--u-ready-text);
+    position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-block-size: 124px; padding: 0 4px 10px; border: 1.5px solid var(--edge); border-radius: calc(var(--r-small) + 4px); background: var(--fill); color: var(--ink); text-align: center; }
+  .tile:hover { box-shadow: 0 0 0 1px var(--edge); }
+  .tile .hk { display: inline-flex; align-items: center; gap: 5px; margin-block-end: 4px; padding-block: 1px 2px; padding-inline: 10px; border-end-start-radius: 8px; border-end-end-radius: 8px; background: var(--surface); color: var(--text); font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .tile .no { font-size: 22px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .tile .st { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .tile .st svg { inline-size: 14px; block-size: 14px; }
+  .tile .dt { font-size: 12px; line-height: 1.4; }
+  .tile .late { display: inline-flex; align-items: center; gap: 3px; margin-block-start: 4px; padding-inline: 6px; border-radius: 999px; background: var(--late-bg); color: var(--on-late); font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .tile .late svg { inline-size: 12px; block-size: 12px; }
+
+  .s-ready, .chip-ready { --edge: var(--u-ready-edge); --fill: var(--u-ready-surface); --ink: var(--u-ready-text); }
+  .s-dirty, .chip-dirty { --edge: var(--u-dirty-edge); --fill: var(--u-dirty-surface); --ink: var(--u-dirty-text); }
+  .s-paid, .chip-paid { --edge: var(--u-paid-edge); --fill: var(--u-paid-surface); --ink: var(--u-paid-text); }
+  .s-unpaid, .chip-unpaid { --edge: var(--u-unpaid-edge); --fill: var(--u-unpaid-surface); --ink: var(--u-unpaid-text); }
+  .s-occ, .chip-occ { --edge: var(--u-occ-edge); --fill: var(--u-occ-surface); --ink: var(--u-occ-text); }
+  .s-oos, .chip-oos { --edge: var(--u-oos-edge); --fill: var(--u-oos-surface); --ink: var(--u-oos-text); }
+  .tile.s-oos { background: repeating-linear-gradient(45deg, var(--u-oos-surface) 0 4px, var(--u-oos-alt) 4px 9px); }
+
+  .mark { display: inline-block; inline-size: 10px; block-size: 10px; flex: none; }
+  .m-clean { border-radius: 50%; background: var(--hk-clean); }
+  .m-inspected { background: var(--hk-inspected); transform: rotate(45deg) scale(.85); }
+  .m-cleaning { border-radius: 50%; border: 1.5px solid var(--hk-cleaning); background: linear-gradient(90deg, var(--hk-cleaning) 50%, transparent 50%); }
+  .m-dirty { border-radius: 50%; border: 2px solid var(--hk-dirty); }
+  .m-oos { border: 1.5px solid var(--hk-oos); background: repeating-linear-gradient(45deg, var(--hk-oos) 0 1.5px, transparent 1.5px 4px); }
+
+  .mock .note { margin: 0; color: var(--muted); font-size: 12px; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 16 16"><path d="M2.5 4h11M2.5 8h11M2.5 12h11"/></symbol>
+  <symbol id="i-home" viewBox="0 0 16 16"><path d="M2.5 7.2 8 2.8l5.5 4.4v6.3h-3.7V10H6.2v3.5H2.5z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 16 16"><path d="M1.5 3.5v10M1.5 10.5h13v3M14.5 10.5V8.5A1.5 1.5 0 0 0 13 7H7v3.5"/><circle cx="4.3" cy="8.3" r="1.3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 16 16"><path d="M10.6 2.6a3.2 3.2 0 0 0-3.2 4.3L2.8 11.5a1.2 1.2 0 0 0 1.7 1.7l4.6-4.6a3.2 3.2 0 0 0 4.3-3.2l-1.9 1.9-1.8-.5-.5-1.8z"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="11" rx="1"/><path d="M6 3V1.8h4V3M5.5 7h5M5.5 10h5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 16 16"><circle cx="6" cy="5.5" r="2.2"/><path d="M1.8 13c.3-2.2 2-3.5 4.2-3.5s3.9 1.3 4.2 3.5M10.5 3.4a2.1 2.1 0 0 1 0 4.2M12 9.8c1.2.5 2 1.6 2.2 3.2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.6"/><path d="M3.2 13.6c.4-2.4 2.3-3.9 4.8-3.9s4.4 1.5 4.8 3.9"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 16 16"><rect x="1.5" y="4" width="13" height="8" rx="1"/><circle cx="8" cy="8" r="1.8"/></symbol>
+  <symbol id="i-file" viewBox="0 0 16 16"><path d="M3.5 1.5h6l3 3v10h-9z"/><path d="M9.5 1.5v3h3M5.8 8h4.4M5.8 11h4.4"/></symbol>
+  <symbol id="i-brief" viewBox="0 0 16 16"><rect x="1.5" y="4.5" width="13" height="9" rx="1"/><path d="M5.5 4.5V2.8h5v1.7M1.5 8.5h13"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13 9.6A5.5 5.5 0 1 1 6.4 3a4.5 4.5 0 0 0 6.6 6.6z"/></symbol>
+  <symbol id="i-report" viewBox="0 0 16 16"><path d="M2 13.5h12M4 11V7.5M7 11V4M10 11V8.5M13 11V5.5"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3.5 3.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 16 16"><path d="M4 11V7a4 4 0 0 1 8 0v4l1.5 1.5h-11zM6.5 14.2h3"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M2 8h12M8 2c1.8 1.7 2.6 3.7 2.6 6S9.8 12.3 8 14M8 2C6.2 3.7 5.4 5.7 5.4 8s.8 4.3 2.6 6"/></symbol>
+  <symbol id="i-drawer" viewBox="0 0 16 16"><rect x="1.5" y="6" width="13" height="7.5" rx="1"/><path d="M4 6V2.5h8V6M6 9.5h4"/></symbol>
+  <symbol id="i-card" viewBox="0 0 16 16"><rect x="2" y="3.5" width="12" height="9" rx="1"/><path d="M2 6.5h12M4.5 10h3"/></symbol>
+  <symbol id="s-ready" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4.5"/></symbol>
+  <symbol id="s-dirty" viewBox="0 0 16 16"><path d="M9.5 2.5h3.5v11H9.5M2.5 8h7M5.5 5 2.5 8l3 3"/></symbol>
+  <symbol id="s-paid" viewBox="0 0 16 16"><path d="M4.5 2.5h7v11L8 11l-3.5 2.5z"/></symbol>
+  <symbol id="s-unpaid" viewBox="0 0 16 16"><path d="M4.5 2.5h7M4.5 13.5h7M5.5 2.5c0 2.6 5 3 5 5.5s-5 2.9-5 5.5M10.5 2.5c0 2.6-5 3-5 5.5s5 2.9 5 5.5"/></symbol>
+  <symbol id="s-occ" viewBox="0 0 16 16"><circle cx="8" cy="5.5" r="2.6"/><path d="M3.2 13.6c.4-2.4 2.3-3.9 4.8-3.9s4.4 1.5 4.8 3.9"/></symbol>
+  <symbol id="s-oos" viewBox="0 0 16 16"><path d="M10.6 2.6a3.2 3.2 0 0 0-3.2 4.3L2.8 11.5a1.2 1.2 0 0 0 1.7 1.7l4.6-4.6a3.2 3.2 0 0 0 4.3-3.2l-1.9 1.9-1.8-.5-.5-1.8z"/></symbol>
+  <symbol id="s-late" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></symbol>
+</svg>
 
-<div class="wrap" dir="rtl" lang="ar">
+<div class="wrap">
   <header class="intro">
-    <h1>ستة اتجاهات بصرية لـ Suitter</h1>
-    <p>الشاشة نفسها والمحتوى نفسه في الاتجاهات الستة: لوحة الاستقبال لليوم. يتغير فقط ما يصنع الهوية: الألوان، والخط العربي، والزوايا، والكثافة. الأسماء والأرقام أمثلة مولَّدة، والأرقام بصيغة ar-SY.</p>
+    <h1>ثيمات Suitter وألوان حالات الوحدات</h1>
+    <p>ستة ثيمات لواجهة Suitter، معروضة على شاشة حالة الوحدات اليوم. الثيم يغيّر الغلاف فقط: الشريط العلوي والقائمة والأزرار والروابط والأرضية والخطوط والزوايا والكثافة. ترتيب الشاشة وألوان حالات الوحدات لا يغيّرها الثيم.</p>
+    <p>ألوان حالات الوحدات إعداد مستقل عن الثيم، فيه مجموعتان: «القياسية»، وهي الافتراضية لكل فندق، و«الأحمر للمقيم». كل ثيم يعمل مع المجموعتين، ولا يتغيّر بينهما إلا اللون: الكلمات والأيقونات واحدة.</p>
+    <p>تحت الشاشة فحص التباين لكل ثيم مع كل مجموعة. الأسماء والأرقام أمثلة مولّدة، لا بيانات ضيوف، وأزرار الشاشة لا تعمل إلا مفتاح الحالات، فهو يصفّي اللوحة.</p>
   </header>
 
-  <div class="tabs" role="tablist" aria-label="الاتجاهات">
-    <button class="tab" role="tab" id="t-a" aria-controls="p-a" aria-selected="true">أ · واحة (المعتمد)</button>
-    <button class="tab" role="tab" id="t-b" aria-controls="p-b" aria-selected="false" tabindex="-1">ب · طين</button>
-    <button class="tab" role="tab" id="t-c" aria-controls="p-c" aria-selected="false" tabindex="-1">ج · حبر</button>
-    <button class="tab" role="tab" id="t-d" aria-controls="p-d" aria-selected="false" tabindex="-1">د · ليل</button>
-    <button class="tab" role="tab" id="t-e" aria-controls="p-e" aria-selected="false" tabindex="-1">هـ · زيتون</button>
-    <button class="tab" role="tab" id="t-f" aria-controls="p-f" aria-selected="false" tabindex="-1">و · ياسمين</button>
+  <div class="controls">
+    <div class="group" role="group" aria-labelledby="g-theme">
+      <span class="group-label" id="g-theme">الثيم</span>
+      <span id="theme-buttons" class="group"></span>
+    </div>
+    <div class="group" role="group" aria-labelledby="g-set">
+      <span class="group-label" id="g-set">ألوان حالات الوحدات</span>
+      <span id="set-buttons" class="group"></span>
+    </div>
   </div>
 
-  <section id="p-a" role="tabpanel" aria-labelledby="t-a" data-dir="a"></section>
-  <section id="p-b" role="tabpanel" aria-labelledby="t-b" data-dir="b" hidden></section>
-  <section id="p-c" role="tabpanel" aria-labelledby="t-c" data-dir="c" hidden></section>
-  <section id="p-d" role="tabpanel" aria-labelledby="t-d" data-dir="d" hidden></section>
-  <section id="p-e" role="tabpanel" aria-labelledby="t-e" data-dir="e" hidden></section>
-  <section id="p-f" role="tabpanel" aria-labelledby="t-f" data-dir="f" hidden></section>
+  <section class="notes" aria-live="polite" id="notes"></section>
+
+  <div class="frame">
+    <div class="mock" id="mock" data-theme="oasis" data-set="standard">
+      <header class="band">
+        <img class="logo" id="logo" src="shared/logo-band.svg" alt="Suitter" width="111" height="32">
+        <div class="band-search" role="search">
+          <label class="sr-only" for="q">البحث</label>
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="q" type="search" placeholder="ابحث بالاسم أو رقم الوحدة أو الحجز" dir="auto">
+          <kbd>/</kbd>
+        </div>
+        <label class="sr-only" for="prop">الفندق والمبنى</label>
+        <select id="prop" class="band-select"><option>منتجع الساحل، كل المباني</option></select>
+        <div class="band-end">
+          <button class="band-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>الإشعارات<span class="band-count">5</span></button>
+          <ul class="station" aria-label="حالة محطة العمل">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-drawer"/></svg>الصندوق مفتوح</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg>المرمِّز متصل</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>سامي، الاستقبال 1</li>
+          </ul>
+          <div class="lang"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span>العربية</span><a href="#" lang="en">English</a></div>
+        </div>
+      </header>
+
+      <div class="shell">
+        <nav class="nav" aria-label="القائمة الرئيسية">
+          <p class="nav-title">الاستقبال</p>
+          <ul><li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>اليوم</a></li></ul>
+          <p class="nav-title">الوحدات</p>
+          <ul>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>الجدول الزمني</a></li>
+            <li><a href="#" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-bed"/></svg>حالة الوحدات اليوم</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg>الصيانة وخارج الخدمة</a></li>
+          </ul>
+          <p class="nav-title">الحجوزات</p>
+          <ul>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-clip"/></svg>الحجوزات</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>المجموعات والوكلاء</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>الضيوف</a></li>
+          </ul>
+          <p class="nav-title">المال</p>
+          <ul>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-cash"/></svg>الصندوق</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>الفواتير</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-brief"/></svg>حسابات الوكلاء</a></li>
+          </ul>
+          <p class="nav-title">نهاية اليوم</p>
+          <ul>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg>التدقيق الليلي</a></li>
+            <li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-report"/></svg>التقارير</a></li>
+          </ul>
+          <p class="nav-title">النظام</p>
+          <ul><li><a href="#"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg>الإعدادات</a></li></ul>
+        </nav>
+
+        <main class="page">
+          <div class="page-head">
+            <h1>حالة الوحدات اليوم</h1>
+            <p class="muted">تاريخ العمل: الأحد 4 تشرين الأول 2026</p>
+            <div class="page-actions">
+              <label class="field">عرض الحالة عند <input type="text" value="4/10/2026" dir="ltr"></label>
+              <div class="seg" role="group" aria-label="الوقت">
+                <button type="button" aria-pressed="true">الآن</button>
+                <button type="button" aria-pressed="false">اليوم</button>
+                <button type="button" aria-pressed="false">وقت الدخول 14:00</button>
+                <button type="button" aria-pressed="false">وقت الخروج 12:00</button>
+              </div>
+            </div>
+          </div>
+
+          <dl class="stats" id="stats"></dl>
+
+          <div class="bar-row">
+            <div class="tabs" role="tablist" aria-label="المبنى">
+              <button type="button" role="tab" aria-selected="true">الأجنحة البحرية</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1">الفندق الشرقي</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1">الفندق الغربي</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1">كل المباني</button>
+            </div>
+            <div class="seg" role="group" aria-label="الإطلالة">
+              <button type="button" aria-pressed="true">كل الإطلالات</button>
+              <button type="button" aria-pressed="false">إطلالة بحرية</button>
+              <button type="button" aria-pressed="false">إطلالة حديقة</button>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span class="legend-title" id="lg-states">الحالات</span>
+            <span id="legend-states" class="legend" style="padding:0;gap:8px" role="group" aria-labelledby="lg-states"></span>
+            <span class="legend-sep" aria-hidden="true"></span>
+            <span class="legend-title">التدبير الفندقي</span>
+            <span id="legend-hk" class="legend" style="padding:0;gap:14px"></span>
+          </div>
+
+          <section class="board" id="board" aria-label="وحدات الأجنحة البحرية حسب الطابق"></section>
+          <p class="note">بيانات مولّدة للعرض فقط.</p>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <section class="check" aria-labelledby="check-title">
+    <h2 id="check-title">فحص التباين</h2>
+    <p>المطلوب: النص 4.5:1 على الأقل، والحدود وعلامات التدبير الفندقي وحلقة التركيز 3:1 (WCAG 2.1، المعياران 1.4.3 و1.4.11). الحساب يجري في الصفحة نفسها على القيم المعروضة.</p>
+    <table class="matrix">
+      <caption style="text-align:start;font-weight:600;padding-block-end:4px">نتيجة كل ثيم مع كل مجموعة ألوان</caption>
+      <thead><tr><th scope="col">الثيم</th><th scope="col">القياسية</th><th scope="col">الأحمر للمقيم</th></tr></thead>
+      <tbody id="matrix"></tbody>
+    </table>
+    <p class="verdict" id="verdict"></p>
+    <details>
+      <summary>كل الأزواج للاختيار الحالي</summary>
+      <ul class="pairs" id="pairs"></ul>
+    </details>
+  </section>
+
+  <p class="foot">الثيمات الستة هي الاتجاهات البصرية التي رُوجعت في 4 تشرين الأول 2026، بعد تعديلات مراجعة 5 تشرين الأول: أزرار «ليل» وروابطه تركوازية بدل الكهرماني، وأزرار «طين» وروابطه بنية بدل لون الطين المحروق، و«ياسمين» يكتب النص بخط <bdi>Noto Sans Arabic</bdi> ويُبقي خط الرقعة للعنوان الكبير. ألوان حالات الوحدات مشتركة بين الثيمات، ولها نسخة غامقة يستعملها «ليل».</p>
 </div>
 
-<template id="mock">
-  <div class="mock" dir="rtl" lang="ar">
-    <header class="shell">
-      <span class="logo">سويتر</span>
-      <nav class="nav" aria-label="الأقسام">
-        <a href="#" aria-current="page">الاستقبال</a><a href="#">الحجوزات</a><a href="#">لوحة الغرف</a><a href="#">التدبير الفندقي</a><a href="#">الصندوق والفواتير</a><a href="#">التقارير</a>
-      </nav>
-      <div class="shell-end">
-        <span class="bizdate">تاريخ العمل: الأحد ٤ تشرين الأول ٢٠٢٦</span>
-        <span>سامي · الاستقبال ١</span>
-        <a class="lang" href="#" lang="en" dir="ltr">English</a>
-      </div>
-    </header>
-    <main class="page">
-      <div class="page-head">
-        <div>
-          <h1>الاستقبال اليوم</h1>
-          <div class="sub">منتجع الساحل · المبنى الرئيسي</div>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn btn-secondary">بحث عن ضيف <kbd>/</kbd></button>
-          <button type="button" class="btn btn-primary">حجز جديد</button>
-        </div>
-      </div>
-      <div class="strip">
-        <div class="stat"><div class="k">وصول اليوم</div><div class="v">١٨</div><div class="m">وصل ٦ · بقي ١٢</div></div>
-        <div class="stat"><div class="k">مغادرة اليوم</div><div class="v">١٢</div><div class="m">غادر ٩ · بقي ٣</div></div>
-        <div class="stat"><div class="k">مقيمون الآن</div><div class="v">٧٤</div><div class="m">في ٥٢ وحدة</div></div>
-        <div class="stat"><div class="k">متاح الليلة</div><div class="v">٣١</div><div class="m">من ٢٨٩ وحدة</div></div>
-        <div class="stat"><div class="k">الإشغال الليلة</div><div class="v">٧٢٪</div><div class="m">أمس ٦٨٪</div></div>
-      </div>
-      <div class="cols">
-        <section class="panel" aria-labelledby="arr">
-          <div class="panel-head"><h2 id="arr">الوصول اليوم</h2><span class="count">١٢ متبقٍ</span><a class="more" href="#">كل الوصول</a></div>
-          <table>
-            <thead><tr><th>الضيف</th><th>الوحدة</th><th class="num">الليالي</th><th class="num">الموعد</th><th>الحالة</th><th class="num">المستحق</th></tr></thead>
-            <tbody>
-              <tr><td class="guest">رامي خوري<small>حجز مباشر</small></td><td class="num">١٠٢</td><td class="num">٢</td><td class="num">١٤:٠٠</td><td><span class="chip ok">جاهزة للوصول</span></td><td class="num money" data-usd="320"></td></tr>
-              <tr><td class="guest">مجموعة الأمل<small>٤ وحدات · وكيل سفر</small></td><td class="num">—</td><td class="num">٣</td><td class="num">١٦:٣٠</td><td><span class="chip attn">بلا تخصيص</span></td><td class="num money" data-usd="1240"></td></tr>
-              <tr><td class="guest">يوسف حداد<small>هاتف</small></td><td class="num">٣٠٨</td><td class="num">١</td><td class="num">١٨:٠٠</td><td><span class="chip warn">الغرفة غير جاهزة</span></td><td class="num money" data-usd="150"></td></tr>
-              <tr><td class="guest">ريم الأحمد<small>حجز مباشر</small></td><td class="num">١١٢</td><td class="num">٤</td><td class="num">١٣:١٥</td><td><span class="chip ok">جاهزة للوصول</span></td><td class="num money" data-usd="0"></td></tr>
-              <tr><td class="guest">جورج سمعان<small>بريد إلكتروني</small></td><td class="num">٢٠٥</td><td class="num">٢</td><td class="num">٢٠:٠٠</td><td><span class="chip neutral">وصول متأخر</span></td><td class="num money" data-usd="280"></td></tr>
-              <tr><td class="guest">سلمى عبد الله<small>حجز مباشر</small></td><td class="num">٢١٤</td><td class="num">٣</td><td class="num">١٢:٠٠</td><td><span class="chip info">وصلت</span></td><td class="num money" data-usd="0"></td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="panel" aria-labelledby="hk">
-          <div class="panel-head"><h2 id="hk">حالة الغرف</h2><span class="count">٨٧ وحدة في الخدمة</span></div>
-          <div class="hk">
-            <div class="hk-bar" aria-hidden="true">
-              <span style="flex:42;background:var(--hk-clean)"></span><span style="flex:20;background:var(--hk-inspected)"></span><span style="flex:5;background:var(--hk-cleaning)"></span><span style="flex:17;background:var(--hk-dirty)"></span><span style="flex:3;background:var(--hk-ooo)"></span>
-            </div>
-            <ul class="hk-list">
-              <li><span class="dot" style="background:var(--hk-clean)"></span>نظيفة<span class="n">٤٢</span></li>
-              <li><span class="dot" style="background:var(--hk-inspected)"></span>مفحوصة<span class="n">٢٠</span></li>
-              <li><span class="dot" style="background:var(--hk-cleaning)"></span>قيد التنظيف<span class="n">٥</span></li>
-              <li><span class="dot" style="background:var(--hk-dirty)"></span>متسخة<span class="n">١٧</span></li>
-              <li><span class="dot" style="background:var(--hk-ooo)"></span>خارج الخدمة<span class="n">٣</span></li>
-            </ul>
-          </div>
-        </section>
-      </div>
-      <section class="panel" aria-labelledby="rb">
-        <div class="panel-head"><h2 id="rb">لوحة الغرف</h2><span class="count">المبنى الرئيسي · الطابق الأول</span><a class="more" href="#">فتح اللوحة كاملة</a></div>
-        <div class="board">
-          <div class="brow head"><div></div><div class="today">الأحد ٤</div><div>الاثنين ٥</div><div>الثلاثاء ٦</div><div>الأربعاء ٧</div><div>الخميس ٨</div><div>الجمعة ٩</div><div>السبت ١٠</div></div>
-          <div class="brow"><div class="unit"><b>١٠١</b><span>مزدوجة · بحرية</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar inhouse" style="grid-column:2 / span 3">سامر الحلبي · مقيم</div><div class="bar confirmed" style="grid-column:6 / span 3">ليلى ناصر</div></div>
-          <div class="brow"><div class="unit"><b>١٠٢</b><span>مزدوجة</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar confirmed" style="grid-column:2 / span 2">رامي خوري · يصل ١٤:٠٠</div><div class="bar tentative" style="grid-column:5 / span 4">مجموعة الأمل · مبدئي</div></div>
-          <div class="brow"><div class="unit"><b>١٠٣</b><span>جناح</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar inhouse" style="grid-column:2 / span 5">عائلة درويش · مقيم</div></div>
-          <div class="brow"><div class="unit"><b>١٠٤</b><span>مزدوجة</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar ooo" style="grid-column:2 / span 2">خارج الخدمة · صيانة التكييف</div><div class="bar confirmed" style="grid-column:4 / span 3">هالة سعيد</div></div>
-          <div class="brow"><div class="unit"><b>١٠٥</b><span>عائلية · ٦ أشخاص</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar confirmed" style="grid-column:4 / span 2">كريم منصور</div><div class="bar confirmed" style="grid-column:7 / span 2">نور الهدى</div></div>
-          <div class="brow"><div class="unit"><b>١٠٦</b><span>جناح</span></div><i class="night today"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i><i class="night"></i>
-            <div class="bar inhouse" style="grid-column:2 / span 1">باسل عيسى · يغادر اليوم</div></div>
-        </div>
-        <div class="legend">
-          <span><i style="background:var(--bar-inhouse)"></i>مقيم</span>
-          <span><i style="background:var(--bar-confirmed)"></i>مؤكد</span>
-          <span><i style="border:1.5px dashed var(--bar-tentative-line)"></i>مبدئي</span>
-          <span><i style="background:repeating-linear-gradient(135deg,var(--bar-ooo) 0 3px,var(--surface) 3px 5px);border:1px solid var(--line-strong)"></i>خارج الخدمة</span>
-          <span><i style="background:var(--today-bg);border:1px solid var(--line-strong)"></i>اليوم</span>
-        </div>
-      </section>
-    </main>
-  </div>
-</template>
-
 <script>
-  (function () {
-    var NOTES = {
-      a: { name: 'أ · واحة', idea: 'دفء الضيافة: شريط علوي أخضر داكن، ولوحات بيضاء بلا حدود على أرضية ورقية، وزر رئيسي كهرماني. مستوحى من نمط Organic.',
-           fonts: 'العناوين: Noto Naskh Arabic (نسخ). النص: Noto Sans Arabic.', density: 'متوسطة، زوايا كبيرة وشرائط مستديرة.',
-           move: 'الشريط العلوي الأخضر، وحجوزات لوحة الغرف ككبسولات مستديرة.', verdict: 'الأقوى في إحساس الضيافة والأكثر صقلاً. نقطتا ضعف: نهايات الكبسولات المستديرة في لوحة الغرف تُضعف دقة حدود الليلة، والكثافة أقل من غيره.', sw: ['#0e4a43', '#e8b071', '#f3f1ec', '#1f2a27', '#bcd9d2'] },
-      b: { name: 'ب · طين', idea: 'ألوان الطين والرمل: أرضية رملية، شريط علوي بني داكن، وزر رئيسي بلون الطين المحروق. مستوحى من نمطي Methodical وTerracotta.',
-           fonts: 'العناوين: Reem Kufi (كوفي هندسي). النص: Readex Pro.', density: 'متوسطة إلى عالية، زوايا صغيرة وحدود واضحة.',
-           move: 'العناوين الكوفية، وأرضية الرمل الدافئة.', verdict: 'الأكثر تميزاً والأقرب إلى بيئتنا، ولا يشبه أي برنامج SaaS. نقطة ضعف: أرقام Readex Pro العربية غير ثابتة العرض، فلا تصطف الأرقام في الأعمدة تماماً. علاجها أن تبقى العناوين بخط Reem Kufi وتُكتب أرقام الجداول بخط ثابت العرض.', sw: ['#a8441c', '#3a2419', '#f4ece1', '#e9c7ae', '#5e7a2c'] },
-      c: { name: 'ج · حبر', idea: 'أبيض وأسود هادئ، واللون للحالات فقط. النسخة الضابطة للمقارنة، مستوحاة من نمط Minimal.',
-           fonts: 'كل شيء: Noto Sans Arabic، وأرقامه العربية بعرض ثابت في الجداول.', density: 'عالية: نص أصغر وصفوف أضيق، تعرض أكثر في الشاشة.',
-           move: 'عمود اليوم بخلفية صفراء فاتحة في لوحة الغرف، والباقي حبر على ورق.', verdict: 'الأوضح والأكثر كثافة للعمل اليومي الطويل، لكنه الأقل هوية: أقرب الثلاثة إلى الشكل العام الذي نريد تجنبه.', sw: ['#131416', '#ffffff', '#f6f6f4', '#fff6d6', '#1d6b3a'] },
-      d: { name: 'د · ليل', idea: 'وضع ليلي هادئ لوردية الليل وتدقيق نهاية اليوم: أرضية فحمية، وكهرماني دافئ للأزرار وللضيوف المقيمين.',
-           fonts: 'كل شيء: IBM Plex Sans Arabic، وهو خط منصات الحكومة السعودية.', density: 'متوسطة، وزوايا 8px.',
-           move: 'الكهرماني على الفحمي: المقيمون وعمود اليوم يضيئون في العتمة.', verdict: 'الأكثر لفتاً للنظر، ومريح للعين في وردية الليل. لكن الواجهة الداكنة غير مألوفة في نهار الاستقبال، لذلك يصلح وضعاً ليلياً اختيارياً فوق أي اتجاه نختاره، لا هويةً كاملة.', sw: ['#121619', '#f0b45b', '#2f4752', '#ebe7df', '#8fd6a5'] },
-      e: { name: 'هـ · زيتون', idea: 'زيتون وكريم: أخضر زيتوني للشريط العلوي والأزرار، وأرضية بلون الكريم. طابع متوسطي ريفي هادئ.',
-           fonts: 'العناوين: El Messiri، خط عربي أنيق مستوحى من النسخ ومعه لاتيني مطابق. النص: IBM Plex Sans Arabic.', density: 'متوسطة، وزوايا 12px وحدود خفيفة.',
-           move: 'عناوين El Messiri الأنيقة على الأخضر الزيتوني.', verdict: 'متوازن: أنيق ودافئ بلا مبالغة. يعطي El Messiri العناوين شخصية واضحة، ومعه خط لاتيني مطابق لصفحات الإنجليزية. نقطة ضعف: أرقام IBM Plex Sans Arabic العربية غير ثابتة العرض في الجداول.', sw: ['#4a552a', '#f5f2e8', '#d8dfbf', '#22251b', '#a8502b'] },
-      f: { name: 'و · ياسمين', idea: 'ياسمين دمشقي: باذنجاني عميق للشريط والأزرار، وأبيض ناصع، وأصفر الياسمين لعمود اليوم.',
-           fonts: 'العناوين: Aref Ruqaa (خط الرقعة). النص: Beiruti، خط عربي حديث من بيروت.', density: 'متوسطة، وزوايا 10px.',
-           move: 'عناوين بخط الرقعة: لمسة يدوية شامية لا يملكها أي برنامج آخر.', verdict: 'الأكثر تفرداً بفضل خط الرقعة. نقطتا ضعف ظهرتا في الفحص: خط Beiruti يضيّق المسافة بين الكلمات حتى تلتصق («حجزجديد»)، فيحتاج النص خطاً آخر. والرقعة تصلح للعناوين الكبيرة فقط.', sw: ['#4a2545', '#faf8f6', '#e6d3e2', '#fbf3d0', '#24603a'] }
-    };
-    // Money comes from Intl, as in the app. The currency code is isolated as an LTR run so "US$" keeps its order inside RTL text.
-    var money = new Intl.NumberFormat('ar-SY-u-ca-gregory', { style: 'currency', currency: 'USD' });
-    function fillMoney(root) {
-      Array.prototype.forEach.call(root.querySelectorAll('[data-usd]'), function (td) {
-        td.innerHTML = money.formatToParts(Number(td.getAttribute('data-usd'))).map(function (p) {
-          return p.type === 'currency' ? '<bdi dir="ltr">' + p.value + '</bdi>' : p.value;
-        }).join('');
-      });
-    }
-    var tpl = document.getElementById('mock');
-    ['a', 'b', 'c', 'd', 'e', 'f'].forEach(function (k) {
-      var panel = document.getElementById('p-' + k), n = NOTES[k];
-      var notes = document.createElement('div');
-      notes.className = 'notes';
-      notes.innerHTML = '<h2>' + n.name + '</h2>' +
-        '<dl><dt>الفكرة</dt><dd>' + n.idea + '</dd></dl>' +
-        '<dl><dt>الخطوط</dt><dd>' + n.fonts + '</dd></dl>' +
-        '<dl><dt>الكثافة والشكل</dt><dd>' + n.density + '</dd></dl>' +
-        '<dl><dt>الحركة المميزة</dt><dd>' + n.move + '</dd></dl>' +
-        '<dl><dt>الألوان الأساسية</dt><dd><div class="swatches">' + n.sw.map(function (c) { return '<span style="background:' + c + '" title="' + c + '"></span>'; }).join('') + '</div></dd></dl>' +
-        '<div class="verdict"><dl><dt>الحكم بعد الفحص</dt><dd>' + n.verdict + '</dd></dl><p>فحص Impeccable الآلي: ملاحظة واحدة، وهي التظليل المائل لـ«خارج الخدمة». أبقيناه لأنه رمز وظيفي في لوحات الغرف، لا زخرفة. التباين: كل النصوص ٥٫٤:١ أو أكثر.</p></div>';
-      var stage = document.createElement('div');
-      stage.className = 'stage';
-      var mock = tpl.content.firstElementChild.cloneNode(true);
-      mock.classList.add('dir-' + k);
-      fillMoney(mock);
-      stage.appendChild(mock);
-      panel.appendChild(notes);
-      panel.appendChild(stage);
-    });
-    var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
-    function select(tab) {
-      tabs.forEach(function (t) {
-        var on = t === tab;
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        t.tabIndex = on ? 0 : -1;
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      });
-      tab.focus();
-    }
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { select(t); });
-      t.addEventListener('keydown', function (e) {
-        // In RTL the next tab sits to the left, so ArrowLeft moves forward.
-        var d = e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowRight' ? -1 : 0;
-        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length]); }
-      });
-    });
-  })();
-</script>
+(function () {
+  var THEMES = [
+    { id: 'oasis', name: 'واحة', idea: 'شريط علوي أخضر داكن، ولوحات بيضاء بلا حدود على أرضية ورقية، وزر رئيسي كهرماني. الثيم الذي يستعمله المنتج اليوم.', fonts: 'العناوين: <bdi>Noto Naskh Arabic</bdi>. النص: <bdi>Noto Sans Arabic</bdi>.', shape: 'زوايا كبيرة وأزرار مستديرة، وكثافة متوسطة.' },
+    { id: 'clay', name: 'طين', idea: 'ألوان الطين والرمل: أرضية رملية، وشريط علوي بني داكن، وأزرار وروابط بنية.', fonts: 'العناوين: <bdi>Reem Kufi</bdi>. النص: <bdi>Readex Pro</bdi>.', shape: 'زوايا صغيرة (6px) وحدود واضحة.' },
+    { id: 'ink', name: 'حبر', idea: 'أبيض وأسود هادئ، والشريط العلوي أبيض بخط تحته. اللون للحالات فقط.', fonts: 'كل شيء: <bdi>Noto Sans Arabic</bdi>.', shape: 'كثافة أعلى: بلاطات أضيق تعرض وحدات أكثر في السطر.' },
+    { id: 'night', name: 'ليل', idea: 'ثيم غامق لوردية الليل: أرضية فحمية، وأزرار وروابط تركوازية فاتحة. يستعمل النسخة الغامقة من ألوان الحالات.', fonts: 'كل شيء: <bdi>IBM Plex Sans Arabic</bdi>.', shape: 'زوايا 8px، وكثافة متوسطة.' },
+    { id: 'olive', name: 'زيتون', idea: 'زيتون وكريم: أخضر زيتوني للشريط العلوي والأزرار، وأرضية بلون الكريم.', fonts: 'العناوين: <bdi>El Messiri</bdi>. النص: <bdi>IBM Plex Sans Arabic</bdi>.', shape: 'زوايا 12px وحدود خفيفة.' },
+    { id: 'jasmine', name: 'ياسمين', idea: 'باذنجاني عميق للشريط والأزرار، وأبيض ناصع.', fonts: 'العنوان الكبير: <bdi>Aref Ruqaa</bdi> (الرقعة). النص: <bdi>Noto Sans Arabic</bdi>.', shape: 'زوايا 10px، وكثافة متوسطة.' }
+  ];
+  var SETS = [
+    { id: 'standard', name: 'القياسية', note: 'الافتراضية لكل فندق. المشغولة تركوازية، والشاغرة التي تحتاج تنظيفاً حمراء، وعلامة «متسخة» حلقة حمراء.' },
+    { id: 'occupied-red', name: 'الأحمر للمقيم', note: 'المشغولة حمراء، والشاغرة خضراء سواء كانت نظيفة أو تحتاج تنظيفاً، وتقول ذلك كلمتها وأيقونتها وعلامة «متسخة» فوقها، وهي هنا حلقة تركوازية.' }
+  ];
+  var STATES = {
+    ready: { word: 'شاغرة، جاهزة', short: 'جاهزة' },
+    dirty: { word: 'شاغرة، تحتاج تنظيفاً', short: 'تحتاج تنظيفاً' },
+    paid: { word: 'تصل اليوم، بعربون', short: 'بعربون' },
+    unpaid: { word: 'تصل اليوم، بلا عربون', short: 'بلا عربون' },
+    occ: { word: 'مشغولة', short: 'مشغولة' },
+    oos: { word: 'خارج الخدمة', short: 'خارج الخدمة' }
+  };
+  var STATE_ORDER = ['occ', 'paid', 'unpaid', 'ready', 'dirty', 'oos'];
+  var HK = { clean: 'نظيفة', inspected: 'مفحوصة', cleaning: 'قيد التنظيف', dirty: 'متسخة', oos: 'خارج الخدمة' };
+  var HK_ORDER = ['inspected', 'clean', 'cleaning', 'dirty', 'oos'];
 
+  // [number, state, housekeeping, detail, late departure]
+  var FLOORS = [
+    { name: '1', units: [
+      ['1101', 'dirty', 'dirty', 'غادر 10:20'],
+      ['1102', 'occ', 'clean', 'يغادر الجمعة'],
+      ['1103', 'ready', 'inspected', ''],
+      ['1104', 'unpaid', 'inspected', 'تصل 20:00'],
+      ['1105', 'occ', 'clean', 'يغادر السبت'],
+      ['1106', 'paid', 'inspected', 'تصل 14:00'],
+      ['1107', 'ready', 'clean', ''],
+      ['1108', 'occ', 'clean', 'يغادر اليوم 12:00', true],
+      ['1109', 'paid', 'clean', 'تصل 15:00 · مجموعة'],
+      ['1110', 'ready', 'inspected', '']
+    ] },
+    { name: '2', units: [
+      ['1201', 'paid', 'inspected', 'تصل 14:00 · وكيل'],
+      ['1202', 'ready', 'clean', ''],
+      ['1203', 'occ', 'clean', 'يغادر الخميس'],
+      ['1204', 'dirty', 'cleaning', 'غادر 09:45'],
+      ['1205', 'ready', 'inspected', ''],
+      ['1206', 'paid', 'clean', 'تصل 16:00 · مجموعة'],
+      ['1207', 'occ', 'dirty', 'يغادر الجمعة'],
+      ['1208', 'occ', 'clean', 'يغادر 11/10'],
+      ['1209', 'unpaid', 'clean', 'تصل · مهلة يوم و18 س'],
+      ['1210', 'ready', 'clean', '']
+    ] },
+    { name: '3', units: [
+      ['1301', 'ready', 'inspected', ''],
+      ['1302', 'occ', 'clean', 'يغادر الإثنين'],
+      ['1303', 'dirty', 'dirty', 'غادر 11:40'],
+      ['1304', 'unpaid', 'clean', 'تصل 18:00 · مجموعة'],
+      ['1305', 'paid', 'inspected', 'تصل 16:00'],
+      ['1306', 'oos', 'oos', 'المكيّف · حتى 6/10']
+    ] }
+  ];
+
+  var mock = document.getElementById('mock');
+  var filter = {};
+
+  function el(tag, attrs, html) {
+    var e = document.createElement(tag);
+    for (var k in attrs) { if (attrs[k] !== null) e.setAttribute(k, attrs[k]); }
+    if (html !== undefined) e.innerHTML = html;
+    return e;
+  }
+  function icon(id) { return '<svg class="icon" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+  function mark(hk) { return '<span class="mark m-' + hk + '" aria-hidden="true"></span>'; }
+
+  function renderControls() {
+    var tb = document.getElementById('theme-buttons');
+    THEMES.forEach(function (t) {
+      var b = el('button', { type: 'button', 'class': 'opt', 'data-theme-id': t.id, 'aria-pressed': 'false' }, t.name);
+      b.addEventListener('click', function () { setState(t.id, mock.dataset.set); });
+      tb.appendChild(b);
+    });
+    var sb = document.getElementById('set-buttons');
+    SETS.forEach(function (s) {
+      var b = el('button', { type: 'button', 'class': 'opt', 'data-set-id': s.id, 'aria-pressed': 'false' }, s.name);
+      b.addEventListener('click', function () { setState(mock.dataset.theme, s.id); });
+      sb.appendChild(b);
+    });
+  }
+
+  function renderBoard() {
+    var counts = {}, hk = {}, all = [];
+    FLOORS.forEach(function (f) { f.units.forEach(function (u) { all.push(u); counts[u[1]] = (counts[u[1]] || 0) + 1; hk[u[2]] = (hk[u[2]] || 0) + 1; }); });
+
+    var stats = [
+      ['الوصول اليوم', (counts.paid || 0) + (counts.unpaid || 0)],
+      ['المغادرة اليوم', 4],
+      ['المقيمون', counts.occ || 0],
+      ['الإشغال الآن', Math.round(100 * (counts.occ || 0) / all.length) + '٪'],
+      ['الشاغرة', ((counts.ready || 0) + (counts.dirty || 0)) + ' من ' + all.length],
+      ['تحتاج تنظيفاً', (hk.dirty || 0) + (hk.cleaning || 0)]
+    ];
+    document.getElementById('stats').innerHTML = stats.map(function (s) { return '<div class="stat"><dt>' + s[0] + '</dt><dd>' + s[1] + '</dd></div>'; }).join('');
+
+    var ls = document.getElementById('legend-states');
+    ls.innerHTML = '';
+    STATE_ORDER.forEach(function (s) {
+      var b = el('button', { type: 'button', 'class': 'state-chip chip-' + s, 'aria-pressed': 'false', 'data-state': s },
+        '<svg class="icon" aria-hidden="true"><use href="#s-' + s + '"/></svg>' + STATES[s].word + ' <b>' + (counts[s] || 0) + '</b>');
+      b.addEventListener('click', function () {
+        filter[s] = !filter[s];
+        b.setAttribute('aria-pressed', filter[s] ? 'true' : 'false');
+        applyFilter();
+      });
+      ls.appendChild(b);
+    });
+    document.getElementById('legend-hk').innerHTML = HK_ORDER.map(function (h) {
+      return '<span class="hk-sum">' + mark(h) + HK[h] + ' <b>' + (hk[h] || 0) + '</b></span>';
+    }).join('');
+
+    var board = document.getElementById('board');
+    board.innerHTML = '';
+    FLOORS.forEach(function (f) {
+      var row = el('div', { 'class': 'floor', 'data-floor': f.name });
+      row.appendChild(el('div', { 'class': 'floor-name' }, 'الطابق<b>' + f.name + '</b>'));
+      var tiles = el('div', { 'class': 'tiles' });
+      f.units.forEach(function (u) {
+        var html = '<span class="hk">' + mark(u[2]) + HK[u[2]] + '</span>' +
+          '<span class="no">' + u[0] + '</span>' +
+          '<span class="st" title="' + STATES[u[1]].word + '"><svg class="icon" aria-hidden="true"><use href="#s-' + u[1] + '"/></svg>' + STATES[u[1]].short + '</span>' +
+          (u[3] ? '<span class="dt">' + u[3] + '</span>' : '') +
+          (u[4] ? '<span class="late"><svg class="icon" aria-hidden="true"><use href="#s-late"/></svg>تأخّر المغادرة</span>' : '');
+        tiles.appendChild(el('button', { type: 'button', 'class': 'tile s-' + u[1], 'data-state': u[1] }, html));
+      });
+      row.appendChild(tiles);
+      board.appendChild(row);
+    });
+  }
+
+  function applyFilter() {
+    var on = Object.keys(filter).filter(function (k) { return filter[k]; });
+    document.querySelectorAll('#board .floor').forEach(function (row) {
+      var shown = 0;
+      row.querySelectorAll('.tile').forEach(function (t) {
+        var vis = on.length === 0 || on.indexOf(t.dataset.state) >= 0;
+        t.hidden = !vis;
+        if (vis) shown++;
+      });
+      row.hidden = shown === 0;
+    });
+  }
+
+  // ---------- Contrast ----------
+  function lum(hex) {
+    var h = hex.trim().replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+    var rgb = [0, 2, 4].map(function (i) {
+      var c = parseInt(h.slice(i, i + 2), 16) / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  }
+  function ratio(a, b) { var la = lum(a), lb = lum(b); return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05); }
+
+  var UNIT_NAMES = { ready: 'شاغرة جاهزة', dirty: 'شاغرة تحتاج تنظيفاً', paid: 'تصل بعربون', unpaid: 'تصل بلا عربون', occ: 'مشغولة', oos: 'خارج الخدمة' };
+  function pairs() {
+    var t = [], n = [];
+    ['ready', 'dirty', 'paid', 'unpaid', 'occ', 'oos'].forEach(function (s) {
+      t.push(['نص «' + UNIT_NAMES[s] + '» على بلاطتها', 'u-' + s + '-text', 'u-' + s + '-surface']);
+      n.push(['إطار «' + UNIT_NAMES[s] + '» على اللوحة', 'u-' + s + '-edge', 'surface']);
+    });
+    t.push(['نص خارج الخدمة على الخطوط الفاتحة', 'u-oos-text', 'u-oos-alt']);
+    t.push(['نص «تأخّر المغادرة» على شارته', 'on-late', 'late-bg']);
+    t.push(['النص على اللوحة', 'text', 'surface']);
+    t.push(['النص الثانوي على اللوحة', 'muted', 'surface']);
+    t.push(['النص الثانوي على الأرضية', 'muted', 'page']);
+    t.push(['نص الشريط العلوي', 'on-brand', 'brand']);
+    t.push(['النص الثانوي في الشريط العلوي', 'on-brand-muted', 'brand']);
+    t.push(['نص الزر الرئيسي', 'on-action', 'action']);
+    t.push(['الرابط على اللوحة', 'link', 'surface']);
+    t.push(['الرابط على الصف المحدد', 'link', 'selected']);
+    t.push(['النص على لون الرابط', 'on-link', 'link']);
+    ['clean', 'inspected', 'cleaning', 'dirty', 'oos'].forEach(function (h) { n.push(['علامة «' + HK[h] + '» على اللوحة', 'hk-' + h, 'surface']); });
+    n.push(['شارة «تأخّر المغادرة» على بلاطة المشغولة', 'late-bg', 'u-occ-surface']);
+    n.push(['حلقة التركيز على اللوحة', 'focus', 'surface']);
+    n.push(['حلقة التركيز على الأرضية', 'focus', 'page']);
+    n.push(['حدود الحقول على اللوحة', 'ctl-border', 'surface']);
+    return { text: t, nonText: n };
+  }
+  var probe = el('div', { 'class': 'mock', 'aria-hidden': 'true', hidden: '' });
+  document.body.appendChild(probe);
+  function measure(themeId, setId) {
+    probe.dataset.theme = themeId; probe.dataset.set = setId;
+    var cs = getComputedStyle(probe), p = pairs(), out = [];
+    function v(name) { return cs.getPropertyValue('--' + name).trim(); }
+    p.text.forEach(function (x) { out.push({ label: x[0], r: ratio(v(x[1]), v(x[2])), min: 4.5 }); });
+    p.nonText.forEach(function (x) { out.push({ label: x[0], r: ratio(v(x[1]), v(x[2])), min: 3 }); });
+    return out;
+  }
+  function fmt(r) { return (Math.floor(r * 100) / 100).toFixed(2) + ':1'; }
+
+  function renderCheck() {
+    var rows = '';
+    THEMES.forEach(function (t) {
+      rows += '<tr><th scope="row">' + t.name + '</th>';
+      SETS.forEach(function (s) {
+        var res = measure(t.id, s.id), fails = res.filter(function (x) { return x.r < x.min; });
+        var cur = t.id === mock.dataset.theme && s.id === mock.dataset.set;
+        rows += '<td' + (cur ? ' aria-current="true" style="font-weight:700"' : '') + '>' +
+          (fails.length ? '<span class="bad">✗ ' + fails.length + ' لا تمرّ</span>' : '<span class="ok">✓ كلها تمرّ</span>') +
+          (cur ? ' (المعروض)' : '') + '</td>';
+      });
+      rows += '</tr>';
+    });
+    document.getElementById('matrix').innerHTML = rows;
+
+    var res = measure(mock.dataset.theme, mock.dataset.set);
+    var fails = res.filter(function (x) { return x.r < x.min; });
+    var lowText = Math.min.apply(null, res.filter(function (x) { return x.min === 4.5; }).map(function (x) { return x.r; }));
+    var lowNon = Math.min.apply(null, res.filter(function (x) { return x.min === 3; }).map(function (x) { return x.r; }));
+    var t = THEMES.filter(function (x) { return x.id === mock.dataset.theme; })[0], s = SETS.filter(function (x) { return x.id === mock.dataset.set; })[0];
+    document.getElementById('verdict').innerHTML = '«' + t.name + '» مع «' + s.name + '»: ' +
+      (fails.length ? '<span class="bad">✗ ' + fails.length + ' من ' + res.length + ' لا تمرّ</span>' : '<span class="ok">✓ ' + res.length + ' من ' + res.length + ' تمرّ</span>') +
+      '. أقل نسبة للنص <span dir="ltr">' + fmt(lowText) + '</span>، وللحدود والعلامات <span dir="ltr">' + fmt(lowNon) + '</span>.';
+    document.getElementById('pairs').innerHTML = res.map(function (x) {
+      var ok = x.r >= x.min;
+      return '<li><span>' + x.label + '</span><span class="num" dir="ltr">' + fmt(x.r) + '</span><span class="' + (ok ? 'ok' : 'bad') + '">' + (ok ? '✓ تمرّ' : '✗ أقل من ' + x.min) + '</span></li>';
+    }).join('');
+  }
+
+  function renderNotes() {
+    var t = THEMES.filter(function (x) { return x.id === mock.dataset.theme; })[0], s = SETS.filter(function (x) { return x.id === mock.dataset.set; })[0];
+    document.getElementById('notes').innerHTML = '<h2>' + t.name + ' · ' + s.name + '</h2>' +
+      '<dl><dt>الفكرة</dt><dd>' + t.idea + '</dd></dl>' +
+      '<dl><dt>الخطوط</dt><dd>' + t.fonts + '</dd></dl>' +
+      '<dl><dt>الشكل والكثافة</dt><dd>' + t.shape + '</dd></dl>' +
+      '<dl><dt>ألوان حالات الوحدات</dt><dd>' + s.note + '</dd></dl>';
+  }
+
+  function setState(themeId, setId) {
+    mock.dataset.theme = themeId; mock.dataset.set = setId;
+    document.getElementById('logo').src = themeId === 'ink' ? 'shared/logo-ground.svg' : 'shared/logo-band.svg';
+    document.querySelectorAll('[data-theme-id]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.themeId === themeId ? 'true' : 'false'); });
+    document.querySelectorAll('[data-set-id]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.setId === setId ? 'true' : 'false'); });
+    try { history.replaceState(null, '', '#' + themeId + '/' + setId); } catch (e) { /* a file:// page may refuse; the page still works */ }
+    renderNotes();
+    renderCheck();
+  }
+
+  renderControls();
+  renderBoard();
+  var hash = (location.hash || '').replace('#', '').split('/');
+  var th = THEMES.some(function (x) { return x.id === hash[0]; }) ? hash[0] : 'oasis';
+  var st = SETS.some(function (x) { return x.id === hash[1]; }) ? hash[1] : 'standard';
+  setState(th, st);
+})();
+</script>
 </body>
 </html>
